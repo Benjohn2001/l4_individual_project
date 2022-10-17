@@ -43,4 +43,9 @@
 
 * *2.5 hour* Approx. trying to set-up basic app with react native cli (Xcode download, packages, sdk's etc.)
 * *1.5 hour* Research and use expo to create initial app and commit to repo
-* *0.5 hour* Start timelog
+* *0.5 hour* Start timelog & plan
+* *1 hour* Creation of dissertation repo and commiting template
+
+### 17 Oct 2022
+
+* *1 hour* Set up a firebase project and link to app with credentials as environment vars 
