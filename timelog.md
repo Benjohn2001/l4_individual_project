@@ -54,3 +54,4 @@
 
 * *1 hour* List requirements and use moscow method to prioritize my requirements
 * *1.0 hour* Write agenda and have meeting
+* *0.5 hour* Investigate the use of github actions for CI/CD
