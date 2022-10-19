@@ -49,3 +49,8 @@
 ### 17 Oct 2022
 
 * *1 hour* Set up a firebase project and link to app with credentials as environment vars 
+
+### 19 Oct 2022
+
+* *1 hour* List requirements and use moscow method to prioritize my requirements
+* *1.0 hour* Write agenda and have meeting
