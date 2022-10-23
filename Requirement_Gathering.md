@@ -2,7 +2,7 @@
 
 ## Initial Requirements:
 
-	-	Have an easy navigation system
+	-	Have an intuitive navigation system requiring no instructions to the user
 	-	Have both iOs and Android apps
 	-	Have firebase backend using real time database
 	-	Ability to create a group with your friends
@@ -22,12 +22,18 @@
 	-	Animation design
 	-	Authentication for users
 	-	Login/Sign up for user
+	-	Settings page
+  	-   Ability to change username
+  	-   Ability to customise a profile (Image, bio)
+  	-   Home page showing groups
+  	-   Have a friends list
+  	-   Be able to share your profile for friends to add
 
 
 ## MOSCOW Analysis:
 
 	Must Haves:		
-		-	Have an easy navigation system	
+		-	Have an intuitive navigation system requiring no instructions to the user
 		-	Have both iOs and Android apps
 		-	Have firebase backend using real time database
 		-	Visually pleasing UI throughout app
@@ -35,6 +41,8 @@
 		- 	Default hand designs and clock faces
 		-	High level of accessibility
 		-	Show status of friends of graphical clockface
+		-	Settings page
+		-   Home page showing groups
 
 
 	Should Haves:
@@ -45,6 +53,10 @@
 		-	Integration with dark mode
 		-	Authentication for users
 		-	Login/Sign up for user
+		-   Ability to change username
+      	-   Ability to customise a profile (Image, bio)
+      	-   Have a friends list
+      	-   Be able to share your profile for friends to add
 
 	Could Haves:
 		-	User can have multiple groups 

@@ -55,3 +55,16 @@
 * *1 hour* List requirements and use moscow method to prioritize my requirements
 * *1.0 hour* Write agenda and have meeting
 * *0.5 hour* Investigate the use of github actions for CI/CD
+
+### 20 Oct 2022
+
+* *1 hour* Revise and add new requirements
+  
+### 22 Oct 2022
+
+* *3 hour* Set up and start using figma for design & prototype
+
+### 23 Oct 2022
+
+* *1.5 hour* Finish figma and upload to git
+  * May need to add screen for updating screen not figured out how I am doing that yet 
