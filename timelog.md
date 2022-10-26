@@ -68,6 +68,7 @@
 
 * *1.5 hour* Finish figma and upload to git
   * May need to add screen for updating screen not figured out how I am doing that yet 
+*  *0.5 hour* Informal interview with classmates on figma UI 
 
 ### 26 Oct 2022
 
