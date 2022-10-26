@@ -68,3 +68,8 @@
 
 * *1.5 hour* Finish figma and upload to git
   * May need to add screen for updating screen not figured out how I am doing that yet 
+
+### 26 Oct 2022
+
+* *0.5 hour* Alter figma design
+* *1 hour* Write agenda and have meeting
