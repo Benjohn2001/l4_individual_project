@@ -2,16 +2,16 @@ import 'dotenv/config';
 
 export default{
   "expo": {
-    "name": "App",
-    "slug": "App",
+    "name": "Weasley Clock",
+    "slug": "Weasley-Clock",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-clock.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-clock.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#C6C4FF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,9 +24,11 @@ export default{
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/adaptive-icon-clock.png",
+        "backgroundColor": "#C6C4FF",
+        "backgroundImage": "./assets/background-colour.png"
+      },
+      "icon": "./assets/adaptive-icon-clock.png",
     },
     "web": {
       "favicon": "./assets/favicon.png"

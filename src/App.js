@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { COLOURS } from './assets/colours';
+import { Feather } from '@expo/vector-icons';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>Ben Johnston</Text>
       <StatusBar style="auto" />
+      
     </View>
   );
 }
@@ -14,7 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: COLOURS.primaryPurple,
     alignItems: 'center',
     justifyContent: 'center',
   },
