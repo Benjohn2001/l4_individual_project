@@ -6,10 +6,10 @@ export default{
     "slug": "Weasley-Clock",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon-clock.png",
+    "icon": "./app/assets/icon-clock.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-clock.png",
+      "image": "./app/assets/splash-clock.png",
       "resizeMode": "contain",
       "backgroundColor": "#C6C4FF"
     },
@@ -24,14 +24,14 @@ export default{
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon-clock.png",
+        "foregroundImage": "./app/assets/adaptive-icon-clock.png",
         "backgroundColor": "#C6C4FF",
-        "backgroundImage": "./assets/background-colour.png"
+        "backgroundImage": "./app/assets/background-colour.png"
       },
-      "icon": "./assets/adaptive-icon-clock.png",
+      "icon": "./app/assets/adaptive-icon-clock.png",
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./app/assets/favicon.png"
     },
     "extra": {
       firebaseApiKey: process.env.FIREBASE_API_KEY,
