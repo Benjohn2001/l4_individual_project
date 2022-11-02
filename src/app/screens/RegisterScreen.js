@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View, Image, TextInput } from 'react-native';
+import { Text, View, Image, TextInput, SafeAreaView } from 'react-native';
 import PressableIcon from '../components/PressableIcon';
 import { COLOURS } from '../assets/colours';
 import AppButtonPurple from '../components/AppButtonPurple';
 
 const RegisterScreen = ({ navigation }) => {
     return (
-        <View className='flex-1 bg-primaryPurple'>
+        <SafeAreaView className='flex-1 bg-primaryPurple'>
             <View className='pt-10 pl-5'>
                 <PressableIcon
                         onPress={() => {
@@ -61,18 +61,18 @@ const RegisterScreen = ({ navigation }) => {
                     cursorColor={COLOURS.darkerPurple}
                     secureTextEntry={true}
                 />
-                <Text className='text-sm text-left pt-2 pb-10 text-gray-500'>
+                <Text className='text-sm text-left pt-2 pb-2 text-gray-500'>
                 Password must be at least 8 characters and {'\n'}
                 contain at least 1 upper-case character 
                 </Text>
                 <AppButtonPurple
                     title="Submit"
                     onPress={() => {
-                        alert("Submit")
+                        navigation.navigate("HomeScreen")
                     }}
                 />
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 export default RegisterScreen;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
@@ -8,7 +8,7 @@ import { COLOURS } from '../assets/colours';
 
 const SignInScreen = ({ navigation }) => {
     return (
-        <View className="flex-1 items-center pt-20 bg-primaryPurple" >
+        <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple" >
             <Image 
                 className="w-64 h-64" 
                 source = {require("../assets/clock.png")}
@@ -43,11 +43,11 @@ const SignInScreen = ({ navigation }) => {
                 icon1="edit"
                 title2="Sign In"
                 onPress2={() => {
-                    alert("Sign In")
+                    navigation.navigate("HomeScreen")
                 }}
                 icon2="arrow-right-circle"
             />     
-        </View>
+        </SafeAreaView>
     );
 }
 
