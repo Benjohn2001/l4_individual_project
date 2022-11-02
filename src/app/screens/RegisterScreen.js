@@ -13,6 +13,8 @@ const RegisterScreen = ({ navigation }) => {
                             navigation.navigate("SignInScreen")
                         }}
                         icon="arrow-left"
+                        size={40}
+                        color="black"
                     />
             </View>
             <View className='flex-row justify-center items-center'>

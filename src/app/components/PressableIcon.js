@@ -5,11 +5,11 @@ import { Feather } from '@expo/vector-icons';
 
 class PressableIcon extends Component {
     render(){
-        const { onPress , icon } = this.props;
+        const { onPress , icon, size, color } = this.props;
 		return (
             <View className="flex-row">
                 <Pressable onPress={onPress}>
-                        <Feather name={icon} size={40} color="black" />
+                        <Feather name={icon} size={size} color={color} />
                 </Pressable>
             </View>
         );
@@ -18,7 +18,9 @@ class PressableIcon extends Component {
 
 PressableIcon.propTypes = {
     onPress: PropTypes.func.isRequired,
-    icon: PropTypes.string.isRequired
+    icon: PropTypes.string.isRequired,
+    size: PropTypes.number.isRequired,
+    color: PropTypes.string.isRequired
 };
         
 export default PressableIcon;
