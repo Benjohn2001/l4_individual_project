@@ -24,6 +24,7 @@ class TwoButtonsSide extends Component {
         );
     }
 }
+
 TwoButtonsSide.propTypes = {
     title1: PropTypes.string.isRequired,
     onPress1: PropTypes.func.isRequired,

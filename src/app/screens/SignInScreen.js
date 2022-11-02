@@ -13,26 +13,28 @@ const SignInScreen = ({ navigation }) => {
                 className="w-64 h-64" 
                 source = {require("../assets/clock.png")}
             />
-            <TextInput 
-                className="bg-secondaryPurple my-5 w-80 h-12 rounded-md" 
-                placeholder="Email" 
-                underlineColorAndroid = "transparent"
-                cursorColor={COLOURS.darkerPurple}
-            />
-            <TextInput 
-                className="bg-secondaryPurple mt-5 w-80 h-12 rounded-md" 
-                placeholder="Password" 
-                underlineColorAndroid = "transparent"
-                cursorColor={COLOURS.darkerPurple}
-                secureTextEntry={true}
-            />
-            <TouchableOpacity onPress={() => {
-                    alert("Forgotten Password")
-                }}>
-                <Text className="mt-2 mb-20 underline text-darkerPurple">
-                    Forgotten Password
-                </Text>
-            </TouchableOpacity>
+            <View className='pt-10'>
+                <TextInput 
+                    className="bg-secondaryPurple my-5 w-80 h-12 rounded-md" 
+                    placeholder="Email" 
+                    underlineColorAndroid = "transparent"
+                    cursorColor={COLOURS.darkerPurple}
+                />
+                <TextInput 
+                    className="bg-secondaryPurple mt-5 w-80 h-12 rounded-md" 
+                    placeholder="Password" 
+                    underlineColorAndroid = "transparent"
+                    cursorColor={COLOURS.darkerPurple}
+                    secureTextEntry={true}
+                />
+                <TouchableOpacity onPress={() => {
+                        alert("Forgotten Password")
+                    }}>
+                    <Text className="mt-2 mb-20 underline text-darkerPurple">
+                        Forgotten Password
+                    </Text>
+                </TouchableOpacity>
+            </View>
             <TwoButtonsSide
                 title1="Register"
                 onPress1={() => {

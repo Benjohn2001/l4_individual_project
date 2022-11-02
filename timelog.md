@@ -73,4 +73,28 @@
 ### 26 Oct 2022
 
 * *0.5 hour* Alter figma design
-* *1 hour* Write agenda and have meeting
+* *1 hour* Write agenda and have meetin
+* *0.5 hour* Flowchart of apps flow between pages
+
+
+### 28 Oct 2022
+
+* *1.5 hour* Issues with node / expo
+* *1.0 hour* Splash, app icons, file structure
+
+### 29 Oct 2022
+
+* *2 hour* Start to research and use tailwind css 
+
+### 31 Oct 2022
+
+* *1.5 hour* Research component making and make inital buttons
+
+### 1 Nov 2022
+
+* *2.5 hour* Create sign in page with buttons and navigation
+* *0.5 hour* Create agenda
+
+### 2 Nov 2022
+
+* *0.5 hour* Meeting with jeremy
