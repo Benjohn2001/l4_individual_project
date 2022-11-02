@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
                     color="black"
                 />
             </View>
-            <View className="flex-1 justify-center items-center pt-5">
+            <View className="flex-1 justify-center items-center pt-10">
                 <ScrollView 
                     showsVerticalScrollIndicator={false}
                 >
@@ -36,28 +36,28 @@ const HomeScreen = ({ navigation }) => {
                             avatar={require('../assets/ben-avatar.png')}
                         />
                         <GroupButton
-                            groupName="The Boys"
+                            groupName="Film People"
                             onPress={() => {
                                 alert("Access Group")
                             }}
                             avatar={require('../assets/ben-avatar.png')}
                         />
                         <GroupButton
-                            groupName="The Boys"
+                            groupName="Uni Mates"
                             onPress={() => {
                                 alert("Access Group")
                             }}
                             avatar={require('../assets/ben-avatar.png')}
                         />
                         <GroupButton
-                            groupName="The Boys"
+                            groupName="Work People"
                             onPress={() => {
                                 alert("Access Group")
                             }}
                             avatar={require('../assets/ben-avatar.png')}
                         />
                         <GroupButton
-                            groupName="The Boys"
+                            groupName="Football"
                             onPress={() => {
                                 alert("Access Group")
                             }}

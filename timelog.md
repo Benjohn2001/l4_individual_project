@@ -100,3 +100,4 @@
 * *0.5 hour* Meeting with jeremy
 * *2.5 hour* Register and sign in pages completed,bottom navigation added
 * *1 hour* Create home page
+* *0.5 hour* Create settings page

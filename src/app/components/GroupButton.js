@@ -8,10 +8,10 @@ class GroupButton extends Component {
     render(){
         const { groupName, onPress, avatar} = this.props;
 		return (
-            <View className="py-3">
-                <TouchableOpacity onPress={onPress} className="bg-primaryDarker h-36 w-80 py-4 rounded-2xl mx-1.5">
-                <View className="flex-row justify-evenly">
-                    <Text  className="text-black text-2xl text-center">{groupName}</Text>
+            <View className="py-3 w-full items-center">
+                <TouchableOpacity onPress={onPress} className="bg-primaryDarker h-36 py-4 rounded-2xl mx-1.5">
+                <View className="flex-row w-11/12">
+                    <Text  className="text-black text-2xl text-center ml-5 mr-3">{groupName}</Text>
                     <PressableIcon
                         onPress={() => {
                             alert("Favourited")
@@ -20,14 +20,16 @@ class GroupButton extends Component {
                         size={32}
                         color="gold"
                     />
-                    <PressableIcon
-                        onPress={() => {
-                            alert("To Group")
-                        }}
-                        icon="arrow-right"
-                        size={32}
-                        color="black"
-                    />   
+                    <View  className="ml-auto mr-5">
+                        <PressableIcon
+                            onPress={() => {
+                                alert("To Group")
+                            }}
+                            icon="arrow-right"
+                            size={32}
+                            color="black"
+                        /> 
+                    </View>  
                 </View>
                 <View className="flex-row justify-evenly pt-3">
                     <Image 
