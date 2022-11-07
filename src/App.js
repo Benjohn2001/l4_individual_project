@@ -8,6 +8,9 @@ import HomeScreen from './app/screens/HomeScreen';
 import MeScreen from './app/screens/MeScreen';
 import FriendsScreen from './app/screens/FriendsScreen';
 import SettingsScreen from './app/screens/SettingsScreen';
+import GroupScreen from './app/screens/GroupScreen';
+import GroupSettingsScreen from './app/screens/GroupSettingsScreen';
+import ClockCustomiseScreen from './app/screens/ClockCustomiseScreen';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -92,6 +95,21 @@ function App () {
         <Stack.Screen 
           name="HomeScreen"
           component={HomeTabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="GroupScreen"
+          component={GroupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="GroupSettingsScreen"
+          component={GroupSettingsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="ClockCustomiseScreen"
+          component={ClockCustomiseScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

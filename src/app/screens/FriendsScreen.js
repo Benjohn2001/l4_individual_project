@@ -12,7 +12,7 @@ import PillButton from '../components/PillButton';
 const FriendsScreen = ({ navigation }) => {
     return (
         <SafeAreaView className="flex-1 bg-primaryPurple" >
-            <View className="flex-row justify-between pt-20 pb-10 mx-10">
+            <View className="flex-row justify-between pt-14 pb-10 mx-10">
                 <PressableIcon
                         onPress={() => {
                             alert("add")

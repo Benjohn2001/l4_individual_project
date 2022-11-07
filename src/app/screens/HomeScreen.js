@@ -11,7 +11,7 @@ import PressableIcon from '../components/PressableIcon';
 const HomeScreen = ({ navigation }) => {
     return (
         <SafeAreaView className="flex-1 bg-primaryPurple" >
-            <View className="flex-row justify-between pt-20 mx-10">
+            <View className="flex-row justify-between pt-14 mx-10">
                 <Text className="font-bold text-3xl">
                     My Groups
                 </Text>
@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
                         <GroupButton
                             groupName="The Boys"
                             onPress={() => {
-                                alert("Access Group")
+                                navigation.navigate("GroupScreen")
                             }}
                             avatar={require('../assets/ben-avatar.png')}
                         />

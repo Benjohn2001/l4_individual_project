@@ -11,8 +11,8 @@ import PillButton from '../components/PillButton';
 
 const MeScreen = ({ navigation }) => {
     return (
-        <SafeAreaView className="flex-1 pt-14 bg-primaryPurple" >
-            <View className="items-center">
+        <SafeAreaView className="flex-1 bg-primaryPurple" >
+            <View className="items-center pt-14">
                 <Image 
                     className="w-44 h-44 rounded-full" 
                     source = {require('../assets/ben-avatar.png')}

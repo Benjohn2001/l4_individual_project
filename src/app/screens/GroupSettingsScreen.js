@@ -6,60 +6,55 @@ import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
 import { COLOURS } from '../assets/colours';
 import RowItem from '../components/RowItem';
+import PressableIcon from '../components/PressableIcon';
 
-const SettingsScreen = ({ navigation }) => {
+const GroupSettingsScreen = ({ navigation }) => {
     return (      
         <SafeAreaView className="flex-1 bg-primaryPurple" >
-            <Text className="font-bold text-3xl justify-start pt-14 mx-10">
-                Settings
-            </Text>
+            <View className="flex-row justify-between pt-14 mx-10">
+                <PressableIcon
+                        onPress={() => {
+                            navigation.navigate("GroupScreen")
+                        }}
+                        icon="arrow-left"
+                        size={40}
+                        color="black"
+                    />
+                <Text className="font-bold ml-auto mr-auto text-3xl">
+                    Group Settings
+                </Text>
+            </View>
             <Text className="font-bold text-2xl justify-start pt-10 mx-5 ">
-                    General
+                    Add to Group
             </Text>
             <View className='items-center'>
                 <RowItem
-                    title="Account"
-                    icon="user"
+                    title="From Friends"
+                    icon="users"
                     onPress={() => {
-                        alert("Account")
+                        alert("From Friends")
                     }}
                     color="black"
                 />
                 <RowItem
-                    title="Notifications"
-                    icon="bell"
+                    title="Invite Friends"
+                    icon="share-2"
                     onPress={() => {
-                        alert("Notifications")
+                        alert("invite Friends")
                     }}
                     color="black"
-                />
-                <RowItem
-                    title="Log Out"
-                    icon="log-out"
-                    onPress={() => {
-                        alert("Log Out")
-                    }}
-                    color="red"
                 />
             </View>
 
             <Text className="font-bold text-2xl justify-start pt-10 mx-5 ">
-                    Feedback
+                    Admin
             </Text>
             <View className='items-center'>
                 <RowItem
-                    title="Send Feedback"
-                    icon="send"
+                    title="Change Group Name"
+                    icon="edit-3"
                     onPress={() => {
-                        alert("Send Feedback")
-                    }}
-                    color="black"
-                />
-                <RowItem
-                    title="Report a bug"
-                    icon="alert-triangle"
-                    onPress={() => {
-                        alert("Report a bug")
+                        alert("Change Group Name")
                     }}
                     color="black"
                 />
@@ -70,4 +65,4 @@ const SettingsScreen = ({ navigation }) => {
     );
 };
 
-export default SettingsScreen;
+export default GroupSettingsScreen;

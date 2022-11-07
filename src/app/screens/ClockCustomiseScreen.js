@@ -6,60 +6,55 @@ import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
 import { COLOURS } from '../assets/colours';
 import RowItem from '../components/RowItem';
+import PressableIcon from '../components/PressableIcon';
 
-const SettingsScreen = ({ navigation }) => {
+const ClockCustomiseScreen = ({ navigation }) => {
     return (      
         <SafeAreaView className="flex-1 bg-primaryPurple" >
-            <Text className="font-bold text-3xl justify-start pt-14 mx-10">
-                Settings
-            </Text>
+            <View className="flex-row justify-between pt-14 mx-10">
+                <PressableIcon
+                        onPress={() => {
+                            navigation.navigate("GroupScreen")
+                        }}
+                        icon="arrow-left"
+                        size={40}
+                        color="black"
+                    />
+                <Text className="font-bold ml-auto mr-auto text-3xl">
+                    Customise
+                </Text>
+            </View>
             <Text className="font-bold text-2xl justify-start pt-10 mx-5 ">
-                    General
+                    Clock Customisation
             </Text>
             <View className='items-center'>
                 <RowItem
-                    title="Account"
-                    icon="user"
+                    title="Clock Face"
+                    icon="clock"
                     onPress={() => {
-                        alert("Account")
+                        alert("Clock Face")
                     }}
                     color="black"
                 />
                 <RowItem
-                    title="Notifications"
-                    icon="bell"
+                    title="Locations"
+                    icon="map-pin"
                     onPress={() => {
-                        alert("Notifications")
+                        alert("Locations")
                     }}
                     color="black"
-                />
-                <RowItem
-                    title="Log Out"
-                    icon="log-out"
-                    onPress={() => {
-                        alert("Log Out")
-                    }}
-                    color="red"
                 />
             </View>
 
             <Text className="font-bold text-2xl justify-start pt-10 mx-5 ">
-                    Feedback
+                    Hand Customisation
             </Text>
             <View className='items-center'>
                 <RowItem
-                    title="Send Feedback"
-                    icon="send"
+                    title="Hand Colour"
+                    icon="arrow-down-right"
                     onPress={() => {
-                        alert("Send Feedback")
-                    }}
-                    color="black"
-                />
-                <RowItem
-                    title="Report a bug"
-                    icon="alert-triangle"
-                    onPress={() => {
-                        alert("Report a bug")
+                        alert("Hand Colour")
                     }}
                     color="black"
                 />
@@ -70,4 +65,4 @@ const SettingsScreen = ({ navigation }) => {
     );
 };
 
-export default SettingsScreen;
+export default ClockCustomiseScreen;

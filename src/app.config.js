@@ -6,6 +6,7 @@ export default{
     "slug": "Weasley-Clock",
     "version": "1.0.0",
     "orientation": "portrait",
+    "primaryColor": "#C6C4FF",
     "icon": "./app/assets/icon-clock.png",
     "userInterfaceStyle": "light",
     "splash": {
