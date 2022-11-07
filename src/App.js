@@ -11,6 +11,7 @@ import SettingsScreen from './app/screens/SettingsScreen';
 import GroupScreen from './app/screens/GroupScreen';
 import GroupSettingsScreen from './app/screens/GroupSettingsScreen';
 import ClockCustomiseScreen from './app/screens/ClockCustomiseScreen';
+import CreateNewGroupScreen from './app/screens/CreateNewGroupScreen';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -110,6 +111,11 @@ function App () {
         <Stack.Screen 
           name="ClockCustomiseScreen"
           component={ClockCustomiseScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="CreateNewGroupScreen"
+          component={CreateNewGroupScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
