@@ -105,3 +105,7 @@
 ### 3 Nov 2022
 
 * *1.5 hour* Create profile and friends screens
+
+### 7 Nov
+
+* *3 hour* Create group screen, add a group pop up, create a group screen, many more components
