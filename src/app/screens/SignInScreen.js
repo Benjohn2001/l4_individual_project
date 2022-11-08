@@ -1,12 +1,36 @@
-import React from 'react';
+import React,  { useState }  from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
 import { COLOURS } from '../assets/colours';
+import { auth } from '../../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const SignInScreen = ({ navigation }) => {
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const signinUser = () => {
+        if(email == "" || password == ""){
+            alert("Please fill out the full form")
+        }else{
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCred) => {
+                console.log("Sign in successful!")
+                console.log(userCred)
+                navigation.navigate("HomeScreen")
+            })
+            .catch((error) => {
+                alert(error)
+                console.log(error)
+            })
+        }
+    }
+
+
     return (
         <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple" >
             <Image 
@@ -19,6 +43,8 @@ const SignInScreen = ({ navigation }) => {
                     placeholder="Email" 
                     underlineColorAndroid = "transparent"
                     cursorColor={COLOURS.darkerPurple}
+                    value={email}
+                    onChangeText={(val) => setEmail(val)}
                 />
                 <TextInput 
                     className="bg-secondaryPurple mt-5 w-80 h-12 rounded-md" 
@@ -26,6 +52,8 @@ const SignInScreen = ({ navigation }) => {
                     underlineColorAndroid = "transparent"
                     cursorColor={COLOURS.darkerPurple}
                     secureTextEntry={true}
+                    value={password}
+                    onChangeText={(val) => setPassword(val)}
                 />
                 <TouchableOpacity onPress={() => {
                         alert("Forgotten Password")
@@ -43,7 +71,7 @@ const SignInScreen = ({ navigation }) => {
                 icon1="edit"
                 title2="Sign In"
                 onPress2={() => {
-                    navigation.navigate("HomeScreen")
+                    signinUser()
                 }}
                 icon2="arrow-right-circle"
             />     
