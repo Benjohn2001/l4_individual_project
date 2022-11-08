@@ -30,4 +30,5 @@ jobs:
         run: npm install
 
       - name: 🚀 Publish app
+        working-directory: ./src
         run: expo publish --non-interactive
