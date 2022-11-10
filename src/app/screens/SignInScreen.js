@@ -1,12 +1,13 @@
 import React,  { useState }  from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
 import { COLOURS } from '../assets/colours';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useRef } from 'react';
 
 const SignInScreen = ({ navigation }) => {
 
@@ -15,7 +16,7 @@ const SignInScreen = ({ navigation }) => {
 
     const signinUser = () => {
         if(email == "" || password == ""){
-            alert("Please fill out the full form")
+            Alert.alert("Incomplete form","Please fill out the full form")
         }else{
             signInWithEmailAndPassword(auth, email, password)
             .then((userCred) => {
@@ -24,12 +25,17 @@ const SignInScreen = ({ navigation }) => {
                 navigation.navigate("HomeScreen")
             })
             .catch((error) => {
-                alert(error)
+                if(error.code == "auth/user-not-found"){
+                    Alert.alert("User not found","Please retry entering your email")
+                }else if (error.code == "auth/wrong-password"){
+                    Alert.alert("Wrong password","Please retry entering your password")
+                }
                 console.log(error)
             })
         }
     }
 
+    const passwordRef = useRef();
 
     return (
         <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple" >
@@ -45,6 +51,12 @@ const SignInScreen = ({ navigation }) => {
                     cursorColor={COLOURS.darkerPurple}
                     value={email}
                     onChangeText={(val) => setEmail(val)}
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                        passwordRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
+                    autoCapitalize = 'none'
                 />
                 <TextInput 
                     className="bg-secondaryPurple mt-5 w-80 h-12 rounded-md" 
@@ -54,6 +66,8 @@ const SignInScreen = ({ navigation }) => {
                     secureTextEntry={true}
                     value={password}
                     onChangeText={(val) => setPassword(val)}
+                    ref={passwordRef}
+                    autoCapitalize = 'none'
                 />
                 <TouchableOpacity onPress={() => {
                         alert("Forgotten Password")
