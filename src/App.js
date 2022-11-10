@@ -96,7 +96,7 @@ function App () {
         <Stack.Screen 
           name="HomeScreen"
           component={HomeTabs}
-          options={{ headerShown: false, gestureEnabled: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen 
           name="GroupScreen"

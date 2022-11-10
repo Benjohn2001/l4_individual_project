@@ -15,11 +15,13 @@ const HomeScreen = ({ navigation }) => {
     
     const [isModalVisible, setModalVisible] = React.useState(false);
 
-
-    //stopping back gesture going back to sign in - not working
-    // React.useEffect( () => navigation.addlistener('beforeRemove', (e) => {
-    //     e.preventDefault();
-    // }))
+    React.useEffect(
+        () =>
+          navigation.addListener('beforeRemove', (e) => {
+            e.preventDefault();
+        }
+          )
+    )
 
     return (
         <SafeAreaView className="flex-1 bg-primaryPurple" >
