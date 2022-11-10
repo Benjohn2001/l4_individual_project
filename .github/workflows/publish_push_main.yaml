@@ -1,5 +1,6 @@
 name: Publish on push to main
 run-name: ${{ github.actor }} publishing the app 🚀
+#https://github.com/expo/expo-github-action
 
 on:
   push:

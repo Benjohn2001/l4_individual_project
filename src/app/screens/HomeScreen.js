@@ -10,9 +10,18 @@ import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import TwoButtonStack from '../components/TwoButtonStack';
 
+
 const HomeScreen = ({ navigation }) => {
     
     const [isModalVisible, setModalVisible] = React.useState(false);
+
+    React.useEffect(
+        () =>
+          navigation.addListener('beforeRemove', (e) => {
+            e.preventDefault();
+        }
+          )
+    )
 
     return (
         <SafeAreaView className="flex-1 bg-primaryPurple" >

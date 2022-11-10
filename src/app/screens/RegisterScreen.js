@@ -1,10 +1,83 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TextInput, SafeAreaView } from 'react-native';
 import PressableIcon from '../components/PressableIcon';
 import { COLOURS } from '../assets/colours';
 import AppButtonPurple from '../components/AppButtonPurple';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { auth } from '../../firebase';
+import { getDatabase, ref, set, onValue, orderByChild, query, equalTo, get, child} from "firebase/database";
+import { useRef } from 'react';
+import { Alert } from 'react-native';
+
 
 const RegisterScreen = ({ navigation }) => {
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+
+    const db = getDatabase()
+
+    const registerUser = () => {
+
+        const unamesRef = query(ref(db, "/users"), orderByChild("userName"), equalTo(userName))
+
+        console.log(userName)
+        
+        if(firstName == "" || lastName == "" || userName == "" || email == "" || password == ""){
+            Alert.alert("Incomplete Form","One or more fields are empty")
+        }
+        else if(password.length<8 || password.search(/[A-Z]/) < 0 ){
+            Alert.alert("Improper Password","Password must be at least 8 characters and contain at least 1 upper-case character")
+        }
+        else if(userName!=""){
+            onValue(unamesRef, (snapshot) => {
+                console.log(snapshot.val())
+                if(snapshot.val() != null){
+                    console.log("snapshot exists")
+                    Alert.alert("Username taken", "Please select a new username")
+                }else{
+                    createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCred) => {
+                        console.log("Registration successful!")
+                        console.log(userCred)
+                        set(ref(db, 'users/' + userCred.user.uid), {
+                            firstName: firstName,
+                            lastName: lastName,
+                            userName: userName,
+                            email: email
+                        })
+                        setFirstName("")
+                        setLastName("")
+                        setUserName("")
+                        setEmail("")
+                        setPassword("")
+                        navigation.navigate("SignInScreen")
+                    })
+                    .catch((error) => {
+                        if(error.code == "auth/invalid-email"){
+                            Alert.alert("Invalid E-mail","Please enter a valid email address")
+                        }else if(error.code=="auth/email-already-in-use"){
+                            Alert.alert("Email taken","This email is already in use")
+                        }              
+                        console.log(error)
+                    })
+                }
+            }, {onlyOnce: true})
+            
+        }
+        
+
+    }
+
+    const lastNameRef = useRef();
+    const usernameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
     return (
         <SafeAreaView className='flex-1 bg-primaryPurple'>
             <View className='pt-10 pl-5'>
@@ -37,24 +110,57 @@ const RegisterScreen = ({ navigation }) => {
                     placeholder="First Name" 
                     underlineColorAndroid = "transparent"
                     cursorColor={COLOURS.darkerPurple}
+                    value={firstName}
+                    onChangeText={(val) => setFirstName(val)}
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                        lastNameRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                 />
                 <TextInput 
                     className="bg-secondaryPurple my-4 w-80 h-12 rounded-md" 
                     placeholder="Last Name" 
                     underlineColorAndroid = "transparent"
                     cursorColor={COLOURS.darkerPurple}
+                    value={lastName}
+                    onChangeText={(val) => setLastName(val)}
+                    ref={lastNameRef}
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                        usernameRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                 />
                 <TextInput 
                     className="bg-secondaryPurple my-4 w-80 h-12 rounded-md" 
                     placeholder="Username" 
                     underlineColorAndroid = "transparent"
                     cursorColor={COLOURS.darkerPurple}
+                    value={userName}
+                    onChangeText={(val) => setUserName(val)}
+                    ref={usernameRef}
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                        emailRef.current.focus();
+                    }}
+                    autoCapitalize = 'none'
+                    blurOnSubmit={false}
                 />
                 <TextInput 
                     className="bg-secondaryPurple my-4 w-80 h-12 rounded-md" 
                     placeholder="Email" 
                     underlineColorAndroid = "transparent"
                     cursorColor={COLOURS.darkerPurple}
+                    value={email}
+                    onChangeText={(val) => setEmail(val)}
+                    ref={emailRef}
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                        passwordRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
+                    autoCapitalize = 'none'
                 />
                 <TextInput 
                     className="bg-secondaryPurple mt-4 w-80 h-12 rounded-md" 
@@ -62,6 +168,10 @@ const RegisterScreen = ({ navigation }) => {
                     underlineColorAndroid = "transparent"
                     cursorColor={COLOURS.darkerPurple}
                     secureTextEntry={true}
+                    value={password}
+                    onChangeText={(val) => setPassword(val)}
+                    ref={passwordRef}
+                    autoCapitalize = 'none'
                 />
                 <Text className='text-sm text-left pt-2 pb-2 text-gray-500'>
                 Password must be at least 8 characters and {'\n'}
@@ -70,7 +180,7 @@ const RegisterScreen = ({ navigation }) => {
                 <AppButtonPurple
                     title="Submit"
                     onPress={() => {
-                        navigation.navigate("HomeScreen")
+                        registerUser()
                     }}
                 />
             </View>
