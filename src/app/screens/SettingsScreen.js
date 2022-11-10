@@ -6,6 +6,7 @@ import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
 import { COLOURS } from '../assets/colours';
 import RowItem from '../components/RowItem';
+import { auth } from '../../firebase';
 
 const SettingsScreen = ({ navigation }) => {
     return (      
@@ -37,7 +38,14 @@ const SettingsScreen = ({ navigation }) => {
                     title="Log Out"
                     icon="log-out"
                     onPress={() => {
-                        alert("Log Out")
+                        auth.signOut().then(()=>{
+                            console.log("User logged out")
+                            navigation.navigate("SignInScreen")
+                        }).catch((error) => {
+                            console.log(error)
+                        }
+                        )
+                        
                     }}
                     color="red"
                 />

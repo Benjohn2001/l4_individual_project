@@ -6,13 +6,16 @@ import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
 import { COLOURS } from '../assets/colours';
 import { auth } from '../../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail} from 'firebase/auth';
 import { useRef } from 'react';
+import Modal from "react-native-modal";
 
 const SignInScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [emailReset, setEmailReset] = useState("")
+    const [isModalVisible, setModalVisible] = React.useState(false);
 
     const signinUser = () => {
         if(email == "" || password == ""){
@@ -21,6 +24,8 @@ const SignInScreen = ({ navigation }) => {
             signInWithEmailAndPassword(auth, email, password)
             .then((userCred) => {
                 console.log("Sign in successful!")
+                setEmail("")
+                setPassword("")
                 console.log(userCred)
                 navigation.navigate("HomeScreen")
             })
@@ -70,7 +75,7 @@ const SignInScreen = ({ navigation }) => {
                     autoCapitalize = 'none'
                 />
                 <TouchableOpacity onPress={() => {
-                        alert("Forgotten Password")
+                        setModalVisible(true)
                     }}>
                     <Text className="mt-2 mb-20 underline text-darkerPurple">
                         Forgotten Password
@@ -88,7 +93,37 @@ const SignInScreen = ({ navigation }) => {
                     signinUser()
                 }}
                 icon2="arrow-right-circle"
-            />     
+            />
+
+            <Modal 
+                isVisible={isModalVisible}
+                onBackdropPress={() => setModalVisible(false)}
+                className="items-center"
+            >
+                <View className=" w-11/12 h-50 items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
+                    <Text className="text-2xl font-bold  pb-2">Forgotten Password</Text>
+                    <Text className="text-center text-gray-500 py-4">Enter the email of the account to be reset</Text>
+                    <TextInput 
+                        className="bg-white my-5 w-full mx-3 h-12 rounded-md" 
+                        placeholder="Email" 
+                        underlineColorAndroid = "transparent"
+                        cursorColor={COLOURS.darkerPurple}
+                        value={emailReset}
+                        onChangeText={(val) => setEmailReset(val)}
+                    />
+                    <AppButtonPurple
+                        title="Send Email"
+                        onPress={()=>{
+                            sendPasswordResetEmail(auth, emailReset)
+                            .then(()=>{
+                                setEmailReset("")
+                                console.log("Email sent to "+emailReset)
+                            })
+                        }}
+                    />
+                    
+                </View>
+            </Modal>     
         </SafeAreaView>
     );
 }
