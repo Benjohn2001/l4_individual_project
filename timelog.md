@@ -114,3 +114,16 @@
 
 * *1 hour* Create github action to publish app to expo
 * *2.5 hour* Set up database, sign and register, authentication
+
+### 10 Nov 2022
+
+*4 hour* Validation of usernames, logout, forgot password, no back from home to login
+
+
+### 15 Nov 2022
+
+*4 hour* Add firebase data to me page, change username and bio functionality
+
+### 16 Nov 2022
+
+*3 hour* Add upload of picture and edit picture, fix all async issues and add loading indicators
