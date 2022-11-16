@@ -27,7 +27,7 @@ const SignInScreen = ({ navigation }) => {
                 setEmail("")
                 setPassword("")
                 console.log(userCred)
-                navigation.navigate("HomeScreen")
+                navigation.push("HomeScreen")
             })
             .catch((error) => {
                 if(error.code == "auth/user-not-found"){
@@ -116,8 +116,10 @@ const SignInScreen = ({ navigation }) => {
                         onPress={()=>{
                             sendPasswordResetEmail(auth, emailReset)
                             .then(()=>{
-                                setEmailReset("")
+                                Alert.alert("Email sent","Reset email has been sent to "+emailReset )
                                 console.log("Email sent to "+emailReset)
+                                setModalVisible(false)
+                                setEmailReset("")
                             })
                         }}
                     />

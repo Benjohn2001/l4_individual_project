@@ -40,7 +40,7 @@ const SettingsScreen = ({ navigation }) => {
                     onPress={() => {
                         auth.signOut().then(()=>{
                             console.log("User logged out")
-                            navigation.navigate("SignInScreen")
+                            navigation.push("SignInScreen")
                         }).catch((error) => {
                             console.log(error)
                         }

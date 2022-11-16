@@ -24,8 +24,6 @@ const RegisterScreen = ({ navigation }) => {
     const registerUser = () => {
 
         const unamesRef = query(ref(db, "/users"), orderByChild("userName"), equalTo(userName))
-
-        console.log(userName)
         
         if(firstName == "" || lastName == "" || userName == "" || email == "" || password == ""){
             Alert.alert("Incomplete Form","One or more fields are empty")
@@ -48,7 +46,8 @@ const RegisterScreen = ({ navigation }) => {
                             firstName: firstName,
                             lastName: lastName,
                             userName: userName,
-                            email: email
+                            email: email,
+                            bio: "Add a bio!"
                         })
                         setFirstName("")
                         setLastName("")

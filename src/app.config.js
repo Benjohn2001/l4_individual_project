@@ -6,8 +6,8 @@ export default{
     "slug": "Weasley-Clock",
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#C6C4FF",
-    "icon": "./app/assets/icon-clock.png",
+    "primaryColor": "#6B4EFF",
+    "icon": "./app/assets/icon-clock-v2.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./app/assets/splash-clock.png",
@@ -25,11 +25,10 @@ export default{
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon-clock.png",
-        "backgroundColor": "#C6C4FF",
-        "backgroundImage": "./app/assets/background-colour.png"
+        "foregroundImage": "./app/assets/adaptive-icon-clock-2.png",
+        "backgroundColor": "#6B4EFF",
       },
-      "icon": "./app/assets/adaptive-icon-clock.png",
+      "icon": "./app/assets/adaptive-icon-clock-2.png",
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
