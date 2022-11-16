@@ -34,6 +34,8 @@ const SignInScreen = ({ navigation }) => {
                     Alert.alert("User not found","Please retry entering your email")
                 }else if (error.code == "auth/wrong-password"){
                     Alert.alert("Wrong password","Please retry entering your password")
+                }else if (error.code == "auth/invalid-email"){
+                    Alert.alert("Invalid email","Please retry entering your email")
                 }
                 console.log(error)
             })

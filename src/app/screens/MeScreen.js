@@ -72,7 +72,6 @@ const MeScreen = ({ navigation }) => {
         return await getDownloadURL(fileRef);
       }
 
-    //Not updating data on page when the data is changed include fields in [] maybe ??
     useEffect(()=>{
         console.log("first")
         onValue(unamesRef, (snapshot) => {

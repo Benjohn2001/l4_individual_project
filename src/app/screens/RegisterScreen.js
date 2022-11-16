@@ -21,7 +21,7 @@ const RegisterScreen = ({ navigation }) => {
 
     const db = getDatabase()
 
-    const registerUser = () => {
+    const registerUser = async () => {
 
         const unamesRef = query(ref(db, "/users"), orderByChild("userName"), equalTo(userName))
         
@@ -32,12 +32,11 @@ const RegisterScreen = ({ navigation }) => {
             Alert.alert("Improper Password","Password must be at least 8 characters and contain at least 1 upper-case character")
         }
         else if(userName!=""){
-            onValue(unamesRef, (snapshot) => {
-                console.log(snapshot.val())
-                if(snapshot.val() != null){
-                    console.log("snapshot exists")
-                    Alert.alert("Username taken", "Please select a new username")
-                }else{
+            const snapshot = await get(unamesRef)
+            if(snapshot.val() !== null){
+                console.log("snapshot exists")
+                Alert.alert("Username taken", "Please select a new username")
+            }else{
                     createUserWithEmailAndPassword(auth, email, password)
                     .then((userCred) => {
                         console.log("Registration successful!")
@@ -65,12 +64,10 @@ const RegisterScreen = ({ navigation }) => {
                         console.log(error)
                     })
                 }
-            }, {onlyOnce: true})
+            }
             
         }
         
-
-    }
 
     const lastNameRef = useRef();
     const usernameRef = useRef();
