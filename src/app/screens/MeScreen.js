@@ -73,9 +73,7 @@ const MeScreen = ({ navigation }) => {
       }
 
     useEffect(()=>{
-        console.log("first")
         onValue(unamesRef, (snapshot) => {
-            console.log("second")
             if(snapshot.exists){
                 const data = snapshot.val()
                 console.log(data)
