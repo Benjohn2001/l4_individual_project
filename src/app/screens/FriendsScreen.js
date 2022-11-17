@@ -14,6 +14,7 @@ import { async } from '@firebase/util';
 import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
 import {ref as stref} from "firebase/storage";
 import FriendsRowSearch from '../components/FriendsRowSearch';
+import { auth } from '../../firebase';
 
 
 const FriendsScreen = ({ navigation }) => {
@@ -21,8 +22,10 @@ const FriendsScreen = ({ navigation }) => {
     const [searchVis, setSearchVis] = useState(false)
     const [spinVis, setSpinVis] = useState(false)
     const [unames, setUnames] = useState([])
+    const [friends, setFriends] = useState([])
     const [filtered, setFiltered] = useState([])
     const [urls, setUrls] = useState([])
+    const uid = auth.currentUser.uid
 
     useEffect(()=>{
         const fetchData = async () =>{
@@ -30,7 +33,15 @@ const FriendsScreen = ({ navigation }) => {
             const unamesRef = query(ref(getDatabase(), "/users"), orderByChild("userName"))
             const data = await get(unamesRef)
             data.forEach(c => {
-                setUnames(a => {return [...a , c.val()]})
+                if(c.val()["email"] != auth.currentUser.email){
+                    setUnames(a => {return [...a , c.val()]})
+                }
+            })
+            setFriends([])
+            const friendsRef = ref(getDatabase(), "/friends/"+uid)
+            const dataFr = await get(friendsRef)
+            dataFr.forEach(c => {
+                setFriends(a => {return [...a , c.val().u]})
             })
         }
         fetchData()
@@ -39,7 +50,7 @@ const FriendsScreen = ({ navigation }) => {
     const filterUname = (name) => {
         setFiltered([])
         unames.filter((str)=>{
-                if(str["userName"].includes(name)){
+                if(str["userName"].toLowerCase().includes(name.toLowerCase())){
                     setFiltered(a => {return [...a , str]}) 
                 }
         })
@@ -73,7 +84,7 @@ const FriendsScreen = ({ navigation }) => {
                 <View>
                     <SearchBar
                         className="bg-secondaryPurple  h-12 w-11/12"
-                        placeholder="Search for a user"
+                        placeholder="Search for a username"
                         iconColor="6B4EFF"
                         spinnerVisibility={spinVis}
                         onChangeText={text => {
@@ -95,7 +106,9 @@ const FriendsScreen = ({ navigation }) => {
                                     <FriendsRowSearch
                                         title={item["userName"]}
                                         onPress={() => {
-                                            alert("View Profile");
+                                            navigation.push('UserProfileScreen', {
+                                                user: item,
+                                              });
                                         } }
                                         avatar={ item["profilePic"] }
                                     />
@@ -108,27 +121,29 @@ const FriendsScreen = ({ navigation }) => {
 
                 :
 
-            <><ScrollView
-                        showsVerticalScrollIndicator={false}
-                    >
-                       
-                        <FriendsRow
-                            title="Bill Smith"
+            <View>
+                <FlatList
+                    data={friends}
+                    renderItem={ ({item})=>(
+                        <FriendsRowSearch
+                            title={item["userName"]}
                             onPress={() => {
-                                alert("View Profile");
+                                navigation.push('UserProfileScreen', {
+                                    user: item,
+                                    });
                             } }
-                            avatar={require('../assets/ben-avatar.png')} />
-                        <FriendsRow
-                            title="Bill Smith"
-                            onPress={() => {
-                                alert("View Profile");
-                            } }
-                            avatar={require('../assets/ben-avatar.png')} />
-                    </ScrollView><PillButton
-                            title="Invite more friends"
-                            onPress={() => {
-                                alert("Invite more friends");
-                            } } /></>
+                            avatar={ item["profilePic"] }
+                        />
+                    )
+                    }
+                />
+                <PillButton
+                    title="Invite more friends"
+                    onPress={() => {
+                        alert("Invite more friends");
+                    } } 
+                />
+            </View>
             }
         </SafeAreaView>
 

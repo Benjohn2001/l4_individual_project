@@ -16,6 +16,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import UserProfileScreen from './app/screens/UserProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -116,6 +117,11 @@ function App () {
         <Stack.Screen 
           name="CreateNewGroupScreen"
           component={CreateNewGroupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="UserProfileScreen"
+          component={UserProfileScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

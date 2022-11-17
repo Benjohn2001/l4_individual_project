@@ -7,13 +7,10 @@ import PressableIcon from "./PressableIcon";
 import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
 import {ref as stref} from "firebase/storage";
 
-//have button change from plus to delete once friend added ??
-
 function FriendsRowSearch (props) {
     const [pic, setPic] = useState(Image.resolveAssetSource(require('../assets/defaultProfilePic.png')).uri);
     const { title, onPress, avatar} = props;
-
-    console.log(avatar)
+    
     if(avatar!== ""){
         getDownloadURL(stref(getStorage(), avatar)).then((url)=>{
             setPic(url)
