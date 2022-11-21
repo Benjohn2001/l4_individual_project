@@ -38,7 +38,7 @@ const FriendsScreen = ({ navigation, route }) => {
         const unamesRef = query(ref(getDatabase(), "/users"), orderByChild("userName"))
         const data = await get(unamesRef)
         data.forEach(c => {
-            if(c.val()["email"] != auth.currentUser.email){
+            if(c.val()["email"].toLowerCase() != auth.currentUser.email.toLowerCase()){
                 setUnames(a => {return [...a , c]})
             }
         })
@@ -120,6 +120,7 @@ const FriendsScreen = ({ navigation, route }) => {
 
                         onClearPress={() => {
                             filterUname('');
+                            setSpinVis(false);
                         } } />
                         <View>
                             <FlatList
