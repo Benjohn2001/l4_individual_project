@@ -17,23 +17,21 @@ import FriendsRowSearch from '../components/FriendsRowSearch';
 import { auth } from '../../firebase';
 
 
-const FriendsScreen = ({ navigation }) => {
+const FriendsScreen = ({ navigation, route }) => {
 
-    const [searchVis, setSearchVis] = useState(false)
+    const [searchVis, setSearchVis] = useState(true)
     const [spinVis, setSpinVis] = useState(false)
     const [unames, setUnames] = useState([])
-    const [temp, setTemp] = useState([])
     const [friends, setFriends] = useState([])
     const [friendsKeys, setFriendsKeys] = useState([])
     const [filtered, setFiltered] = useState([])
     const [fetched, setFetched] = useState(false)
-    const [friendsChanged, setFriendsChanged] = useState(false)
     const uid = auth.currentUser.uid
 
     useEffect(()=>{
         fetchData()
         getFriends()
-    }, [])
+    }, [searchVis])
 
     const fetchData = async () =>{
         setUnames([])
@@ -51,20 +49,16 @@ const FriendsScreen = ({ navigation }) => {
         setFetched(false)
         setFriendsKeys([])
         setFriends([])
-        setTemp([])
         const friendsRef = ref(getDatabase(), "/friends/"+uid)
         const dataFr = await get(friendsRef)
         dataFr.forEach(c => {setFriendsKeys(a =>{return [...a, c.val()["user"]]})})
 
         for(const i in unames){
             if(friendsKeys.includes(unames[i].key)){
-                console.log("set friends")
                 setFriends(a => {return [...a , unames[i]]})
             }
         }
-        console.log(friends.length + "-------------in funct")
         setFetched(true)
-        setFriendsChanged(true)
     }
 
     const filterUname = (name) => {
@@ -76,7 +70,6 @@ const FriendsScreen = ({ navigation }) => {
         })
     }
 
-    console.log(friends.length+"------frends out")
 
     return (
         <SafeAreaView className="flex-1 bg-primaryPurple" >
@@ -89,9 +82,15 @@ const FriendsScreen = ({ navigation }) => {
                     size={40}
                     color="black"
                 />
+                {searchVis ?
+                <Text className="font-bold text-3xl">
+                    Search
+                </Text>
+                :
                 <Text className="font-bold text-3xl">
                     My Friends
                 </Text>
+                }               
                 <PressableIcon
                     onPress={() => {
                         setSearchVis(true)
@@ -110,6 +109,7 @@ const FriendsScreen = ({ navigation }) => {
                         iconColor="6B4EFF"
                         spinnerVisibility={spinVis}
                         onChangeText={text => {
+                            setFiltered([])
                             if (text.length === 0) {
                                 setSpinVis(false);
                             } else {

@@ -63,7 +63,7 @@ const UserProfileScreen = ({ route, navigation }) => {
             <View className="flex-row justify-between pt-14 mx-10">
                 <PressableIcon
                         onPress={() => {
-                            navigation.push('HomeScreen', { screen: 'Friends' })
+                            navigation.goBack()
                         }}
                         icon="arrow-left"
                         size={40}
