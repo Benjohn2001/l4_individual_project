@@ -32,11 +32,11 @@ const UserProfileScreen = ({ route, navigation }) => {
     const user = route.params.user
 
     useEffect(()=>{
-        setNameFull(user["firstName"]+" "+user["lastName"])
-        setUserName(user["userName"])
-        setBio(user["bio"])
-        if(user["profilePic"]!== undefined){
-            getDownloadURL(stref(getStorage(), user["profilePic"])).then((url)=>{
+        setNameFull(user.val()["firstName"]+" "+user.val()["lastName"])
+        setUserName(user.val()["userName"])
+        setBio(user.val()["bio"])
+        if(user.val()["profilePic"]!== undefined){
+            getDownloadURL(stref(getStorage(), user.val()["profilePic"])).then((url)=>{
                 setPic(url)
             })
         }else{
@@ -47,7 +47,7 @@ const UserProfileScreen = ({ route, navigation }) => {
             const dataFr = await get(friendsRef)
             if(dataFr.val() !== null){
                 dataFr.forEach(c => {
-                    if(c.val()["u"]["userName"]==user["userName"]){
+                    if(c.val()["user"]==user.key){
                         setFriend(true)
                     }
                 })
@@ -55,9 +55,6 @@ const UserProfileScreen = ({ route, navigation }) => {
         }
 
         checkFriend()
-        // dataFr.forEach(c => {
-        //     setFriends(a => {return [...a , c.val().u]})
-        // })
         
     },[])
     
@@ -96,7 +93,8 @@ const UserProfileScreen = ({ route, navigation }) => {
                             const data = await get(dref)
                             if(data.val() !== null){
                                 data.forEach(c => {
-                                    if(c.val()["u"]["userName"]==user["userName"]){
+
+                                    if(c.val()["user"]==user.key){
                                         remove(ref(db, "/friends/"+uid+"/"+c.key))
                                     }
                                 })
@@ -112,7 +110,7 @@ const UserProfileScreen = ({ route, navigation }) => {
                     onPress={async ()=>{
                         const pref=push(ref(db, '/friends/' + uid ))
                         await set(pref,{
-                            u: user
+                            user: user.key
                         })
                         Alert.alert("Success","Friend added succesfully")
                         setFriend(true)
