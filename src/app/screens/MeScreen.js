@@ -73,9 +73,7 @@ const MeScreen = ({ navigation }) => {
       }
 
     useEffect(()=>{
-        console.log("first")
         onValue(unamesRef, (snapshot) => {
-            console.log("second")
             if(snapshot.exists){
                 const data = snapshot.val()
                 console.log(data)
@@ -243,17 +241,21 @@ const MeScreen = ({ navigation }) => {
                         }}
                         title2="Save picture"
                         onPress2={async () => {
-                            setUploading(true)
-                            setPicModalVisible(false)
-                            const upload_url= await uploadImageAsync(picUp)
-                            setUploading(false)
-                            console.log(upload_url)
-                            setPic(upload_url)
-                            await update(ref(db, '/users/' + uid ), {
-                                profilePic: "images/profilePics/"+uid
-                            }).then(()=>{
-                                Alert.alert("Success","Profile pic changed succesfully")
-                            })
+                            if(picUp==""){
+                                Alert.alert("No image selected","Please upload an image")
+                            }else{
+                                setUploading(true)
+                                setPicModalVisible(false)
+                                const upload_url= await uploadImageAsync(picUp)
+                                setUploading(false)
+                                console.log(upload_url)
+                                setPic(upload_url)
+                                await update(ref(db, '/users/' + uid ), {
+                                    profilePic: "images/profilePics/"+uid
+                                }).then(()=>{
+                                    Alert.alert("Success","Profile pic changed succesfully")
+                                })
+                            }
                             setPicUp("")
                         }}
                     
