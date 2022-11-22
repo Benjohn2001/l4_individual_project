@@ -17,6 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
 import {ref as stref} from "firebase/storage";
 import PressableIcon from '../components/PressableIcon';
+import AppButtonRed from '../components/AppButtonRed';
 
 
 const UserProfileScreen = ({ route, navigation }) => {
@@ -86,24 +87,21 @@ const UserProfileScreen = ({ route, navigation }) => {
                     />
                 </View>
                 {friend ? 
-                    <AppButtonPurple
-                        title={"Remove friend"}
-                        onPress={async ()=>{
-                            const dref=query(ref(db, "/friends/"+uid))
-                            const data = await get(dref)
-                            if(data.val() !== null){
-                                data.forEach(c => {
-
-                                    if(c.val()["user"]==user.key){
-                                        remove(ref(db, "/friends/"+uid+"/"+c.key))
-                                    }
-                                })
-                            }
-                            Alert.alert("Success","Friend removed succesfully")
-                            setFriend(false)
-                            }
-                        }
-                    />
+                    <AppButtonRed
+                            title={"Remove friend"}
+                            onPress={async () => {
+                                const dref = query(ref(db, "/friends/" + uid));
+                                const data = await get(dref);
+                                if (data.val() !== null) {
+                                    data.forEach(c => {
+                                        if (c.val()["user"] == user.key) {
+                                            remove(ref(db, "/friends/" + uid + "/" + c.key));
+                                        }
+                                    });
+                                }
+                                Alert.alert("Success", "Friend removed succesfully");
+                                setFriend(false);
+                            } } />
                 :
                 <AppButtonPurple
                     title={"Add friend"}
