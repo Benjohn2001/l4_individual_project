@@ -15,13 +15,15 @@ const CreateNewGroupScreen = ({ navigation }) => {
         if(groupName==""){
             Alert.alert("Incomplete Form","One or more fields are empty")
         }else{
-          
+            const randomNumber = Math.floor(Math.random() * 100) + 1
+            const id = groupName.replace(' ','_')+randomNumber
 
             const groupsRef = push(ref(getDatabase(), "/groups/"+auth.currentUser.uid))
-            const groupMembersRef = push(ref(getDatabase(), "/groupMembers/"+groupName))
+            const groupMembersRef = push(ref(getDatabase(), "/groupMembers/"+id))
 
             await set(groupsRef, {
-                name: groupName
+                name: groupName,
+                membersRef: id
             })
             await set(groupMembersRef,{
                 member: auth.currentUser.uid

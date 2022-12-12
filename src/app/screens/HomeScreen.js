@@ -119,7 +119,8 @@ const HomeScreen = ({ navigation }) => {
                                 groupName={item.val()["name"]}
                                 onPress={() => {
                                     navigation.navigate("GroupScreen",{
-                                        name: item.val()["name"]
+                                        name: item.val()["name"],
+                                        membersRef: item.val()["membersRef"]
                                     })
                                 }}
                                 avatar={require('../assets/ben-avatar.png')}

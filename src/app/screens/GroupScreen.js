@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView, FlatList, ActivityIndicator } from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
@@ -10,98 +10,89 @@ import RowItem from '../components/RowItem';
 import PillButton from '../components/PillButton';
 import PressableIcon from '../components/PressableIcon';
 import GroupMemberBar from '../components/GroupMemberBar';
+import { query, get, ref, getDatabase } from 'firebase/database';
 
 const GroupScreen = ({ route, navigation }) => {
 
     const name=route.params.name
+    const membersRef=route.params.membersRef
+
+    const [membersKeys, setMembersKeys] = React.useState([])
+    const [members, setMembers] = React.useState([])
+    const [fetched, setFetched] = React.useState(false)
+
+    React.useEffect(()=>{
+        fetchData()
+    },[])
+
+    const fetchData = async () =>{
+        setFetched(false)
+        setMembersKeys([])
+        setMembers([])
+        const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
+        const data = await get(groupMembersRef)
+        data.forEach(c => {
+            setMembersKeys(a => {return [...a , c]})
+        })
+        for (const i in membersKeys) {
+            const userRef = query(ref(getDatabase(), "/users/"+membersKeys[i].val()["member"]))
+            const data = await get(userRef)
+            setMembers(a => {return [...a , data]})
+        }
+        setFetched(true)
+    }
+
 
     return (
         <SafeAreaView className="flex-1  bg-primaryPurple" >
-            <View className="flex-row justify-between pt-14 mx-10">
-                <PressableIcon
+        {fetched ?
+            <><View className="flex-row justify-between pt-14 mx-10">
+                    <PressableIcon
                         onPress={() => {
-                            navigation.navigate("HomeScreen")
-                        }}
+                            navigation.goBack();
+                        } }
                         icon="arrow-left"
                         size={40}
-                        color="black"
-                    />
-                <Text className="font-bold ml-auto mr-auto text-3xl">
-                    {name}
-                </Text>
+                        color="black" />
+                    <Text className="font-bold ml-auto mr-auto text-3xl">
+                        {name}
+                    </Text>
+                </View><View className="justify-center items-center">
+                        <Image
+                            className="w-full h-96"
+                            source={require("../assets/clock.png")} />
+                        <FlatList
+                            showsVerticalScrollIndicator={false}
+                            extraData={members}
+                            data={members}
+                            renderItem={({ item }) => (
+                                <GroupMemberBar
+                                    title={item.val()["firstName"] + " " + item.val()["lastName"]}
+                                    onPress={() => {
+                                        alert("View Profile");
+                                    } }
+                                    avatar={item.val()["profilePic"]}
+                                    color="red" />
+                            )} />
+                    </View><View className="items-center py-3 mt-auto">
+                        <TwoButtonsSide
+                            title1="Settings"
+                            onPress1={() => {
+                                navigation.navigate("GroupSettingsScreen");
+                            } }
+                            icon1="settings"
+                            title2="Customise"
+                            onPress2={() => {
+                                navigation.navigate("ClockCustomiseScreen");
+                            } }
+                            icon2="clock" />
+                    </View></>
+        :
+            <View className="justify-center items-center flex-1">
+                <ActivityIndicator size="large" color="#6B4EFF"  />
+                <Text className="text-center">Loading Group</Text>
             </View>
-            <ScrollView 
-                    showsVerticalScrollIndicator={false}
-            >
-                <View className="justify-center items-center">
-                    <Image 
-                        className="w-full h-96" 
-                        source = {require("../assets/clock.png")}
-                    />
-                    <GroupMemberBar
-                        title="Bill Smith"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="red"
-                    />
-                    <GroupMemberBar
-                        title="Colin Star"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="blue"
-                    />
-                    <GroupMemberBar
-                        title="Dave Spiers"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="green"
-                    />
-                    <GroupMemberBar
-                        title="James Daring"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="yellow"
-                    />
-                    <GroupMemberBar
-                        title="Thomas Spink"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="pink"
-                    />
-                    <GroupMemberBar
-                        title="Greg Star"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="orange"
-                    />
-                </View>
-            </ScrollView>
-            <View className="items-center py-3">
-                <TwoButtonsSide
-                    title1="Settings"
-                    onPress1={() => {
-                        navigation.navigate("GroupSettingsScreen")
-                    }}
-                    icon1="settings"
-                    title2="Customise"
-                    onPress2={() => {
-                        navigation.navigate("ClockCustomiseScreen")
-                    }}
-                    icon2="clock"
-                />
-            </View>
+        }
         </SafeAreaView>
 
     );
