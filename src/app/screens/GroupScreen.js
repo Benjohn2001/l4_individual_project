@@ -11,7 +11,10 @@ import PillButton from '../components/PillButton';
 import PressableIcon from '../components/PressableIcon';
 import GroupMemberBar from '../components/GroupMemberBar';
 
-const GroupScreen = ({ navigation }) => {
+const GroupScreen = ({ route, navigation }) => {
+
+    const name=route.params.name
+
     return (
         <SafeAreaView className="flex-1  bg-primaryPurple" >
             <View className="flex-row justify-between pt-14 mx-10">
@@ -24,7 +27,7 @@ const GroupScreen = ({ navigation }) => {
                         color="black"
                     />
                 <Text className="font-bold ml-auto mr-auto text-3xl">
-                    The Boys
+                    {name}
                 </Text>
             </View>
             <ScrollView 

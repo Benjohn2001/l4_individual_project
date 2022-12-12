@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView, } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView, FlatList, ActivityIndicator} from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
@@ -9,19 +9,45 @@ import GroupButton from '../components/GroupButton';
 import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import TwoButtonStack from '../components/TwoButtonStack';
+import { auth } from '../../firebase';
+import { query, get, ref, getDatabase } from 'firebase/database';
+import SearchBar from "react-native-dynamic-search-bar";
 
 
 const HomeScreen = ({ navigation }) => {
     
-    const [isModalVisible, setModalVisible] = React.useState(false);
+    const [isModalVisible, setModalVisible] = React.useState(false)
+    const [groups, setGroups] = React.useState([])
+    const [fetched, setFetched] = React.useState(false)
+    const [searchVis, setSearchVis] = React.useState(false)
+    const [spinVis, setSpinVis] = React.useState(false)
+    const [filtered, setFiltered] = React.useState([])
 
-    React.useEffect(
-        () =>
+    React.useEffect(() =>{
           navigation.addListener('beforeRemove', (e) => {
             e.preventDefault();
-        }
-          )
-    )
+        })
+        fetchData()
+    },[] )
+
+    const fetchData = async () =>{
+        setGroups([])
+        const groupsRef = query(ref(getDatabase(), "/groups/"+auth.currentUser.uid))
+        const data = await get(groupsRef)
+        data.forEach(c => {
+            setGroups(a => {return [...a , c]})
+        })
+        setFetched(true)
+    }
+
+    const filterGroups = (name) => {
+        setFiltered([])
+        groups.filter((str)=>{
+                if(str.val()["name"].toLowerCase().includes(name.toLowerCase())){
+                    setFiltered(a => {return [...a , str]}) 
+                }
+        })
+    }
 
     return (
         <SafeAreaView className="flex-1 bg-primaryPurple" >
@@ -31,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
                 <PressableIcon
                     onPress={() => {
-                        alert("search")
+                        searchVis ? setSearchVis(false) : setSearchVis(true)
                     }}
                     icon="search"
                     size={40}
@@ -39,45 +65,75 @@ const HomeScreen = ({ navigation }) => {
                 />
             </View>
             <View className="flex-1 justify-center items-center pt-10">
-                <ScrollView 
-                    showsVerticalScrollIndicator={false}
-                >
-                        <GroupButton
-                            groupName="The Boys"
-                            onPress={() => {
-                                navigation.navigate("GroupScreen")
-                            }}
-                            avatar={require('../assets/ben-avatar.png')}
+            {
+                searchVis ?
+                <View>
+                    <SearchBar
+                        className="bg-secondaryPurple  h-12 w-11/12"
+                        placeholder="Search for a group"
+                        iconColor="6B4EFF"
+                        spinnerVisibility={spinVis}
+                        onChangeText={text => {
+                            setFiltered([])
+                            if (text.length === 0) {
+                                setSpinVis(false);
+                            } else {
+                                setSpinVis(true);
+                            }
+                            filterGroups(text);
+                        } }
+
+                        onClearPress={() => {
+                            filterGroups('');
+                            setSpinVis(false);
+                        } } />
+                        <View>
+                            <FlatList
+                                data={filtered}
+                                renderItem={ ({item})=>(
+                                    <GroupButton
+                                        groupName={item.val()["name"]}
+                                        onPress={() => {
+                                            navigation.navigate("GroupScreen",{
+                                                name: item.val()["name"]
+                                            })
+                                        }}
+                                        avatar={require('../assets/ben-avatar.png')}
+                                    />
+                                )
+
+                            
+                                }
+                            />
+                        </View>
+                </View>
+                :
+            <View>
+                {fetched ?
+                    <FlatList
+                            showsVerticalScrollIndicator={false}
+                            extraData={groups}
+                            data={groups}
+                            renderItem={({ item }) => (
+                                <GroupButton
+                                groupName={item.val()["name"]}
+                                onPress={() => {
+                                    navigation.navigate("GroupScreen",{
+                                        name: item.val()["name"]
+                                    })
+                                }}
+                                avatar={require('../assets/ben-avatar.png')}
+                            />
+                            )} 
                         />
-                        <GroupButton
-                            groupName="Film People"
-                            onPress={() => {
-                                alert("Access Group")
-                            }}
-                            avatar={require('../assets/ben-avatar.png')}
-                        />
-                        <GroupButton
-                            groupName="Uni Mates"
-                            onPress={() => {
-                                alert("Access Group")
-                            }}
-                            avatar={require('../assets/ben-avatar.png')}
-                        />
-                        <GroupButton
-                            groupName="Work People"
-                            onPress={() => {
-                                alert("Access Group")
-                            }}
-                            avatar={require('../assets/ben-avatar.png')}
-                        />
-                        <GroupButton
-                            groupName="Football"
-                            onPress={() => {
-                                alert("Access Group")
-                            }}
-                            avatar={require('../assets/ben-avatar.png')}
-                        />
-                </ScrollView>
+                    :
+                    <View className="justify-center items-center flex-1">
+                        <ActivityIndicator size="large" color="#6B4EFF"  />
+                        <Text className="text-center">Loading Groups</Text>
+                    </View>
+                }
+            </View>
+            }       
             </View>
             
             <View className="items-center py-3">
