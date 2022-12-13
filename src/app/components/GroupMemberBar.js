@@ -37,7 +37,7 @@ function GroupMemberBar (props) {
 GroupMemberBar.propTypes = {
     title: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
-    avatar: PropTypes.number.isRequired,
+    avatar: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired
 };
 

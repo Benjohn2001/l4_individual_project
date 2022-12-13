@@ -11,6 +11,7 @@ import PillButton from '../components/PillButton';
 import PressableIcon from '../components/PressableIcon';
 import GroupMemberBar from '../components/GroupMemberBar';
 import { query, get, ref, getDatabase } from 'firebase/database';
+import { auth } from '../../firebase';
 
 const GroupScreen = ({ route, navigation }) => {
 
@@ -19,14 +20,14 @@ const GroupScreen = ({ route, navigation }) => {
 
     const [membersKeys, setMembersKeys] = React.useState([])
     const [members, setMembers] = React.useState([])
+    const [showMembers, setShowMembers] = React.useState(false)
     const [fetched, setFetched] = React.useState(false)
 
     React.useEffect(()=>{
         fetchData()
-    },[])
+    },[showMembers])
 
     const fetchData = async () =>{
-        setFetched(false)
         setMembersKeys([])
         setMembers([])
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
@@ -57,24 +58,53 @@ const GroupScreen = ({ route, navigation }) => {
                     <Text className="font-bold ml-auto mr-auto text-3xl">
                         {name}
                     </Text>
-                </View><View className="justify-center items-center">
-                        <Image
-                            className="w-full h-96"
-                            source={require("../assets/clock.png")} />
-                        <FlatList
-                            showsVerticalScrollIndicator={false}
-                            extraData={members}
-                            data={members}
-                            renderItem={({ item }) => (
-                                <GroupMemberBar
-                                    title={item.val()["firstName"] + " " + item.val()["lastName"]}
-                                    onPress={() => {
-                                        alert("View Profile");
-                                    } }
-                                    avatar={item.val()["profilePic"]}
-                                    color="red" />
-                            )} />
-                    </View><View className="items-center py-3 mt-auto">
+                </View>
+                <View className="justify-center items-center">
+                    <Image
+                        className="w-full h-96"
+                        source={require("../assets/clock.png")} 
+                    />
+                    { showMembers ?
+                        <>
+                            <PillButton
+                                title="Hide Members"
+                                onPress={() => {
+                                    setShowMembers(false);
+                                } }
+                                icon="users" 
+                            />
+                            <FlatList
+                                showsVerticalScrollIndicator={false}
+                                extraData={members}
+                                data={members}
+                                renderItem={({ item }) => (
+                                    <GroupMemberBar
+                                        title={item.val()["firstName"] + " " + item.val()["lastName"]}
+                                        onPress={() => {
+                                            if (item.key == auth.currentUser.uid) {
+                                                navigation.navigate("HomeScreen", { screen: "Me" });
+                                            } else {
+                                                navigation.push('UserProfileScreen', {
+                                                    user: item,
+                                                });
+                                            }
+                                        } }
+                                        avatar={item.val()["profilePic"]}
+                                        color="red" />
+                                )} 
+                            />
+                        </>
+                    :
+                        <PillButton
+                            title="Show Members"
+                            onPress={()=>{
+                                setShowMembers(true)
+                            }}
+                            icon="users"
+                        />
+                    }
+                    </View>
+                    <View className="items-center py-3 mt-auto">
                         <TwoButtonsSide
                             title1="Settings"
                             onPress1={() => {

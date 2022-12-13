@@ -31,6 +31,7 @@ const HomeScreen = ({ navigation }) => {
     },[] )
 
     const fetchData = async () =>{
+        setFetched(false)
         setGroups([])
         const groupsRef = query(ref(getDatabase(), "/groups/"+auth.currentUser.uid))
         const data = await get(groupsRef)
@@ -116,15 +117,15 @@ const HomeScreen = ({ navigation }) => {
                             data={groups}
                             renderItem={({ item }) => (
                                 <GroupButton
-                                groupName={item.val()["name"]}
-                                onPress={() => {
-                                    navigation.navigate("GroupScreen",{
-                                        name: item.val()["name"],
-                                        membersRef: item.val()["membersRef"]
-                                    })
-                                }}
-                                avatar={require('../assets/ben-avatar.png')}
-                            />
+                                    groupName={item.val()["name"]}
+                                    onPress={() => {
+                                        navigation.navigate("GroupScreen",{
+                                            name: item.val()["name"],
+                                            membersRef: item.val()["membersRef"]
+                                        })
+                                    }}
+                                    avatar={require('../assets/ben-avatar.png')}
+                                />
                             )} 
                         />
                     :

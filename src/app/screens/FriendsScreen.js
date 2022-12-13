@@ -172,6 +172,7 @@ const FriendsScreen = ({ navigation, route }) => {
                             onPress={() => {
                                 alert("Invite more friends");
                             } } 
+                            icon="share-2"
                         />
                     </View>
                 </>
