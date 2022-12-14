@@ -108,7 +108,10 @@ const GroupScreen = ({ route, navigation }) => {
                         <TwoButtonsSide
                             title1="Settings"
                             onPress1={() => {
-                                navigation.navigate("GroupSettingsScreen");
+                                navigation.navigate("GroupSettingsScreen",{
+                                    name: name,
+                                    membRef: membersRef
+                                });
                             } }
                             icon1="settings"
                             title2="Customise"

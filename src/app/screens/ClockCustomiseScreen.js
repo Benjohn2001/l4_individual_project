@@ -14,7 +14,7 @@ const ClockCustomiseScreen = ({ navigation }) => {
             <View className="flex-row justify-between pt-14 mx-10">
                 <PressableIcon
                         onPress={() => {
-                            navigation.navigate("GroupScreen")
+                            navigation.goBack()
                         }}
                         icon="arrow-left"
                         size={40}

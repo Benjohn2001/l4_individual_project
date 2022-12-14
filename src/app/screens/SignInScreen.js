@@ -23,10 +23,8 @@ const SignInScreen = ({ navigation }) => {
         }else{
             signInWithEmailAndPassword(auth, email, password)
             .then((userCred) => {
-                console.log("Sign in successful!")
                 setEmail("")
                 setPassword("")
-                console.log(userCred)
                 navigation.push("HomeScreen")
             })
             .catch((error) => {
@@ -37,7 +35,6 @@ const SignInScreen = ({ navigation }) => {
                 }else if (error.code == "auth/invalid-email"){
                     Alert.alert("Invalid email","Please retry entering your email")
                 }
-                console.log(error)
             })
         }
     }
