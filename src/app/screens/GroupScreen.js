@@ -64,35 +64,42 @@ const GroupScreen = ({ route, navigation }) => {
                         className="w-full h-96"
                         source={require("../assets/clock.png")} 
                     />
+                </View>
+                                    
                     { showMembers ?
                         <>
+                        <View className="flex-1">
                             <PillButton
                                 title="Hide Members"
                                 onPress={() => {
                                     setShowMembers(false);
+                                    setMembersKeys([])
+                                    setMembers([])
                                 } }
                                 icon="users" 
                             />
-                            <FlatList
-                                showsVerticalScrollIndicator={false}
-                                extraData={members}
-                                data={members}
-                                renderItem={({ item }) => (
-                                    <GroupMemberBar
-                                        title={item.val()["firstName"] + " " + item.val()["lastName"]}
-                                        onPress={() => {
-                                            if (item.key == auth.currentUser.uid) {
-                                                navigation.navigate("HomeScreen", { screen: "Me" });
-                                            } else {
-                                                navigation.push('UserProfileScreen', {
-                                                    user: item,
-                                                });
-                                            }
-                                        } }
-                                        avatar={item.val()["profilePic"]}
-                                        color="red" />
-                                )} 
-                            />
+                        
+                                <FlatList
+                                    showsVerticalScrollIndicator={false}
+                                    extraData={members}
+                                    data={members}
+                                    renderItem={({ item }) => (
+                                        <GroupMemberBar
+                                            title={item.val()["firstName"] + " " + item.val()["lastName"]}
+                                            onPress={() => {
+                                                if (item.key == auth.currentUser.uid) {
+                                                    navigation.navigate("HomeScreen", { screen: "Me" });
+                                                } else {
+                                                    navigation.push('UserProfileScreen', {
+                                                        user: item,
+                                                    });
+                                                }
+                                            } }
+                                            avatar={item.val()["profilePic"]}
+                                            color="red" />
+                                    )} 
+                                />
+                            </View>
                         </>
                     :
                         <PillButton
@@ -103,7 +110,7 @@ const GroupScreen = ({ route, navigation }) => {
                             icon="users"
                         />
                     }
-                    </View>
+                    
                     <View className="items-center py-3 mt-auto">
                         <TwoButtonsSide
                             title1="Settings"
