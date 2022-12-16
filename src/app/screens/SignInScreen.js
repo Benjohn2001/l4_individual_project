@@ -86,12 +86,14 @@ const SignInScreen = ({ navigation }) => {
                 onPress1={() => {
                     navigation.navigate("RegisterScreen")
                 }}
+                color1="#E7E7FF"
                 icon1="edit"
                 title2="Sign In"
                 onPress2={() => {
                     signinUser()
                 }}
                 icon2="arrow-right-circle"
+                color2="#6B4EFF"
             />
 
             <Modal 

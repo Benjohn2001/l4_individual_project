@@ -9,7 +9,7 @@ import RowItem from '../components/RowItem';
 import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import TwoButtonStack from '../components/TwoButtonStack';
-import { getDatabase, ref, set, onValue, orderByChild, query, equalTo, get, push} from 'firebase/database';
+import { getDatabase, ref, set, onValue, orderByChild, query, equalTo, get, push, remove} from 'firebase/database';
 import SearchBar from "react-native-dynamic-search-bar";
 import FriendsRowSearch from '../components/FriendsRowSearch';
 import { auth } from '../../firebase';
@@ -22,6 +22,7 @@ const GroupSettingsScreen = ({ route, navigation }) => {
     const name=route.params.name
 
     const [isFromModalVisible, setFromModalVisible] = React.useState(false)
+    const [isLeaveModalVisible, setLeaveModalVisible] = React.useState(false)
     const [spinVis, setSpinVis] = React.useState(false)
     const [unames, setUnames] = React.useState([])
     const [friends, setFriends] = React.useState([])
@@ -135,7 +136,65 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                     }}
                     color="black"
                 />
+                <RowItem
+                    title="Leave Group"
+                    icon="trash-2"
+                    onPress={() => {
+                        setLeaveModalVisible(true)
+                    }}
+                    color="red"
+                />
             </View>
+
+            <Modal 
+                isVisible={isLeaveModalVisible}
+                onBackdropPress={() => setLeaveModalVisible(false)}
+                className="items-center"
+            >
+                <View className=" w-full h-1/4 items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
+                    <Text className="text-2xl font-bold  pb-2">Leave Group</Text>
+                    <Text className="text-l pb-2">Are you sure you want to leave this group?</Text>
+                    <View className="pt-5">
+                        <TwoButtonsSide
+                            title1="Cancel"
+                            onPress1={()=>{setLeaveModalVisible(false)}}
+                            icon1="x-circle" 
+                            color1="#C6C4FF"
+                            title2="Leave"
+                            onPress2={async ()=>{
+                                const groupsRef = query(ref(getDatabase(), "/groups/"+uid))
+                                const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membRef))
+
+                                const dataGroups = await get(groupsRef);
+                                if (dataGroups.val() !== null) {
+                                    dataGroups.forEach(c => {
+                                        if (c.val()["membersRef"] == membRef) {
+                                            remove(ref(getDatabase(), "/groups/" + uid + "/" + c.key));
+                                        }
+                                    });
+                                }
+                                const dataMembers = await get(groupMembersRef);
+                                if (dataMembers.val() !== null) {
+                                    dataMembers.forEach(c => {
+                                        if (c.val()["member"] == uid) {
+                                            remove(ref(getDatabase(), "/groupMembers/" + membRef + "/" + c.key));
+                                        }
+                                    });
+                                }
+                                setLeaveModalVisible(false)
+                                navigation.navigate("HomeScreen")
+                            }}
+                            icon2="trash-2"
+                            color2="red"
+
+                        />
+                    </View>
+
+                </View>
+
+
+            </Modal>
+
 
             <Modal 
                 isVisible={isFromModalVisible}

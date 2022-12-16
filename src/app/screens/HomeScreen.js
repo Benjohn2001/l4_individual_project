@@ -152,23 +152,17 @@ const HomeScreen = ({ navigation }) => {
                 onBackdropPress={() => setModalVisible(false)}
                 className="items-center"
             >
-                <View className=" w-11/12 h-1/2 items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
+                <View className=" w-11/12 items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
                     <Text className="text-2xl font-bold  pb-2">Add a group</Text>
-                    <Text className="text-center text-gray-500 py-5">Add with invite code or create a new group</Text>
-                    <TextInput 
-                        className="bg-white my-5 w-full mx-3 h-12 rounded-md" 
-                        placeholder="Invite Code" 
-                        underlineColorAndroid = "transparent"
-                        cursorColor={COLOURS.darkerPurple}
-                    />
-                    <View className="pt-5">
-                        <TwoButtonStack
-                            title1="Add Group"
-                            onPress1={() => {
-                                alert("Add Group")
-                            }}
-                            title2="Create New Group"
-                            onPress2={() => {
+                    <Text className="text-center text-gray-500 py-5">
+                        You can be added to an existing group by any current member in group settings {"\n\n"} 
+                        or {"\n\n"}  
+                        create a new group
+                    </Text>
+                    <View className="py-3 w-full items-center">
+                        <AppButtonPurple
+                            title="Create New Group"
+                            onPress={() => {
                                 navigation.navigate("CreateNewGroupScreen")
                             }}
                         />

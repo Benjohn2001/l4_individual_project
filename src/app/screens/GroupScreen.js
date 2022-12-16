@@ -121,11 +121,13 @@ const GroupScreen = ({ route, navigation }) => {
                                 });
                             } }
                             icon1="settings"
+                            color1="#E7E7FF"
                             title2="Customise"
                             onPress2={() => {
                                 navigation.navigate("ClockCustomiseScreen");
                             } }
-                            icon2="clock" />
+                            icon2="clock" 
+                            color2="#6B4EFF"/>
                     </View></>
         :
             <View className="justify-center items-center flex-1">
