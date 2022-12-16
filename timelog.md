@@ -127,3 +127,33 @@
 ### 16 Nov 2022
 
 *3 hour* Add upload of picture and edit picture, fix all async issues and add loading indicators
+
+### 17 Nov 2022
+
+*2 hour* Start implementation of friends screen and system
+
+### 19 Nov 2022
+
+*2 hour* Implement friends search and friends list
+
+### 21 Nov 2022
+
+*3 hour* Friends search and async issues fixed
+
+### Gap Due to coursework and exam period
+
+### 12 Dec 2022 
+
+*3 hour* Added firebase data with groups on homepage and groups page
+
+### 13 Dec 2022
+
+*1.5 hour* Hide and show group members, navigation to profiles or my profile
+
+### 14 Dec 2022
+
+*3 hour* Add to group from friends with a search
+
+### 16 Dec 2022
+
+*3 hour* Add leave group, fix group page styling and loading of members list
