@@ -20,22 +20,17 @@ function AddFromFriends (props) {
     }
     return (
         <View className="pt-3 w-full items-center">
-            <TouchableOpacity className="bg-primaryPurple h-16 pt-1 w-11/12  rounded-2xl mx-1.5">
-                <View className="flex-row">
-                    <View className="ml-3">
+            <TouchableOpacity onPress={onPress} className="bg-secondaryPurple h-16 pt-1 w-11/12  rounded-2xl mx-1.5">
+                <View className="flex-row j">
+                    <View className="mr-auto ml-3">
                         <Image 
                             className="w-14 h-14 rounded-full" 
                             source = {{uri: pic}}
                         />
                     </View>
-                    <Text  className="text-black text-sm text-center ml-10 pt-4">{title}</Text>
-                    <View className="ml-auto mr-5 pt-3">
-                    <PressableIcon
-                        onPress={onPress}
-                        icon="plus-square"
-                        size={30}
-                        color="black"
-                    /> 
+                    <Text  className="text-black text-sm text-center  pt-4">{title}</Text>
+                    <View className="ml-auto mr-5 pt-2">
+                        <Feather name="plus" color={"black"} size={35}/>
                     </View>
                 </View>
             </TouchableOpacity>

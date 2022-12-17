@@ -119,12 +119,14 @@ const GroupScreen = ({ route, navigation }) => {
                                     name: name,
                                     membRef: membersRef
                                 });
+                                setShowMembers(false)
                             } }
                             icon1="settings"
                             color1="#E7E7FF"
                             title2="Customise"
                             onPress2={() => {
                                 navigation.navigate("ClockCustomiseScreen");
+                                setShowMembers(false)
                             } }
                             icon2="clock" 
                             color2="#6B4EFF"/>
