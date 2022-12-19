@@ -12,20 +12,25 @@ import PressableIcon from '../components/PressableIcon';
 import GroupMemberBar from '../components/GroupMemberBar';
 import { query, get, ref, getDatabase } from 'firebase/database';
 import { auth } from '../../firebase';
+import { useIsFocused } from '@react-navigation/native';
 
 const GroupScreen = ({ route, navigation }) => {
 
-    const name=route.params.name
-    const membersRef=route.params.membersRef
+    const item=route.params.item
+    const name=item.val()["name"]
+    const membersRef=item.val()["membersRef"]
+    const key=item.key
 
     const [membersKeys, setMembersKeys] = React.useState([])
     const [members, setMembers] = React.useState([])
     const [showMembers, setShowMembers] = React.useState(false)
     const [fetched, setFetched] = React.useState(false)
 
+    const isFocused= useIsFocused()
+
     React.useEffect(()=>{
         fetchData()
-    },[showMembers])
+    },[isFocused, showMembers])
 
     const fetchData = async () =>{
         setMembersKeys([])
@@ -116,8 +121,7 @@ const GroupScreen = ({ route, navigation }) => {
                             title1="Settings"
                             onPress1={() => {
                                 navigation.navigate("GroupSettingsScreen",{
-                                    name: name,
-                                    membRef: membersRef
+                                    item: item
                                 });
                                 setShowMembers(false)
                             } }

@@ -12,6 +12,7 @@ import TwoButtonStack from '../components/TwoButtonStack';
 import { auth } from '../../firebase';
 import { query, get, ref, getDatabase } from 'firebase/database';
 import SearchBar from "react-native-dynamic-search-bar";
+import { useIsFocused } from '@react-navigation/native';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -23,12 +24,14 @@ const HomeScreen = ({ navigation }) => {
     const [spinVis, setSpinVis] = React.useState(false)
     const [filtered, setFiltered] = React.useState([])
 
+    const isFocused = useIsFocused()
+
     React.useEffect(() =>{
-          navigation.addListener('beforeRemove', (e) => {
+        navigation.addListener('beforeRemove', (e) => {
             e.preventDefault();
         })
         fetchData()
-    },[] )
+    },[isFocused] )
 
     const fetchData = async () =>{
         setFetched(false)
@@ -58,7 +61,13 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
                 <PressableIcon
                     onPress={() => {
-                        searchVis ? setSearchVis(false) : setSearchVis(true)
+                        if (searchVis){
+                            setSearchVis(false)
+                            setFiltered([]) 
+                            setSpinVis(false)
+                        }else {
+                            setSearchVis(true)
+                        }
                     }}
                     icon="search"
                     size={40}
@@ -90,13 +99,17 @@ const HomeScreen = ({ navigation }) => {
                         } } />
                         <View>
                             <FlatList
+                                showsVerticalScrollIndicator={false}
                                 data={filtered}
                                 renderItem={ ({item})=>(
                                     <GroupButton
                                         groupName={item.val()["name"]}
                                         onPress={() => {
+                                            setSearchVis(false)
+                                            setFiltered([]) 
+                                            setSpinVis(false)
                                             navigation.navigate("GroupScreen",{
-                                                name: item.val()["name"]
+                                                item: item
                                             })
                                         }}
                                         avatar={require('../assets/ben-avatar.png')}
@@ -120,8 +133,7 @@ const HomeScreen = ({ navigation }) => {
                                     groupName={item.val()["name"]}
                                     onPress={() => {
                                         navigation.navigate("GroupScreen",{
-                                            name: item.val()["name"],
-                                            membersRef: item.val()["membersRef"]
+                                            item: item
                                         })
                                     }}
                                     avatar={require('../assets/ben-avatar.png')}
@@ -149,7 +161,9 @@ const HomeScreen = ({ navigation }) => {
             </View>
             <Modal 
                 isVisible={isModalVisible}
-                onBackdropPress={() => setModalVisible(false)}
+                onBackdropPress={() => {
+                    setModalVisible(false)
+                }}
                 className="items-center"
             >
                 <View className=" w-11/12 items-center py-3 px-3 bg-secondaryPurple rounded-2xl">

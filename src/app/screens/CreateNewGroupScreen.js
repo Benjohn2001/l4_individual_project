@@ -19,11 +19,11 @@ const CreateNewGroupScreen = ({ navigation }) => {
             const id = groupName.replace(' ','_')+randomNumber
 
             const groupsRef = push(ref(getDatabase(), "/groups/"+auth.currentUser.uid))
-            const groupMembersRef = push(ref(getDatabase(), "/groupMembers/"+id))
+            const groupMembersRef = push(ref(getDatabase(), "/groupMembers/"+groupsRef.key))
 
             await set(groupsRef, {
                 name: groupName,
-                membersRef: id
+                membersRef: groupsRef.key
             })
             await set(groupMembersRef,{
                 member: auth.currentUser.uid

@@ -9,20 +9,25 @@ import RowItem from '../components/RowItem';
 import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import TwoButtonStack from '../components/TwoButtonStack';
-import { getDatabase, ref, set, onValue, orderByChild, query, equalTo, get, push, remove} from 'firebase/database';
+import { getDatabase, ref, set, onValue, orderByChild, query, equalTo, get, push, remove, update} from 'firebase/database';
 import SearchBar from "react-native-dynamic-search-bar";
 import FriendsRowSearch from '../components/FriendsRowSearch';
 import { auth } from '../../firebase';
 import AddFromFriends from '../components/AddFromFriends';
+import { Alert } from 'react-native';
 
 
 const GroupSettingsScreen = ({ route, navigation }) => {
 
-    const membRef=route.params.membRef
-    const name=route.params.name
+    const item=route.params.item
+    const name=item.val()["name"]
+    const membRef=item.val()["membersRef"]
+    const key=item.key
+
     const [searchVis, setSearchVis] = React.useState(false)
 
     const [isLeaveModalVisible, setLeaveModalVisible] = React.useState(false)
+    const [isChangeModalVisible, setChangeModalVisible] = React.useState(false)
     const [spinVis, setSpinVis] = React.useState(false)
     const [unames, setUnames] = React.useState([])
     const [friends, setFriends] = React.useState([])
@@ -30,8 +35,8 @@ const GroupSettingsScreen = ({ route, navigation }) => {
     const [filtered, setFiltered] = React.useState([])
     const [membersKeys, setMembersKeys] = React.useState([])
     const [fetched, setFetched]= React.useState(false)
+    const [nameNew, setNameNew] = React.useState("")
     const uid = auth.currentUser.uid
-
 
     React.useEffect(()=>{
         fetchData()
@@ -138,10 +143,10 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                 <AddFromFriends
                                     title={item.val()["userName"]}
                                     onPress={async () => {
-                                        const groupsRef = push(ref(getDatabase(), "/groups/" + item.key));
+                                        const groupsRef = ref(getDatabase(), "/groups/" + item.key +"/" +key);
                                         const groupMembersRef = push(ref(getDatabase(), "/groupMembers/" + membRef));
 
-                                        await set(groupsRef, {
+                                        await update(groupsRef, {
                                             name: name,
                                             membersRef: membRef
                                         });
@@ -191,7 +196,7 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                             title="Change Group Name"
                             icon="edit-3"
                             onPress={() => {
-                                alert("Change Group Name");
+                                setChangeModalVisible(true)
                             } }
                             color="black" />
                         <RowItem
@@ -246,7 +251,46 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                         </View>
 
 
-                    </Modal></>
+                    </Modal>
+                    <Modal 
+                        isVisible={isChangeModalVisible}
+                        onBackdropPress={() => setChangeModalVisible(false)}
+                        className="items-center"
+                    >
+                        <View className=" w-11/12 h-50 items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
+                            <Text className="text-2xl font-bold  pb-2">Change group name</Text>
+                            <Text className="text-center text-gray-500 py-4">Enter a new group name</Text>
+                            <TextInput 
+                                className="bg-white my-5 w-full mx-3 h-12 rounded-md" 
+                                placeholder="group name" 
+                                underlineColorAndroid = "transparent"
+                                cursorColor={COLOURS.darkerPurple}
+                                maxLength={50}
+                                value={nameNew}
+                                onChangeText={(val) => setNameNew(val)}
+                            />
+                            <AppButtonPurple
+                                title="Change Name"
+                                onPress={async ()=>{
+                                    for (const i in membersKeys) {
+                                            await update(ref(getDatabase(), '/groups/' + membersKeys[i] + "/" + key ), {
+                                                membersRef: membRef,
+                                                name: nameNew
+                                            })
+     
+                                    }
+                                
+                                    setNameNew("")
+                                    setChangeModalVisible(false)
+                                    navigation.navigate("HomeScreen")
+                                }}
+                            />
+                            
+                        </View>
+                    </Modal>
+                    
+                    
+                    </>
             }
 
         </SafeAreaView>

@@ -157,3 +157,11 @@
 ### 16 Dec 2022
 
 *3 hour* Add leave group, fix group page styling and loading of members list
+
+### 17 Dec 2022
+
+*2 hour* Fixed lag of search for groups, issues selecting fixed, still shows current members on first load of search
+
+### 18 Dec 2022
+
+*2.5 hour* Implemented change of group name, changed how i store groups and members, home now refreshing correctly
