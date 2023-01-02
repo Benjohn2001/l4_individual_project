@@ -13,6 +13,8 @@ import { auth } from '../../firebase';
 import { query, get, ref, getDatabase } from 'firebase/database';
 import SearchBar from "react-native-dynamic-search-bar";
 import { useIsFocused } from '@react-navigation/native';
+import GroupButtonFB from '../components/GroupButtonFB';
+import RowItem from '../components/RowItem';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -102,8 +104,8 @@ const HomeScreen = ({ navigation }) => {
                                 showsVerticalScrollIndicator={false}
                                 data={filtered}
                                 renderItem={ ({item})=>(
-                                    <GroupButton
-                                        groupName={item.val()["name"]}
+                                    <RowItem
+                                        title={item.val()["name"]}
                                         onPress={() => {
                                             setSearchVis(false)
                                             setFiltered([]) 
@@ -112,34 +114,35 @@ const HomeScreen = ({ navigation }) => {
                                                 item: item
                                             })
                                         }}
-                                        avatar={require('../assets/ben-avatar.png')}
+                                        icon={"users"}
+                                        color={"black"}
                                     />
-                                )
-
-                            
-                                }
+                                )}
                             />
                         </View>
                 </View>
                 :
             <View>
                 {fetched ?
+                <View className="items-center w-full h-full">
                     <FlatList
                             showsVerticalScrollIndicator={false}
+                            ItemSeparatorComponent={()=><View className="pb-3"/>}
                             extraData={groups}
                             data={groups}
                             renderItem={({ item }) => (
-                                <GroupButton
+                                <GroupButtonFB
                                     groupName={item.val()["name"]}
                                     onPress={() => {
                                         navigation.navigate("GroupScreen",{
                                             item: item
                                         })
                                     }}
-                                    avatar={require('../assets/ben-avatar.png')}
+                                    membRef={item.val()["membersRef"]}
                                 />
                             )} 
                         />
+                    </View>
                     :
                     <View className="justify-center items-center flex-1">
                         <ActivityIndicator size="large" color="#6B4EFF"  />

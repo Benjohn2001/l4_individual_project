@@ -121,7 +121,7 @@ const GroupScreen = ({ route, navigation }) => {
                             title1="Settings"
                             onPress1={() => {
                                 navigation.navigate("GroupSettingsScreen",{
-                                    item: item
+                                    item: item,
                                 });
                                 setShowMembers(false)
                             } }

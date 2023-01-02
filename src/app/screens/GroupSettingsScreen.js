@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, FlatList, ActivityIndicator } from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
@@ -15,7 +15,6 @@ import FriendsRowSearch from '../components/FriendsRowSearch';
 import { auth } from '../../firebase';
 import AddFromFriends from '../components/AddFromFriends';
 import { Alert } from 'react-native';
-
 
 const GroupSettingsScreen = ({ route, navigation }) => {
 
@@ -70,12 +69,16 @@ const GroupSettingsScreen = ({ route, navigation }) => {
         dataFr.forEach(c => {
             // console.log(membersKeys)
             // console.log(c.val()["user"])
-            // console.log(!membersKeys.includes(c.val()["user"]))
+            console.log(!membersKeys.includes(c.val()["user"]))
 
             // trying to not show friends already in the group not working on first load, works after refresh
+            //array of friendsKeys has all friends on first, then members removed after refresh??
             if(!membersKeys.includes(c.val()["user"])){
                 setFriendsKeys(a =>{return [...a, c.val()["user"]]})
             }
+            console.log(c)
+            console.log(friendsKeys)
+            //console.log(membersKeys )
         })
 
         for(const i in unames){
@@ -98,67 +101,74 @@ const GroupSettingsScreen = ({ route, navigation }) => {
 
 
 
-
     return (      
         <SafeAreaView className="flex-1 bg-primaryPurple" >
              {searchVis ?
+                <>
+                {fetched ?
+                    <><View className="flex-row justify-between pt-14">
+                        <View className="ml-auto">
+                            <PressableIcon
+                                onPress={() => {
+                                    setSearchVis(false)
+                                } }
+                                icon="arrow-left"
+                                size={40}
+                                color="black" />
+                        </View>
+                        <Text className="font-bold ml-auto mr-auto text-3xl">
+                            Add From Friends
+                        </Text>
+                    </View><View className="pt-10">
+                            <SearchBar
+                                className="bg-secondaryPurple h-12 w-11/12"
+                                placeholder="Search for a username"
+                                iconColor="6B4EFF"
+                                spinnerVisibility={spinVis}
+                                onChangeText={text => {
+                                    setFiltered([]);
+                                    if (text.length === 0) {
+                                        setSpinVis(false);
+                                    } else {
+                                        setSpinVis(true);
+                                    }
+                                    filterUname(text);
+                                } }
 
-                <><View className="flex-row justify-between pt-14">
-                    <View className="ml-auto">
-                        <PressableIcon
-                            onPress={() => {
-                                setSearchVis(false)
-                            } }
-                            icon="arrow-left"
-                            size={40}
-                            color="black" />
-                    </View>
-                    <Text className="font-bold ml-auto mr-auto text-3xl">
-                        Add From Friends
-                    </Text>
-                </View><View className="pt-10">
-                        <SearchBar
-                            className="bg-secondaryPurple h-12 w-11/12"
-                            placeholder="Search for a username"
-                            iconColor="6B4EFF"
-                            spinnerVisibility={spinVis}
-                            onChangeText={text => {
-                                setFiltered([]);
-                                if (text.length === 0) {
+                                onClearPress={() => {
+                                    filterUname('');
                                     setSpinVis(false);
-                                } else {
-                                    setSpinVis(true);
-                                }
-                                filterUname(text);
-                            } }
+                                } } />
+                            <FlatList
+                                data={filtered}
+                                showsVerticalScrollIndicator={false}
+                                renderItem={({ item }) => (
+                                    <AddFromFriends
+                                        title={item.val()["userName"]}
+                                        onPress={async () => {
+                                            const groupsRef = ref(getDatabase(), "/groups/" + item.key +"/" +key);
+                                            const groupMembersRef = push(ref(getDatabase(), "/groupMembers/" + membRef));
 
-                            onClearPress={() => {
-                                filterUname('');
-                                setSpinVis(false);
-                            } } />
-                        <FlatList
-                            data={filtered}
-                            showsVerticalScrollIndicator={false}
-                            renderItem={({ item }) => (
-                                <AddFromFriends
-                                    title={item.val()["userName"]}
-                                    onPress={async () => {
-                                        const groupsRef = ref(getDatabase(), "/groups/" + item.key +"/" +key);
-                                        const groupMembersRef = push(ref(getDatabase(), "/groupMembers/" + membRef));
+                                            await update(groupsRef, {
+                                                name: name,
+                                                membersRef: membRef
+                                            });
+                                            await set(groupMembersRef, {
+                                                member: item.key
+                                            });
 
-                                        await update(groupsRef, {
-                                            name: name,
-                                            membersRef: membRef
-                                        });
-                                        await set(groupMembersRef, {
-                                            member: item.key
-                                        });
-
-                                        setSearchVis(false)
-                                    } }
-                                    avatar={item.val()["profilePic"]} />
-                            )} />
-                    </View></>
+                                            setSearchVis(false)
+                                        } }
+                                        avatar={item.val()["profilePic"]} />
+                                )} />
+                        </View></>
+                :
+                    <View className="justify-center items-center flex-1">
+                        <ActivityIndicator size="large" color="#6B4EFF"  />
+                        <Text className="text-center">Loading Friends</Text>
+                    </View>
+                }
+            </>
 
             :
             <><View className="flex-row justify-between pt-14 mx-10">
