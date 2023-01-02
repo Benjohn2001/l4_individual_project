@@ -27,7 +27,7 @@ const CreateNewGroupScreen = ({ navigation }) => {
             await set(groupMembersRef,{
                 member: auth.currentUser.uid
             })
-            await push(locationsRef,{
+            await set(locationsRef,{
                 locations: ["Uni","Work","Out","Free","Busy","Home"]
             })
             setGroupName("")

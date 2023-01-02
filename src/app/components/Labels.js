@@ -6,6 +6,16 @@ import PropTypes from 'prop-types';
 function Labels(props){
     const {radius, center, locations} = props
     const divisions=360/locations.length
+
+    function textPosHelper(i, coord){
+        if(i===1 || i===2){
+            return(coord-15)
+        }else if(i===4 || i===5){
+            return(coord+15)
+        }else{
+            return(coord)
+        }
+    }
     const labelLines=locations.map((label,index)=>{
         const start = polar2cart(center,center,0,index*divisions)
         const end = polar2cart(center,center,radius-10,index*divisions)
@@ -26,8 +36,8 @@ function Labels(props){
                     fontWeight="bold"
                     fill={"black"}
                     alignmentBaseline="central"
-                    textAnchor="middle"
-                    x={locat.x}
+                    textAnchor='middle'
+                    x={textPosHelper(index, locat.x)}
                     y={locat.y}
                 >
                     {label}

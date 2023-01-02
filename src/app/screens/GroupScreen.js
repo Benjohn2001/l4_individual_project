@@ -40,9 +40,7 @@ const GroupScreen = ({ route, navigation }) => {
         setLocations([])
         const locationsRef = query(ref(getDatabase(), "/locations/"+membersRef))
         const locatData=await get(locationsRef)
-        locatData.forEach(val => {
-            setLocations(val.val()["locations"])
-        })
+        setLocations(locatData.val()["locations"])
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
         const data = await get(groupMembersRef)
         data.forEach(c => {
@@ -136,7 +134,10 @@ const GroupScreen = ({ route, navigation }) => {
                             color1="#E7E7FF"
                             title2="Customise"
                             onPress2={() => {
-                                navigation.navigate("ClockCustomiseScreen");
+                                navigation.navigate("ClockCustomiseScreen",{
+                                    locations: locations,
+                                    membersRef: membersRef,
+                                });
                                 setShowMembers(false)
                             } }
                             icon2="clock" 

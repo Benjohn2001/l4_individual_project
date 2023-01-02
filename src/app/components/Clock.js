@@ -11,7 +11,6 @@ import Labels from './Labels';
 function Clock (props){
 
     const {locations} = props
-    const spaceBetween = (Math.PI * 2) / locations.length
     const windowWidth = Dimensions.get("window").width
 
     const diameter = windowWidth-40
