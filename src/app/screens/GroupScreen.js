@@ -13,6 +13,7 @@ import GroupMemberBar from '../components/GroupMemberBar';
 import { query, get, ref, getDatabase } from 'firebase/database';
 import { auth } from '../../firebase';
 import { useIsFocused } from '@react-navigation/native';
+import Clock from '../components/Clock';
 
 const GroupScreen = ({ route, navigation }) => {
 
@@ -25,6 +26,7 @@ const GroupScreen = ({ route, navigation }) => {
     const [members, setMembers] = React.useState([])
     const [showMembers, setShowMembers] = React.useState(false)
     const [fetched, setFetched] = React.useState(false)
+    const [locations, setLocations] =React.useState([])
 
     const isFocused= useIsFocused()
 
@@ -35,6 +37,12 @@ const GroupScreen = ({ route, navigation }) => {
     const fetchData = async () =>{
         setMembersKeys([])
         setMembers([])
+        setLocations([])
+        const locationsRef = query(ref(getDatabase(), "/locations/"+membersRef))
+        const locatData=await get(locationsRef)
+        locatData.forEach(val => {
+            setLocations(val.val()["locations"])
+        })
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
         const data = await get(groupMembersRef)
         data.forEach(c => {
@@ -52,7 +60,7 @@ const GroupScreen = ({ route, navigation }) => {
     return (
         <SafeAreaView className="flex-1  bg-primaryPurple" >
         {fetched ?
-            <><View className="flex-row justify-between pt-14 mx-10">
+            <><View className="flex-row justify-between pt-14 pb-5 mx-10">
                     <PressableIcon
                         onPress={() => {
                             navigation.goBack();
@@ -64,10 +72,9 @@ const GroupScreen = ({ route, navigation }) => {
                         {name}
                     </Text>
                 </View>
-                <View className="justify-center items-center">
-                    <Image
-                        className="w-full h-96"
-                        source={require("../assets/clock.png")} 
+                <View className="justify-center items-center w-full h-96 px-2 py-2">
+                    <Clock
+                        locations={locations}
                     />
                 </View>
                                     

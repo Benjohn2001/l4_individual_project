@@ -15,11 +15,10 @@ const CreateNewGroupScreen = ({ navigation }) => {
         if(groupName==""){
             Alert.alert("Incomplete Form","One or more fields are empty")
         }else{
-            const randomNumber = Math.floor(Math.random() * 100) + 1
-            const id = groupName.replace(' ','_')+randomNumber
-
             const groupsRef = push(ref(getDatabase(), "/groups/"+auth.currentUser.uid))
             const groupMembersRef = push(ref(getDatabase(), "/groupMembers/"+groupsRef.key))
+            const locationsRef = ref(getDatabase(), "/locations/"+groupsRef.key)
+
 
             await set(groupsRef, {
                 name: groupName,
@@ -28,9 +27,11 @@ const CreateNewGroupScreen = ({ navigation }) => {
             await set(groupMembersRef,{
                 member: auth.currentUser.uid
             })
-
+            await push(locationsRef,{
+                locations: ["Uni","Work","Out","Free","Busy","Home"]
+            })
             setGroupName("")
-            navigation.navigate("HomeScreen")
+            navigation.push("HomeScreen")
         }
 
     }

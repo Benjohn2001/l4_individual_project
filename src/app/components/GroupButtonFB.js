@@ -21,23 +21,23 @@ function GroupButtonFB (props) {
     },[] )
 
     const fetchData = async () =>{
-        console.log("in fetchdata")
+        //console.log("in fetchdata")
         setFetched(false)
         setMembersKeys([])
         setUrls([])
         setPics([])
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membRef))
         const data = await get(groupMembersRef)
-        console.log(data)
+        //console.log(data)
         //only looping though first object, data has all the members however, when using memberskeys array, and looping through this
         //all photos load after multiple refreshes
 
         //ThIS LOADS JUST THE FIRST IMAGE BUT WORKS ON OPEN OF HOM E PAGE
         data.forEach( async c => {
-            console.log(c)
+            //console.log(c)
             const userRef = query(ref(getDatabase(), "/users/"+c.val()["member"]))
             const data = await get(userRef)
-            console.log(data)
+            //console.log(data)
             await getDownloadURL(stref(getStorage(),data.val()["profilePic"])).then((url)=>{
                 setPics(a => {return [...a , url]})
             })
@@ -59,9 +59,9 @@ function GroupButtonFB (props) {
         // }
         setFetched(true)
     }
-    console.log("pics")
-    console.log(pics)
-    console.log("-----------------------")
+    //console.log("pics")
+    //console.log(pics)
+    //console.log("-----------------------")
     
     return (
         <View className="items-center w-full">
