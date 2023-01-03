@@ -9,11 +9,13 @@ import RowItem from '../components/RowItem';
 import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import TwoButtonStack from '../components/TwoButtonStack';
+import { deleteObject, getStorage } from 'firebase/storage';
 import { getDatabase, ref, set, onValue, orderByChild, query, equalTo, get, push, remove, update} from 'firebase/database';
 import SearchBar from "react-native-dynamic-search-bar";
 import FriendsRowSearch from '../components/FriendsRowSearch';
 import { auth } from '../../firebase';
 import AddFromFriends from '../components/AddFromFriends';
+import {ref as stref} from "firebase/storage";
 import { Alert } from 'react-native';
 
 const GroupSettingsScreen = ({ route, navigation }) => {
@@ -249,6 +251,11 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                                     remove(ref(getDatabase(), "/groupMembers/" + membRef + "/" + c.key));
                                                 }
                                             });
+                                        }
+                                        if(dataMembers.size===1){
+                                            remove(ref(getDatabase(), "/locations/" + membRef ))
+                                            remove(ref(getDatabase(), "/clockFace/" + membRef))
+                                            //deleteObject(stref(getStorage(),))
                                         }
                                         setLeaveModalVisible(false);
                                         navigation.navigate("HomeScreen");

@@ -48,6 +48,7 @@ const GroupScreen = ({ route, navigation }) => {
     }
 
     const getClockFace = async () =>{
+        setFetched(false)
         setClockface("")
         const faceRef = query(ref(getDatabase(), "/clockFace/"+membersRef))
         const faceData=await get(faceRef)
