@@ -234,7 +234,6 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                     onPress2={async () => {
                                         const groupsRef = query(ref(getDatabase(), "/groups/" + uid));
                                         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/" + membRef));
-                                        remove(ref(getDatabase(), "/locations/" + membRef));
                                         const dataGroups = await get(groupsRef);
                                         if (dataGroups.val() !== null) {
                                             dataGroups.forEach(c => {

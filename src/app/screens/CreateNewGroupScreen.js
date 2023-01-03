@@ -18,7 +18,7 @@ const CreateNewGroupScreen = ({ navigation }) => {
             const groupsRef = push(ref(getDatabase(), "/groups/"+auth.currentUser.uid))
             const groupMembersRef = push(ref(getDatabase(), "/groupMembers/"+groupsRef.key))
             const locationsRef = ref(getDatabase(), "/locations/"+groupsRef.key)
-
+            const faceRef = ref(getDatabase(), "/clockFace/"+groupsRef.key)
 
             await set(groupsRef, {
                 name: groupName,
@@ -29,6 +29,9 @@ const CreateNewGroupScreen = ({ navigation }) => {
             })
             await set(locationsRef,{
                 locations: ["Uni","Work","Out","Free","Busy","Home"]
+            })
+            await set(faceRef,{
+                background: "#6B4EFF"
             })
             setGroupName("")
             navigation.push("HomeScreen")

@@ -7,19 +7,24 @@ function Labels(props){
     const {radius, center, locations} = props
     const divisions=360/locations.length
 
-    function textPosHelper(i, coord){
-        if(i===1 || i===2){
-            return(coord-15)
-        }else if(i===4 || i===5){
-            return(coord+15)
-        }else{
-            return(coord)
+    function textTransformHelper(i,x,y){
+        if(i===0 || i===3 ){
+            return("translate("+x+"," +y+") rotate(30)")
+        }else if(i===1){
+            return("translate("+x+"," +y+") rotate(90)")
+        }else if(i===4){
+            return("translate("+x+"," +y+") rotate(-90)")
+        }else if(i===2 || i===5 ){
+            return("translate("+x+"," +y+") rotate(-30)")
+        }
+        else{
+            return("")
         }
     }
     const labelLines=locations.map((label,index)=>{
         const start = polar2cart(center,center,0,index*divisions)
-        const end = polar2cart(center,center,radius-10,index*divisions)
-        const locat = polar2cart(center, center, radius+10, index*divisions)
+        const end = polar2cart(center,center,radius+15,index*divisions)
+        const locat = polar2cart(center, center, radius, (index+0.5)*60)
         return(
             <G key={index}>
                 <Line
@@ -35,10 +40,9 @@ function Labels(props){
                     fontSize={15}
                     fontWeight="bold"
                     fill={"black"}
+                    transform={textTransformHelper(index,locat.x, locat.y)}
                     alignmentBaseline="central"
                     textAnchor='middle'
-                    x={textPosHelper(index, locat.x)}
-                    y={locat.y}
                 >
                     {label}
 

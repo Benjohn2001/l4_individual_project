@@ -165,3 +165,13 @@
 ### 18 Dec 2022
 
 *2.5 hour* Implemented change of group name, changed how i store groups and members, home now refreshing correctly
+
+### 2 Jan 2023
+
+*1.5 hour* Change group buttons on the home page to have firebase data, still bugs present
+*2 hour* Create basic clock with labels for sectors and firebase locations
+*1 hour* Add functionality to change the locations
+
+### 3 Jan 2023
+
+*5 hour* Re do clock with better ui and labels, now can upload an image for the clockface or a colour to fill the face

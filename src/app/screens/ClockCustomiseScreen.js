@@ -10,6 +10,12 @@ import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import SelectDropdown from 'react-native-select-dropdown'
 import { getDatabase, update, ref, set } from 'firebase/database';
+import ColorPicker from 'react-native-wheel-color-picker';
+import * as ImagePicker from 'expo-image-picker';
+import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
+import {ref as stref} from "firebase/storage";
+import TwoButtonStack from '../components/TwoButtonStack';
+import { Alert } from 'react-native';
 
 const ClockCustomiseScreen = ({ route, navigation }) => {
 
@@ -21,6 +27,50 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
     const [isLocatModalVisible, setIsLocatModalVisible] = React.useState(false)
     const [newLocationEntry, setNewLocationEntry] = React.useState(false)
     const [newLocation, setNewLocation] = React.useState("")
+    const [newColourEntry, setNewColourEntry] = React.useState(false)
+    const [newColour, setNewColour] = React.useState("")
+    const [newImageEntry, setNewImageEntry] = React.useState(false)
+    const [newImage, setNewImage] = React.useState("")
+    const [isFaceModalVisible, setIsFaceModalVisible] = React.useState(false)
+    const [picUp, setPicUp] = React.useState("")
+
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 4],
+          quality: 0.2,
+        });
+
+        if (!result.cancelled) { 
+            setPicUp(result.uri);
+        }
+    }
+
+    async function uploadImageAsync(uri) {
+        const blob = await new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.onload = function () {
+            resolve(xhr.response);
+          };
+          xhr.onerror = function (e) {
+            console.log(e);
+            reject(new TypeError("Network request failed"));
+          };
+          xhr.responseType = "blob";
+          xhr.open("GET", uri, true);
+          xhr.send(null);
+        });
+      
+        const fileRef = stref(getStorage(),"images/clockFaces/"+membersRef)
+        const uploadTask = await uploadBytes(fileRef, blob);
+      
+        blob.close();
+      
+        return await getDownloadURL(fileRef);
+      }
+
     return (      
         <SafeAreaView className="flex-1 bg-primaryPurple" >
             <View className="flex-row justify-between pt-14 mx-10">
@@ -44,7 +94,7 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
                     title="Clock Face"
                     icon="clock"
                     onPress={() => {
-                        alert("Clock Face")
+                        setIsFaceModalVisible(true)
                     }}
                     color="black"
                 />
@@ -131,6 +181,96 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
                     
                 </View>
             </Modal>
+
+            <Modal 
+                isVisible={isFaceModalVisible}
+                onBackdropPress={() => {
+                    setIsFaceModalVisible(false)
+                    setNewColourEntry(false)
+                    setNewImageEntry(false)
+                }}
+                className="items-center"
+            >
+                <View className=" w-full  items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
+                    <Text className="text-2xl font-bold text-center  pb-2">Change Clock Face</Text>
+                    {newColourEntry ?
+                            <>
+                            <View className="w-full h-1/2">
+                                <ColorPicker
+                                    color={newColour}
+                                    onColorChange={(color) => { setNewColour(color); } } 
+                                />
+                            </View>
+                            <View className="pt-10 w-11/12 items-center">
+                                <AppButtonPurple
+                                    title="Change Colour"
+                                    onPress={async () => {
+                                        await set(ref(getDatabase(), "/clockFace/" + membersRef), {
+                                            background: newColour
+                                        });
+                                        navigation.navigate("HomeScreen");
+                                        setNewColour("");
+                                        setNewColourEntry(false)
+                                        setIsFaceModalVisible(false);
+
+                                    } } 
+                                />
+                            </View>
+                            </>
+                    :
+                    <>
+                    </>
+                    }
+                    {newImageEntry ?
+                        <><Text className="text-center text-gray-500 py-4">Choose a new clockface</Text>
+                        <View className="pb-5">
+                            {picUp && <Image source={{ uri: picUp }} className="h-28 w-28 rounded-full" />}
+                        </View>
+                        <TwoButtonStack
+                                title1="Upload new picture"
+                                onPress1={() => {
+                                    pickImage();
+                                } }
+                                title2="Save picture"
+                                onPress2={async () => {
+                                    if (picUp == "") {
+                                        Alert.alert("No image selected", "Please upload an image");
+                                    } else {
+                                        setIsFaceModalVisible(false);
+                                        const upload_url = await uploadImageAsync(picUp);
+                                        console.log(upload_url);
+                                        await set(ref(getDatabase(), '/clockFace/' + membersRef), {
+                                            background: "images/clockFaces/" + membersRef
+                                        }).then(() => {
+                                            Alert.alert("Success", "Clock face changed succesfully");
+                                        });
+                                    }
+                                    setPicUp("");
+                                    setNewImageEntry(false)
+                                    navigation.navigate("HomeScreen")
+                                } } /></>
+                    :
+                    <></>
+                    }
+                    {newColourEntry || newImageEntry ?
+                    <></>
+                    :
+                    <><Text className="text-center text-gray-500 py-4">Choose either a colour or image</Text><TwoButtonsSide
+                            title1="Colour"
+                            onPress1={() => {
+                                setNewColourEntry(true);
+                            } }
+                            color1="#C6C4FF"
+                            icon1="droplet"
+                            title2="Image"
+                            onPress2={() => {
+                                setNewImageEntry(true);
+                            } }
+                            icon2="image"
+                            color2="#6B4EFF" /></>}
+                </View>
+            </Modal>
+            
 
         </SafeAreaView>
 

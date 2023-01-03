@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView, FlatList, ActivityIndicator } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView, FlatList, ActivityIndicator, ImageBackground } from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
@@ -27,6 +27,7 @@ const GroupScreen = ({ route, navigation }) => {
     const [showMembers, setShowMembers] = React.useState(false)
     const [fetched, setFetched] = React.useState(false)
     const [locations, setLocations] =React.useState([])
+    const [clockface, setClockface] =React.useState("")
 
     const isFocused= useIsFocused()
 
@@ -34,13 +35,29 @@ const GroupScreen = ({ route, navigation }) => {
         fetchData()
     },[isFocused, showMembers])
 
-    const fetchData = async () =>{
-        setMembersKeys([])
-        setMembers([])
+    React.useEffect(()=>{
+        getLocats()
+        getClockFace()
+    },[isFocused])
+
+    const getLocats = async () =>{
         setLocations([])
         const locationsRef = query(ref(getDatabase(), "/locations/"+membersRef))
         const locatData=await get(locationsRef)
         setLocations(locatData.val()["locations"])
+    }
+
+    const getClockFace = async () =>{
+        setClockface("")
+        const faceRef = query(ref(getDatabase(), "/clockFace/"+membersRef))
+        const faceData=await get(faceRef)
+        setClockface(faceData.val()["background"])
+        setFetched(true)
+    }
+
+    const fetchData = async () =>{
+        setMembersKeys([])
+        setMembers([])
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
         const data = await get(groupMembersRef)
         data.forEach(c => {
@@ -51,7 +68,6 @@ const GroupScreen = ({ route, navigation }) => {
             const data = await get(userRef)
             setMembers(a => {return [...a , data]})
         }
-        setFetched(true)
     }
 
 
@@ -70,10 +86,11 @@ const GroupScreen = ({ route, navigation }) => {
                         {name}
                     </Text>
                 </View>
-                <View className="justify-center items-center w-full h-96 px-2 py-2">
-                    <Clock
-                        locations={locations}
-                    />
+                <View className="justify-center items-center w-full h-96">
+                        <Clock
+                            locations={locations}
+                            face={clockface}
+                        />
                 </View>
                                     
                     { showMembers ?
