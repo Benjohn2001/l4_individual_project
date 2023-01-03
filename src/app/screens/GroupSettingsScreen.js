@@ -9,7 +9,7 @@ import RowItem from '../components/RowItem';
 import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import TwoButtonStack from '../components/TwoButtonStack';
-import { deleteObject, getStorage } from 'firebase/storage';
+import { deleteObject, getDownloadURL, getStorage } from 'firebase/storage';
 import { getDatabase, ref, set, onValue, orderByChild, query, equalTo, get, push, remove, update} from 'firebase/database';
 import SearchBar from "react-native-dynamic-search-bar";
 import FriendsRowSearch from '../components/FriendsRowSearch';
@@ -255,7 +255,14 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                         if(dataMembers.size===1){
                                             remove(ref(getDatabase(), "/locations/" + membRef ))
                                             remove(ref(getDatabase(), "/clockFace/" + membRef))
-                                            //deleteObject(stref(getStorage(),))
+                                            
+                                            const file = stref(getStorage(),"images/clockFaces/"+membRef)
+                                            await getDownloadURL(file).then(deleteObject(stref(getStorage(),"images/clockFaces/"+membRef)))
+                                            .catch(error =>{
+                                                if(error.code === 'storage/object-not-found'){
+                                                    console.log("no image in storage")
+                                                }
+                                            })
                                         }
                                         setLeaveModalVisible(false);
                                         navigation.navigate("HomeScreen");

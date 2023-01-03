@@ -12,7 +12,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 import { getDatabase, update, ref, set } from 'firebase/database';
 import ColorPicker from 'react-native-wheel-color-picker';
 import * as ImagePicker from 'expo-image-picker';
-import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
+import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString, deleteObject } from "firebase/storage";
 import {ref as stref} from "firebase/storage";
 import TwoButtonStack from '../components/TwoButtonStack';
 import { Alert } from 'react-native';
@@ -208,6 +208,13 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
                                         await set(ref(getDatabase(), "/clockFace/" + membersRef), {
                                             background: newColour
                                         });
+                                        const file = stref(getStorage(),"images/clockFaces/"+membersRef)
+                                            await getDownloadURL(file).then(deleteObject(stref(getStorage(),"images/clockFaces/"+membersRef)))
+                                            .catch(error =>{
+                                                if(error.code === 'storage/object-not-found'){
+                                                    console.log("no image in storage")
+                                                }
+                                            })
                                         navigation.navigate("HomeScreen");
                                         setNewColour("");
                                         setNewColourEntry(false)

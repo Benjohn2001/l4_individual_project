@@ -180,7 +180,8 @@ const HomeScreen = ({ navigation }) => {
                         <AppButtonPurple
                             title="Create New Group"
                             onPress={() => {
-                                navigation.navigate("CreateNewGroupScreen")
+                                navigation.push("CreateNewGroupScreen")
+                                setModalVisible(false)
                             }}
                         />
                     </View>
