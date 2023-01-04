@@ -17,6 +17,7 @@ import { auth } from '../../firebase';
 import AddFromFriends from '../components/AddFromFriends';
 import {ref as stref} from "firebase/storage";
 import { Alert } from 'react-native';
+import randomColor from "randomcolor";
 
 const GroupSettingsScreen = ({ route, navigation }) => {
 
@@ -71,15 +72,15 @@ const GroupSettingsScreen = ({ route, navigation }) => {
         dataFr.forEach(c => {
             // console.log(membersKeys)
             // console.log(c.val()["user"])
-            console.log(!membersKeys.includes(c.val()["user"]))
+            //console.log(!membersKeys.includes(c.val()["user"]))
 
             // trying to not show friends already in the group not working on first load, works after refresh
             //array of friendsKeys has all friends on first, then members removed after refresh??
             if(!membersKeys.includes(c.val()["user"])){
                 setFriendsKeys(a =>{return [...a, c.val()["user"]]})
             }
-            console.log(c)
-            console.log(friendsKeys)
+            //console.log(c)
+            //console.log(friendsKeys)
             //console.log(membersKeys )
         })
 
@@ -156,7 +157,8 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                                 membersRef: membRef
                                             });
                                             await set(groupMembersRef, {
-                                                member: item.key
+                                                member: item.key,
+                                                colour: randomColor()
                                             });
 
                                             setSearchVis(false)

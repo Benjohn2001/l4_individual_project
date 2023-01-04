@@ -9,13 +9,16 @@ import RowItem from '../components/RowItem';
 import PressableIcon from '../components/PressableIcon';
 import Modal from "react-native-modal";
 import SelectDropdown from 'react-native-select-dropdown'
-import { getDatabase, update, ref, set } from 'firebase/database';
+import { getDatabase, update, ref, set, query, get, onValue } from 'firebase/database';
 import ColorPicker from 'react-native-wheel-color-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString, deleteObject } from "firebase/storage";
 import {ref as stref} from "firebase/storage";
 import TwoButtonStack from '../components/TwoButtonStack';
 import { Alert } from 'react-native';
+import { auth } from '../../firebase';
+import { fetchUpdateAsync } from 'expo-updates';
+import { async } from '@firebase/util';
 
 const ClockCustomiseScreen = ({ route, navigation }) => {
 
@@ -30,9 +33,26 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
     const [newColourEntry, setNewColourEntry] = React.useState(false)
     const [newColour, setNewColour] = React.useState("")
     const [newImageEntry, setNewImageEntry] = React.useState(false)
-    const [newImage, setNewImage] = React.useState("")
     const [isFaceModalVisible, setIsFaceModalVisible] = React.useState(false)
     const [picUp, setPicUp] = React.useState("")
+    const [newHandColour, setNewHandColour] = React.useState("")
+    const [isHandModalVisible, setIsHandModalVisible] = React.useState(false)
+    const [colours, setColours] = React.useState([])
+
+    const uid = auth.currentUser.uid
+    const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
+
+    React.useEffect(()=>{
+        fetchData()
+    }, [isHandModalVisible])
+
+    const fetchData = async () => {
+        setColours([])
+        const data = await get(groupMembersRef)
+        data.forEach(c => {
+            setColours(a => {return [...a , c.val()["colour"]]})
+        })
+    }
 
 
     const pickImage = async () => {
@@ -116,7 +136,7 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
                     title="Hand Colour"
                     icon="arrow-down-right"
                     onPress={() => {
-                        alert("Hand Colour")
+                        setIsHandModalVisible(true)
                     }}
                     color="black"
                 />
@@ -245,7 +265,6 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
                                     } else {
                                         setIsFaceModalVisible(false);
                                         const upload_url = await uploadImageAsync(picUp);
-                                        console.log(upload_url);
                                         await set(ref(getDatabase(), '/clockFace/' + membersRef), {
                                             background: "images/clockFaces/" + membersRef
                                         }).then(() => {
@@ -277,6 +296,51 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
                             color2="#6B4EFF" /></>}
                 </View>
             </Modal>
+
+            <Modal 
+                isVisible={isHandModalVisible}
+                onBackdropPress={() => {
+                    setIsHandModalVisible(false)
+                }}
+                className="items-center"
+            >
+                <View className=" w-full  items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
+                    <Text className="text-2xl font-bold text-center  pb-2">Change Hand Colour</Text>
+                        <View className="w-full h-1/2">
+                            <ColorPicker
+                                color={newHandColour}
+                                onColorChange={(col) => { setNewHandColour(col); } } 
+                            />
+                        </View>
+                        <View className="pt-10 w-11/12 items-center">
+                            <AppButtonPurple
+                                title="Change Hand Colour"
+                                onPress={async () => {
+                                    if(colours.includes(newHandColour)){
+                                        Alert.alert("Hand Colour Taken", "Please select a different colour")
+                                    }else{
+                                        const groupMembersRef = query(ref(getDatabase(), "/groupMembers/" + membersRef));
+                                        const dataMembers = await get(groupMembersRef);
+                                            if (dataMembers.val() !== null) {
+                                                dataMembers.forEach(async c => {
+                                                    if (c.val()["member"] ===  uid) {
+                                                        await set(ref(getDatabase(), "/groupMembers/" + membersRef + "/" + c.key),{
+                                                            member: uid,
+                                                            colour: newHandColour
+                                                        })
+                                                    }
+                                                });
+                                            }
+                                        navigation.navigate("HomeScreen");
+                                        setIsHandModalVisible(false);
+                                        setNewHandColour("");
+                                        }
+                                } } 
+                            />
+                        </View>
+                </View>
+            </Modal>
+                        
             
 
         </SafeAreaView>

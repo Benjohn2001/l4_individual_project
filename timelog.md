@@ -176,3 +176,7 @@
 
 *5 hour* Re do clock with better ui and labels, now can upload an image for the clockface or a colour to fill the face
 *1.5 hour* Have locations, clockfaces and images in storage deleted when all users leave group and image in storage deleted when change face to colour, fixed bug with create group
+
+### 4 Jan 2023
+
+*1.5 hour* Added functionality for clock hand colour and users can customise this

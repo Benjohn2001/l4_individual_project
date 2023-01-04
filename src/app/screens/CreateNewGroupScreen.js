@@ -5,6 +5,7 @@ import { COLOURS } from '../assets/colours';
 import AppButtonPurple from '../components/AppButtonPurple';
 import { getDatabase, set, ref, push } from 'firebase/database';
 import { auth } from '../../firebase';
+import randomColor from "randomcolor";
 
 
 const CreateNewGroupScreen = ({ navigation }) => {
@@ -25,13 +26,14 @@ const CreateNewGroupScreen = ({ navigation }) => {
                 membersRef: groupsRef.key
             })
             await set(groupMembersRef,{
-                member: auth.currentUser.uid
+                member: auth.currentUser.uid,
+                colour: randomColor()
             })
             await set(locationsRef,{
                 locations: ["Uni","Work","Out","Free","Busy","Home"]
             })
             await set(faceRef,{
-                background: "#6B4EFF"
+                background: "#FFFFFF"
             })
             setGroupName("")
             navigation.push("HomeScreen")

@@ -67,7 +67,8 @@ const GroupScreen = ({ route, navigation }) => {
         for (const i in membersKeys) {
             const userRef = query(ref(getDatabase(), "/users/"+membersKeys[i].val()["member"]))
             const data = await get(userRef)
-            setMembers(a => {return [...a , data]})
+            data.val().col=membersKeys[i].val()["colour"]
+            setMembers(a => {return [...a , [data,membersKeys[i].val()["colour"]]]})
         }
     }
 
@@ -113,18 +114,18 @@ const GroupScreen = ({ route, navigation }) => {
                                     data={members}
                                     renderItem={({ item }) => (
                                         <GroupMemberBar
-                                            title={item.val()["firstName"] + " " + item.val()["lastName"]}
+                                            title={item[0].val()["firstName"] + " " + item[0].val()["lastName"]}
                                             onPress={() => {
-                                                if (item.key == auth.currentUser.uid) {
+                                                if (item[0].key == auth.currentUser.uid) {
                                                     navigation.navigate("HomeScreen", { screen: "Me" });
                                                 } else {
                                                     navigation.push('UserProfileScreen', {
-                                                        user: item,
+                                                        user: item[0],
                                                     });
                                                 }
                                             } }
-                                            avatar={item.val()["profilePic"]}
-                                            color="red" />
+                                            avatar={item[0].val()["profilePic"]}
+                                            color={item[1]} />
                                     )} 
                                 />
                             </View>
