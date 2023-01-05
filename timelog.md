@@ -180,3 +180,7 @@
 ### 4 Jan 2023
 
 *1.5 hour* Added functionality for clock hand colour and users can customise this
+
+### 5 Jan 2023
+
+*3 hour* Added labeled and coloured hands to represent the users status stored in firebase on the clock, users can now also update their status on the group screen

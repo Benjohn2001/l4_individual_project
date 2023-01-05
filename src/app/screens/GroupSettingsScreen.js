@@ -299,7 +299,6 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                 onPress={async ()=>{
                                     for (const i in membersKeys) {
                                             await update(ref(getDatabase(), '/groups/' + membersKeys[i] + "/" + key ), {
-                                                membersRef: membRef,
                                                 name: nameNew
                                             })
      

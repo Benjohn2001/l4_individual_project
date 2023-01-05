@@ -324,8 +324,7 @@ const ClockCustomiseScreen = ({ route, navigation }) => {
                                             if (dataMembers.val() !== null) {
                                                 dataMembers.forEach(async c => {
                                                     if (c.val()["member"] ===  uid) {
-                                                        await set(ref(getDatabase(), "/groupMembers/" + membersRef + "/" + c.key),{
-                                                            member: uid,
+                                                        await update(ref(getDatabase(), "/groupMembers/" + membersRef + "/" + c.key),{
                                                             colour: newHandColour
                                                         })
                                                     }

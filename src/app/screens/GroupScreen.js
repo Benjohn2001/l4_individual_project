@@ -10,10 +10,12 @@ import RowItem from '../components/RowItem';
 import PillButton from '../components/PillButton';
 import PressableIcon from '../components/PressableIcon';
 import GroupMemberBar from '../components/GroupMemberBar';
-import { query, get, ref, getDatabase } from 'firebase/database';
+import { query, get, ref, getDatabase, update, set } from 'firebase/database';
 import { auth } from '../../firebase';
 import { useIsFocused } from '@react-navigation/native';
 import Clock from '../components/Clock';
+import Modal from "react-native-modal";
+import SelectDropdown from 'react-native-select-dropdown'
 
 const GroupScreen = ({ route, navigation }) => {
 
@@ -28,8 +30,11 @@ const GroupScreen = ({ route, navigation }) => {
     const [fetched, setFetched] = React.useState(false)
     const [locations, setLocations] =React.useState([])
     const [clockface, setClockface] =React.useState("")
+    const [isUpdateStatusModal, setIsUpdateStatusModal] = React.useState(false)
+    const [newStatusIndex, setNewStatusIndex]=React.useState()
 
     const isFocused= useIsFocused()
+    const uid = auth.currentUser.uid
 
     React.useEffect(()=>{
         fetchData()
@@ -99,15 +104,25 @@ const GroupScreen = ({ route, navigation }) => {
                     { showMembers ?
                         <>
                         <View className="flex-1">
-                            <PillButton
-                                title="Hide Members"
-                                onPress={() => {
-                                    setShowMembers(false);
-                                    setMembersKeys([])
-                                    setMembers([])
-                                } }
-                                icon="users" 
-                            />
+                            <View className="flex-row">
+                                <PillButton
+                                    title="Hide Members"
+                                    onPress={() => {
+                                        setShowMembers(false);
+                                        setMembersKeys([])
+                                        setMembers([])
+                                    } }
+                                    icon="users" 
+                                />
+                                <PillButton
+                                    title="Update Status"
+                                    onPress={() => {
+                                       setIsUpdateStatusModal(true)
+                                    } }
+                                    icon="upload" 
+                                />
+                            </View>
+                            
                         
                                 <FlatList
                                     showsVerticalScrollIndicator={false}
@@ -132,13 +147,23 @@ const GroupScreen = ({ route, navigation }) => {
                             </View>
                         </>
                     :
-                        <PillButton
-                            title="Show Members"
-                            onPress={()=>{
-                                setShowMembers(true)
-                            }}
-                            icon="users"
-                        />
+                        <View className="flex-row">
+                            <PillButton
+                                title="Show Members"
+                                onPress={()=>{
+                                    setShowMembers(true)
+                                }}
+                                icon="users"
+                            />
+
+                            <PillButton
+                                title="Update Status"
+                                onPress={() => {
+                                    setIsUpdateStatusModal(true)
+                                } }
+                                icon="upload" 
+                            />
+                        </View>
                     }
                     
                     <View className="items-center py-3 mt-auto">
@@ -169,6 +194,49 @@ const GroupScreen = ({ route, navigation }) => {
                 <Text className="text-center">Loading Group</Text>
             </View>
         }
+
+            <Modal 
+                isVisible={isUpdateStatusModal}
+                onBackdropPress={() => setIsUpdateStatusModal(false)}
+                className="items-center"
+            >
+                <View className=" w-11/12 h-50 items-center py-3 px-3 bg-secondaryPurple rounded-2xl">
+                    <Text className="text-2xl font-bold  pb-5">Update Status</Text>
+                    <SelectDropdown
+                        buttonStyle={{borderRadius:8, backgroundColor:"white"}}
+                        data={locations}
+                        renderDropdownIcon={isOpened => {
+                            return <Feather name={isOpened ? 'chevron-up' : 'chevron-down'} color={"black"} size={18}/>
+                        }}
+                        dropdownIconPosition={'right'}
+                        defaultButtonText={'Select a status'}
+                        onSelect={(selectedItem, index) => {
+                            setNewStatusIndex(index)
+                        }}
+                    />
+                   <View className="pt-5 w-full items-center">
+                        <AppButtonPurple
+                            title="Update Status"
+                            onPress={async ()=>{
+                                const groupMembersRef = query(ref(getDatabase(), "/groupMembers/" + membersRef));
+                                const dataMembers = await get(groupMembersRef);
+                                    if (dataMembers.val() !== null) {
+                                        dataMembers.forEach(async c => {
+                                            if (c.val()["member"] ===  uid) {
+                                                await update(ref(getDatabase(), "/groupMembers/" + membersRef + "/" + c.key),{
+                                                    status: newStatusIndex
+                                                })
+                                            }
+                                        });
+                                    }
+                                setIsUpdateStatusModal(false)
+                                navigation.navigate("HomeScreen")
+                            }}
+                        />
+                    </View>
+                    
+                </View>
+            </Modal>
         </SafeAreaView>
 
     );
