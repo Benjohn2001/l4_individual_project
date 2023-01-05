@@ -92,6 +92,7 @@ const GroupScreen = ({ route, navigation }) => {
                         <Clock
                             locations={locations}
                             face={clockface}
+                            membs={membersKeys}
                         />
                 </View>
                                     

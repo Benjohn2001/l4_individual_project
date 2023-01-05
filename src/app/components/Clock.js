@@ -7,10 +7,32 @@ import {ref as stref} from "firebase/storage";
 import { Dimensions } from 'react-native';
 import Svg, { Circle, Defs, Pattern, Image, ClipPath } from 'react-native-svg';
 import Labels from './Labels';
+import ClockHand from './ClockHand';
+import { query, get, ref, getDatabase } from 'firebase/database';
+
 
 function Clock (props){
 
-    const {locations, face} = props
+    const {locations, face, membs} = props
+
+    const [members, setMembers] = React.useState([])
+    const [fetched, setFetched] = React.useState(false)
+
+    React.useEffect(()=>{
+        fetchData()
+    },[])
+
+    const fetchData = async () =>{
+        setFetched(false)
+        setMembers([])
+        for (const i in membs) {
+            const userRef = query(ref(getDatabase(), "/users/"+membs[i].val()["member"]))
+            const data = await get(userRef)
+            setMembers(a => {return [...a , [data,membs[i].val()["colour"],membs[i].val()["status"]]]})
+        }
+        setFetched(true)
+    }
+
     const windowWidth = Dimensions.get("window").width
 
     const [pic, setPic] = React.useState("")
@@ -30,6 +52,15 @@ function Clock (props){
                 center={center}
                 locations={locations}
             />
+            {fetched ? 
+                <ClockHand
+                    radius={radius}
+                    center={center}
+                    members={members}
+                />
+            :
+            <></>
+            }
         </Svg>
         )
     }else{
@@ -54,6 +85,16 @@ function Clock (props){
                 center={center}
                 locations={locations}
             />
+
+            {fetched ? 
+                <ClockHand
+                    radius={radius}
+                    center={center}
+                    members={members}
+                />
+            :
+            <></>
+            }
         </Svg>
 
     ); 
@@ -62,7 +103,8 @@ function Clock (props){
 
 Clock.propTypes = {
     locations: PropTypes.array.isRequired,
-    face: PropTypes.string.isRequired
+    face: PropTypes.string.isRequired,
+    membs: PropTypes.array.isRequired
 }
 
 export default Clock
