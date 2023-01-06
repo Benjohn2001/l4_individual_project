@@ -18,6 +18,7 @@ import AddFromFriends from '../components/AddFromFriends';
 import {ref as stref} from "firebase/storage";
 import { Alert } from 'react-native';
 import randomColor from "randomcolor";
+import { useIsFocused } from '@react-navigation/native';
 
 const GroupSettingsScreen = ({ route, navigation }) => {
 
@@ -57,9 +58,9 @@ const GroupSettingsScreen = ({ route, navigation }) => {
         })
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membRef))
         const dataMem = await get(groupMembersRef)
-        dataMem.forEach(c => {
-            setMembersKeys(a => {return [...a , c.val()["member"]]})
-        })
+        for (const c in dataMem.val()) {
+            setMembersKeys(a => {return [...a , dataMem.val()[c]["member"]]})
+        }
 
     }
 
@@ -69,20 +70,20 @@ const GroupSettingsScreen = ({ route, navigation }) => {
         setFriends([])
         const friendsRef = ref(getDatabase(), "/friends/"+uid)
         const dataFr = await get(friendsRef)
-        dataFr.forEach(c => {
-            // console.log(membersKeys)
-            // console.log(c.val()["user"])
-            //console.log(!membersKeys.includes(c.val()["user"]))
+        for(const c in dataFr.val()){
+            //console.log(membersKeys)
+            //console.log(dataFr.val()[c]["user"])
+            //console.log(!membersKeys.includes(dataFr.val()[c]["user"]))
 
             // trying to not show friends already in the group not working on first load, works after refresh
             //array of friendsKeys has all friends on first, then members removed after refresh??
-            if(!membersKeys.includes(c.val()["user"])){
-                setFriendsKeys(a =>{return [...a, c.val()["user"]]})
+            if(!membersKeys.includes(dataFr.val()[c]["user"])){
+                setFriendsKeys(a =>{return [...a, dataFr.val()[c]["user"]]})
             }
             //console.log(c)
             //console.log(friendsKeys)
             //console.log(membersKeys )
-        })
+        }
 
         for(const i in unames){
             if(friendsKeys.includes(unames[i].key)){

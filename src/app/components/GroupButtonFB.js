@@ -7,6 +7,7 @@ import PressableIcon from "./PressableIcon";
 import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
 import {ref as stref} from "firebase/storage";
 import { query, get, ref, getDatabase } from 'firebase/database';
+import { auth } from "../../firebase";
 
 function GroupButtonFB (props) {
 
@@ -16,52 +17,31 @@ function GroupButtonFB (props) {
     const [membersKeys, setMembersKeys] = useState([])
     const [fetched, setFetched]=useState(false)
 
+    const uid=auth.currentUser.uid
+
     React.useEffect(() =>{
         fetchData()
     },[] )
 
     const fetchData = async () =>{
-        //console.log("in fetchdata")
         setFetched(false)
         setMembersKeys([])
         setUrls([])
         setPics([])
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membRef))
         const data = await get(groupMembersRef)
-        //console.log(data)
-        //only looping though first object, data has all the members however, when using memberskeys array, and looping through this
-        //all photos load after multiple refreshes
-
-        //ThIS LOADS JUST THE FIRST IMAGE BUT WORKS ON OPEN OF HOM E PAGE
-        data.forEach( async c => {
-            //console.log(c)
-            const userRef = query(ref(getDatabase(), "/users/"+c.val()["member"]))
-            const data = await get(userRef)
-            //console.log(data)
-            await getDownloadURL(stref(getStorage(),data.val()["profilePic"])).then((url)=>{
-                setPics(a => {return [...a , url]})
-            })
-        })
-
-        //THIS SHOWS ALL AFTER REFRESHIG THIS FILE, but not with home
-        
-        // data.forEach(  c => {
-        //     console.log(c)
-        //     setMembersKeys(a => {return [...a , c]})
-        // })
-        // for(const i in membersKeys ){
-        //     const userRef = query(ref(getDatabase(), "/users/"+membersKeys[i].val()["member"]))
-        //     const data = await get(userRef)
-        //     console.log(data)
-        //     await getDownloadURL(stref(getStorage(),data.val()["profilePic"])).then((url)=>{
-        //         setPics(a => {return [...a , url]})
-        //     })
-        // }
+        for (const c in data.val()){
+            if(data.val()[c]["member"]!==uid){
+                const refV = query(ref(getDatabase(), "/users/"+data.val()[c]["member"]))
+                const dataV= await get(refV)
+                getDownloadURL(stref(getStorage(),dataV.val()["profilePic"])).then((url)=>{
+                    setPics(a => {return [...a , url]})
+                })
+            }
+            
+        }
         setFetched(true)
     }
-    //console.log("pics")
-    //console.log(pics)
-    //console.log("-----------------------")
     
     return (
         <View className="items-center w-full">

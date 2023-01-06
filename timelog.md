@@ -184,3 +184,7 @@
 ### 5 Jan 2023
 
 *3 hour* Added labeled and coloured hands to represent the users status stored in firebase on the clock, users can now also update their status on the group screen
+
+### 6 Jan 2023
+
+*1 hour* Fix bug with group button on home screen so now button displays avatars
