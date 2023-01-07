@@ -188,3 +188,8 @@
 ### 6 Jan 2023
 
 *1 hour* Fix bug with group button on home screen so now button displays avatars
+*1.5 hour* Experimented with images on end of clockhands, wasnt working
+
+### 7 Jan 2023
+
+*3 hour* Managed to eventually get images on the end of clockhands, looks far better, going to keep

@@ -33,7 +33,7 @@ const GroupScreen = ({ route, navigation }) => {
     const [isUpdateStatusModal, setIsUpdateStatusModal] = React.useState(false)
     const [newStatusIndex, setNewStatusIndex]=React.useState()
 
-    const isFocused= useIsFocused()
+    const isFocused= useIsFocused() 
     const uid = auth.currentUser.uid
 
     React.useEffect(()=>{

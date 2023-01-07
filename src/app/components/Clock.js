@@ -72,7 +72,7 @@ function Clock (props){
 
             <Defs>
                 <ClipPath id="clip" >
-                    <Circle cx={center} cy={center} r={radius-15} stroke={"black"} strokeWidth={2} fill="url(#image)"/>
+                    <Circle cx={center} cy={center} r={radius-15} stroke={"black"} strokeWidth={2}/>
                 </ClipPath>
             </Defs>
             <Circle cx={center} cy={center} r={radius+15} stroke={"black"} strokeWidth={2} fill="#6B4EFF"/>

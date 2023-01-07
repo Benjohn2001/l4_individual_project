@@ -1,14 +1,17 @@
-import { G, Line, Text } from "react-native-svg";
+import { G, Line, Text, Defs, ClipPath, Circle, Image,   Svg, Pattern} from "react-native-svg";
 import React from "react";
 import { polar2cart } from "./polar2cart";
 import PropTypes from 'prop-types';
+import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
+import {ref as stref} from "firebase/storage";
+import Hand from "./Hand";
 
 function ClockHand(props){
     const {radius, center, members} = props
-
-    function textTransformHelper(x,y,a){
-        return("translate("+x+"," +y+") rotate("+a+")")
-    }
+    
+    // function textTransformHelper(x,y,a){
+    //     return("translate("+x+"," +y+") rotate("+a+")")
+    // }
 
     function randInterval(a,b){
         return (Math.floor(Math.random() * (b-a+1) + a))
@@ -36,31 +39,17 @@ function ClockHand(props){
         if(member[2]===undefined){
             <></>
         }else{
-        const angle=getAngle(member[2]) //change to the number of the status selected
+        const angle=getAngle(member[2])
         const point = polar2cart(center,center,radius-40,angle)
-        const labelPoint = polar2cart(center,center,radius-25,angle)
+        // const labelPoint = polar2cart(center,center,radius-25,angle)
         return(
-            <G key={index}>
-                <Line
-                    stroke={member[1]}
-                    strokeWidth={10}
-                    x1={center}
-                    x2={point.x}
-                    y1={center}
-                    strokeLinecap={"round"}
-                    y2={point.y} 
-                />
-                <Text
-                    fontSize={15}
-                    fontWeight="bold"
-                    fill={member[1]}
-                    transform={textTransformHelper(labelPoint.x, labelPoint.y, angle)}
-                    alignmentBaseline="central"
-                    textAnchor='middle'
-                >
-                    {member[0].val()["firstName"]}
-                </Text>
-            </G>
+            <Hand
+                index={index}
+                center={center}
+                point={point}
+                member={member}
+            />
+            
         )
         }
     })
@@ -68,6 +57,7 @@ function ClockHand(props){
     return(
         <G>
             {clockHands}
+            
         </G>
     )
 }
