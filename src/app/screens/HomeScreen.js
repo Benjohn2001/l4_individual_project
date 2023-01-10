@@ -155,7 +155,7 @@ const HomeScreen = ({ navigation }) => {
             
             <View className="items-center py-3">
                 <AppButtonPurple
-                    title="Add Another Group"
+                    title="Add a Group"
                     onPress={() => {
                         setModalVisible(true)
                     }

@@ -4,6 +4,7 @@ import { polar2cart } from "./polar2cart";
 import PropTypes from 'prop-types';
 import { getStorage, getDownloadURL, uploadBytesResumable, uploadBytes, uploadString } from "firebase/storage";
 import {ref as stref} from "firebase/storage";
+import {Image as img} from "react-native"
 
 function Hand(props){
     const {index, point, center, member} = props
@@ -16,9 +17,14 @@ function Hand(props){
     },[] )
 
     const fetchData = () =>{
+        if(member[0].val()["profilePic"] !== undefined){
             getDownloadURL(stref(getStorage(),member[0].val()["profilePic"])).then((url)=>{
                 setPic(url)
             })
+        }else{
+            setPic(img.resolveAssetSource(require('../assets/defaultProfilePic.png')).uri)
+        }
+        
     }
 
     return(

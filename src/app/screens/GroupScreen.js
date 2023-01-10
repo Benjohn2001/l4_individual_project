@@ -25,13 +25,13 @@ const GroupScreen = ({ route, navigation }) => {
     const key=item.key
 
     const [membersKeys, setMembersKeys] = React.useState([])
-    const [keys, setKeys] = React.useState([])
     const [members, setMembers] = React.useState([])
     const [showMembers, setShowMembers] = React.useState(false)
     const [fetched, setFetched] = React.useState(false)
     const [locations, setLocations] =React.useState([])
     const [clockface, setClockface] =React.useState("")
     const [myStatus, setMyStatus] =React.useState("")
+    const [myColour, setMyColour] =React.useState("")
     const [updateStatus,setUpdateStatus] = React.useState(false)
     const [newStatusIndex, setNewStatusIndex]=React.useState()
 
@@ -53,7 +53,6 @@ const GroupScreen = ({ route, navigation }) => {
     }
 
     const getClockFace = async () =>{
-        
         setClockface("")
         const faceRef = query(ref(getDatabase(), "/clockFace/"+membersRef))
         const faceData=await get(faceRef)
@@ -65,7 +64,6 @@ const GroupScreen = ({ route, navigation }) => {
         setFetched(false)
         setMembersKeys([])
         setMembers([])
-        setKeys([])
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
         const data = await get(groupMembersRef)
         data.forEach(c => {
@@ -76,9 +74,9 @@ const GroupScreen = ({ route, navigation }) => {
             const data = await get(userRef)
             if(membersKeys[i].val()["member"]===uid){
                 setMyStatus(membersKeys[i].val()["status"])
+                setMyColour(membersKeys[i].val()["colour"])
             }
             setMembers(a => {return [...a , [data,membersKeys[i].val()["colour"]]]})
-            setKeys(a => {return [...a , membersKeys[i].val()["member"]]})
         }
         
     }
@@ -128,9 +126,11 @@ const GroupScreen = ({ route, navigation }) => {
                                 const groupMembersRef = query(ref(getDatabase(), "/groupMembers/" + membersRef));
                                 const dataMembers = await get(groupMembersRef);
                                     if (dataMembers.val() !== null) {
-                                        dataMembers.forEach(async c => {
+                                        dataMembers.forEach( c => {
                                             if (c.val()["member"] ===  uid) {
-                                                await update(ref(getDatabase(), "/groupMembers/" + membersRef + "/" + c.key),{
+                                                set(ref(getDatabase(), "/groupMembers/" + membersRef + "/" + c.key),{
+                                                    colour: myColour,
+                                                    member: uid,
                                                     status: newStatusIndex
                                                 })
                                             }

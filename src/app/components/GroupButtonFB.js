@@ -34,9 +34,11 @@ function GroupButtonFB (props) {
             if(data.val()[c]["member"]!==uid){
                 const refV = query(ref(getDatabase(), "/users/"+data.val()[c]["member"]))
                 const dataV= await get(refV)
-                getDownloadURL(stref(getStorage(),dataV.val()["profilePic"])).then((url)=>{
-                    setPics(a => {return [...a , url]})
-                })
+                if(dataV.val()["profilePic"]!==undefined){
+                    getDownloadURL(stref(getStorage(),dataV.val()["profilePic"])).then((url)=>{
+                        setPics(a => {return [...a , url]})
+                    })
+                }
             }
             
         }

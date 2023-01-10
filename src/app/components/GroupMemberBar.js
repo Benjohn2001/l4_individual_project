@@ -9,14 +9,18 @@ import {ref as stref} from "firebase/storage";
 function GroupMemberBar (props) {
     const [pic, setPic] = React.useState(Image.resolveAssetSource(require('../assets/defaultProfilePic.png')).uri);
     const { title, onPress, avatar, color} = props;
+
+    React.useEffect(()=>{
+        if(avatar !== undefined){
+            getDownloadURL(stref(getStorage(), avatar)).then((url)=>{
+                setPic(url)
+            })
+        }else{
+            setPic(Image.resolveAssetSource(require('../assets/defaultProfilePic.png')).uri)
+        }
+    })
+
     
-    if(avatar!== ""){
-        getDownloadURL(stref(getStorage(), avatar)).then((url)=>{
-            setPic(url)
-        })
-    }else{
-        setPic(Image.resolveAssetSource(require('../assets/defaultProfilePic.png')).uri)
-    }
     return (
         <View className="items-center py-1">
             <TouchableOpacity onPress={onPress} className="bg-secondaryPurple h-14 w-80 rounded-2xl mx-1.5">
@@ -37,7 +41,7 @@ function GroupMemberBar (props) {
 GroupMemberBar.propTypes = {
     title: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
-    avatar: PropTypes.string.isRequired,
+    avatar: PropTypes.string,
     color: PropTypes.string.isRequired
 };
 
