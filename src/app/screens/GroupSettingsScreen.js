@@ -23,6 +23,7 @@ import { useIsFocused } from '@react-navigation/native';
 const GroupSettingsScreen = ({ route, navigation }) => {
 
     const item=route.params.item
+    const dataMemb=route.params.dataMemb
     const name=item.val()["name"]
     const membRef=item.val()["membersRef"]
     const key=item.key
@@ -39,6 +40,7 @@ const GroupSettingsScreen = ({ route, navigation }) => {
     const [membersKeys, setMembersKeys] = React.useState([])
     const [fetched, setFetched]= React.useState(false)
     const [nameNew, setNameNew] = React.useState("")
+    const [icon, setIcon] = React.useState("")
     const uid = auth.currentUser.uid
 
     React.useEffect(()=>{
@@ -47,6 +49,7 @@ const GroupSettingsScreen = ({ route, navigation }) => {
     }, [searchVis])
 
     const fetchData = async () =>{
+        setFetched(false)
         setUnames([])
         setMembersKeys([])
         const unamesRef = query(ref(getDatabase(), "/users"), orderByChild("userName"))
@@ -56,33 +59,20 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                 setUnames(a => {return [...a , c]})
             }
         })
-        const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membRef))
-        const dataMem = await get(groupMembersRef)
-        for (const c in dataMem.val()) {
-            setMembersKeys(a => {return [...a , dataMem.val()[c]["member"]]})
+        for (const c in dataMemb) {
+            setMembersKeys(a => {return [...a , dataMemb[c].val()["member"]]})
         }
+        
 
     }
 
     const getFriends = async () =>{
-        setFetched(false)
         setFriendsKeys([])
         setFriends([])
         const friendsRef = ref(getDatabase(), "/friends/"+uid)
         const dataFr = await get(friendsRef)
         for(const c in dataFr.val()){
-            //console.log(membersKeys)
-            //console.log(dataFr.val()[c]["user"])
-            //console.log(!membersKeys.includes(dataFr.val()[c]["user"]))
-
-            // trying to not show friends already in the group not working on first load, works after refresh
-            //array of friendsKeys has all friends on first, then members removed after refresh??
-            if(!membersKeys.includes(dataFr.val()[c]["user"])){
-                setFriendsKeys(a =>{return [...a, dataFr.val()[c]["user"]]})
-            }
-            //console.log(c)
-            //console.log(friendsKeys)
-            //console.log(membersKeys )
+            setFriendsKeys(a =>{return [...a, dataFr.val()[c]["user"]]})
         }
 
         for(const i in unames){
@@ -97,7 +87,6 @@ const GroupSettingsScreen = ({ route, navigation }) => {
         setFiltered([])
         friends.filter((str)=>{
                 if(str.val()["userName"].toLowerCase().includes(name.toLowerCase())){
-            
                     setFiltered(a => {return [...a , str]}) 
                 }
         })
@@ -123,7 +112,8 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                         <Text className="font-bold ml-auto mr-auto text-3xl">
                             Add From Friends
                         </Text>
-                    </View><View className="pt-10">
+                    </View>
+                    <View className="pt-10 pb-5 flex-1">
                             <SearchBar
                                 className="bg-secondaryPurple h-12 w-11/12"
                                 placeholder="Search for a username"
@@ -150,6 +140,8 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                     <AddFromFriends
                                         title={item.val()["userName"]}
                                         onPress={async () => {
+                                            if(!membersKeys.includes(item.key)){ 
+  
                                             const groupsRef = ref(getDatabase(), "/groups/" + item.key +"/" +key);
                                             const groupMembersRef = push(ref(getDatabase(), "/groupMembers/" + membRef));
 
@@ -163,8 +155,14 @@ const GroupSettingsScreen = ({ route, navigation }) => {
                                             });
 
                                             setSearchVis(false)
+
+                                            }else{
+                                                Alert.alert("User Present","This user is already a member")
+                                            }
                                         } }
-                                        avatar={item.val()["profilePic"]} />
+                                        avatar={item.val()["profilePic"]}
+                                        icon={membersKeys.includes(item.key) ? "check" : "plus"}
+                                         />
                                 )} />
                         </View></>
                 :

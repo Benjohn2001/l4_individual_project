@@ -9,7 +9,7 @@ import {ref as stref} from "firebase/storage";
 
 function AddFromFriends (props) {
     const [pic, setPic] = useState(Image.resolveAssetSource(require('../assets/defaultProfilePic.png')).uri);
-    const { title, onPress, avatar} = props;
+    const { title, onPress, avatar, icon} = props;
     
     if(avatar!== ""){
         getDownloadURL(stref(getStorage(), avatar)).then((url)=>{
@@ -30,7 +30,7 @@ function AddFromFriends (props) {
                     </View>
                     <Text  className="text-black text-sm text-center  pt-4">{title}</Text>
                     <View className="ml-auto mr-5 pt-2">
-                        <Feather name="plus" color={"black"} size={35}/>
+                        <Feather name={icon} color={"black"} size={35}/>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -41,7 +41,8 @@ function AddFromFriends (props) {
 AddFromFriends.propTypes = {
     title: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
-    avatar: PropTypes.string.isRequired
+    avatar: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired
 };
 
 export default AddFromFriends;

@@ -24,8 +24,6 @@ const GroupScreen = ({ route, navigation }) => {
     const membersRef=item.val()["membersRef"]
     const key=item.key
 
-
-
     const [membersKeys, setMembersKeys] = React.useState([])
     const [keys, setKeys] = React.useState([])
     const [members, setMembers] = React.useState([])
@@ -39,6 +37,7 @@ const GroupScreen = ({ route, navigation }) => {
 
     const isFocused= useIsFocused() 
     const uid = auth.currentUser.uid
+
 
     React.useEffect(()=>{
         fetchData()
@@ -66,6 +65,7 @@ const GroupScreen = ({ route, navigation }) => {
         setFetched(false)
         setMembersKeys([])
         setMembers([])
+        setKeys([])
         const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
         const data = await get(groupMembersRef)
         data.forEach(c => {
@@ -78,6 +78,7 @@ const GroupScreen = ({ route, navigation }) => {
                 setMyStatus(membersKeys[i].val()["status"])
             }
             setMembers(a => {return [...a , [data,membersKeys[i].val()["colour"]]]})
+            setKeys(a => {return [...a , membersKeys[i].val()["member"]]})
         }
         
     }
@@ -235,6 +236,7 @@ const GroupScreen = ({ route, navigation }) => {
                             onPress1={() => {
                                 navigation.navigate("GroupSettingsScreen",{
                                     item: item,
+                                    dataMemb: membersKeys
                                 });
                                 setShowMembers(false)
                             } }

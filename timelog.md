@@ -193,3 +193,11 @@
 ### 7 Jan 2023
 
 *3 hour* Managed to eventually get images on the end of clockhands, looks far better, going to keep
+
+### 9 Jan 2023
+
+*3 hour* Moving update status and show members to seperate pages fixed refresh bug
+
+### 10 Jan 2023
+
+*3 hour* Issues with only showing friends not in group when adding group members ccouldnt be resolved, now showing all friends but with different icon and onpress depending on if already a member, betteeer as shows system status
