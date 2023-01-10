@@ -12,20 +12,9 @@ class GroupButton extends Component {
                 <TouchableOpacity onPress={onPress} className="bg-primaryDarker h-36 py-4 rounded-2xl mx-1.5">
                 <View className="flex-row w-11/12">
                     <Text  className="text-black text-2xl text-center ml-5 mr-3">{groupName}</Text>
-                    <PressableIcon
-                        onPress={() => {
-                            alert("Favourited")
-                        }}
-                        icon="star"
-                        size={32}
-                        color="gold"
-                    />
                     <View  className="ml-auto mr-5">
-                        <PressableIcon
-                            onPress={() => {
-                                alert("To Group")
-                            }}
-                            icon="arrow-right"
+                        <Feather
+                            name="arrow-right"
                             size={32}
                             color="black"
                         /> 

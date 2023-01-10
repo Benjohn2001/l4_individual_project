@@ -127,3 +127,77 @@
 ### 16 Nov 2022
 
 *3 hour* Add upload of picture and edit picture, fix all async issues and add loading indicators
+
+### 17 Nov 2022
+
+*2 hour* Start implementation of friends screen and system
+
+### 19 Nov 2022
+
+*2 hour* Implement friends search and friends list
+
+### 21 Nov 2022
+
+*3 hour* Friends search and async issues fixed
+
+### Gap Due to coursework and exam period
+
+### 12 Dec 2022 
+
+*3 hour* Added firebase data with groups on homepage and groups page
+
+### 13 Dec 2022
+
+*1.5 hour* Hide and show group members, navigation to profiles or my profile
+
+### 14 Dec 2022
+
+*3 hour* Add to group from friends with a search
+
+### 16 Dec 2022
+
+*3 hour* Add leave group, fix group page styling and loading of members list
+
+### 17 Dec 2022
+
+*2 hour* Fixed lag of search for groups, issues selecting fixed, still shows current members on first load of search
+
+### 18 Dec 2022
+
+*2.5 hour* Implemented change of group name, changed how i store groups and members, home now refreshing correctly
+
+### 2 Jan 2023
+
+*1.5 hour* Change group buttons on the home page to have firebase data, still bugs present
+*2 hour* Create basic clock with labels for sectors and firebase locations
+*1 hour* Add functionality to change the locations
+
+### 3 Jan 2023
+
+*5 hour* Re do clock with better ui and labels, now can upload an image for the clockface or a colour to fill the face
+*1.5 hour* Have locations, clockfaces and images in storage deleted when all users leave group and image in storage deleted when change face to colour, fixed bug with create group
+
+### 4 Jan 2023
+
+*1.5 hour* Added functionality for clock hand colour and users can customise this
+
+### 5 Jan 2023
+
+*3 hour* Added labeled and coloured hands to represent the users status stored in firebase on the clock, users can now also update their status on the group screen
+
+### 6 Jan 2023
+
+*1 hour* Fix bug with group button on home screen so now button displays avatars
+*1.5 hour* Experimented with images on end of clockhands, wasnt working
+
+### 7 Jan 2023
+
+*3 hour* Managed to eventually get images on the end of clockhands, looks far better, going to keep
+
+### 9 Jan 2023
+
+*3 hour* Moving update status and show members to seperate pages fixed refresh bug
+
+### 10 Jan 2023
+
+*3 hour* Issues with only showing friends not in group when adding group members ccouldnt be resolved, now showing all friends but with different icon and onpress depending on if already a member, betteeer as shows system status

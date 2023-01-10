@@ -76,7 +76,6 @@ const MeScreen = ({ navigation }) => {
         onValue(unamesRef, (snapshot) => {
             if(snapshot.exists){
                 const data = snapshot.val()
-                console.log(data)
                 setNameFull(data["firstName"]+" "+data["lastName"])
                 setUserName(data["userName"])
                 setBio(data["bio"])
@@ -143,6 +142,7 @@ const MeScreen = ({ navigation }) => {
                     onPress={() => {
                         alert("Share my profile")
                     }}
+                    icon="share-2"
                 />
             </View>
 

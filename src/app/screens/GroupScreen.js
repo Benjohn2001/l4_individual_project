@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, ScrollView, FlatList, ActivityIndicator, ImageBackground } from 'react-native';
 import AppButtonPurple from '../components/AppButtonPurple'
 import AppButtonLight from '../components/AppButtonLight';
 import TwoButtonsSide from '../components/TwoButtonsSide';
@@ -10,95 +10,259 @@ import RowItem from '../components/RowItem';
 import PillButton from '../components/PillButton';
 import PressableIcon from '../components/PressableIcon';
 import GroupMemberBar from '../components/GroupMemberBar';
+import { query, get, ref, getDatabase, update, set } from 'firebase/database';
+import { auth } from '../../firebase';
+import { useIsFocused } from '@react-navigation/native';
+import Clock from '../components/Clock';
+import Modal from "react-native-modal";
+import SelectDropdown from 'react-native-select-dropdown'
 
-const GroupScreen = ({ navigation }) => {
+const GroupScreen = ({ route, navigation }) => {
+
+    const item=route.params.item
+    const name=item.val()["name"]
+    const membersRef=item.val()["membersRef"]
+    const key=item.key
+
+    const [membersKeys, setMembersKeys] = React.useState([])
+    const [keys, setKeys] = React.useState([])
+    const [members, setMembers] = React.useState([])
+    const [showMembers, setShowMembers] = React.useState(false)
+    const [fetched, setFetched] = React.useState(false)
+    const [locations, setLocations] =React.useState([])
+    const [clockface, setClockface] =React.useState("")
+    const [myStatus, setMyStatus] =React.useState("")
+    const [updateStatus,setUpdateStatus] = React.useState(false)
+    const [newStatusIndex, setNewStatusIndex]=React.useState()
+
+    const isFocused= useIsFocused() 
+    const uid = auth.currentUser.uid
+
+
+    React.useEffect(()=>{
+        fetchData()
+        getLocats()
+        getClockFace()
+    },[isFocused, showMembers, updateStatus])
+
+    const getLocats = async () =>{
+        setLocations([])
+        const locationsRef = query(ref(getDatabase(), "/locations/"+membersRef))
+        const locatData=await get(locationsRef)
+        setLocations(locatData.val()["locations"])
+    }
+
+    const getClockFace = async () =>{
+        
+        setClockface("")
+        const faceRef = query(ref(getDatabase(), "/clockFace/"+membersRef))
+        const faceData=await get(faceRef)
+        setClockface(faceData.val()["background"])
+        setFetched(true)
+    }
+
+    const fetchData = async () =>{
+        setFetched(false)
+        setMembersKeys([])
+        setMembers([])
+        setKeys([])
+        const groupMembersRef = query(ref(getDatabase(), "/groupMembers/"+membersRef))
+        const data = await get(groupMembersRef)
+        data.forEach(c => {
+            setMembersKeys(a => {return [...a , c]})
+        })
+        for (const i in membersKeys) {
+            const userRef = query(ref(getDatabase(), "/users/"+membersKeys[i].val()["member"]))
+            const data = await get(userRef)
+            if(membersKeys[i].val()["member"]===uid){
+                setMyStatus(membersKeys[i].val()["status"])
+            }
+            setMembers(a => {return [...a , [data,membersKeys[i].val()["colour"]]]})
+            setKeys(a => {return [...a , membersKeys[i].val()["member"]]})
+        }
+        
+    }
+
+
     return (
         <SafeAreaView className="flex-1  bg-primaryPurple" >
-            <View className="flex-row justify-between pt-14 mx-10">
+        {fetched ?
+        <>
+            {updateStatus ?
+            <>
+            <View className='flex-row justify-between pt-14 mx-10'>
                 <PressableIcon
                         onPress={() => {
-                            navigation.navigate("HomeScreen")
+                            setUpdateStatus(false)
+                            setNewStatusIndex()
                         }}
                         icon="arrow-left"
                         size={40}
                         color="black"
-                    />
-                <Text className="font-bold ml-auto mr-auto text-3xl">
-                    The Boys
+                />
+                <Text className="font-bold mr-auto ml-auto text-3xl">
+                    Update Status
                 </Text>
             </View>
-            <ScrollView 
-                    showsVerticalScrollIndicator={false}
-            >
-                <View className="justify-center items-center">
-                    <Image 
-                        className="w-full h-96" 
-                        source = {require("../assets/clock.png")}
-                    />
-                    <GroupMemberBar
-                        title="Bill Smith"
-                        onPress={() => {
-                            alert("View Profile")
+            <View className="flex-1 items-center justify-center pb-14">
+            <Text className="text-center text-xl pb-5">Your current status: {locations[myStatus]}</Text>
+            <View className="pt-7">
+                    <SelectDropdown
+                        buttonStyle={{borderRadius:8, backgroundColor:"white", width:"80%"}}
+                        data={locations}
+                        renderDropdownIcon={isOpened => {
+                            return <Feather name={isOpened ? 'chevron-up' : 'chevron-down'} color={"black"} size={18}/>
                         }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="red"
-                    />
-                    <GroupMemberBar
-                        title="Colin Star"
-                        onPress={() => {
-                            alert("View Profile")
+                        dropdownIconPosition={'right'}
+                        defaultButtonText={'Select a new status'}
+                        onSelect={(selectedItem, index) => {
+                            setNewStatusIndex(index)
                         }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="blue"
                     />
-                    <GroupMemberBar
-                        title="Dave Spiers"
+                    </View>
+                    <Text className="text-center text-xl pb-5 pt-5">Your new status: {locations[newStatusIndex]}</Text>
+                   <View className="pt-5 w-full items-center">
+                        <AppButtonPurple
+                            title="Update"
+                            onPress={async ()=>{
+                                const groupMembersRef = query(ref(getDatabase(), "/groupMembers/" + membersRef));
+                                const dataMembers = await get(groupMembersRef);
+                                    if (dataMembers.val() !== null) {
+                                        dataMembers.forEach(async c => {
+                                            if (c.val()["member"] ===  uid) {
+                                                await update(ref(getDatabase(), "/groupMembers/" + membersRef + "/" + c.key),{
+                                                    status: newStatusIndex
+                                                })
+                                            }
+                                        });
+                                    }
+                                setUpdateStatus(false)
+                                setNewStatusIndex()
+                                setMyStatus(newStatusIndex)
+                            }}
+                        />
+                    </View>
+                    </View>
+                
+
+            </>
+
+            :
+                <>
+            {showMembers ?
+                <>
+                <View className='flex-row justify-between pt-14 mx-10'>
+                <PressableIcon
                         onPress={() => {
-                            alert("View Profile")
+                            setShowMembers(false)
                         }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="green"
+                        icon="arrow-left"
+                        size={40}
+                        color="black"
+                />
+                <Text className="font-bold mr-auto ml-auto text-3xl">
+                    Group Members
+                </Text>
+            </View>
+                <View className="pt-14">
+                    <FlatList
+                            showsVerticalScrollIndicator={false}
+                            extraData={members}
+                            data={members}
+                            renderItem={({ item }) => (
+                                <GroupMemberBar
+                                    title={item[0].val()["firstName"] + " " + item[0].val()["lastName"]}
+                                    onPress={() => {
+                                        if (item[0].key == auth.currentUser.uid) {
+                                            navigation.navigate("HomeScreen", { screen: "Me" });
+                                        } else {
+                                            navigation.push('UserProfileScreen', {
+                                                user: item[0],
+                                            });
+                                        }
+                                    } }
+                                    avatar={item[0].val()["profilePic"]}
+                                    color={item[1]} />
+                            )} 
+                        />
+                    </View>
+                    </>
+            :
+            <>
+            
+            <View className="flex-row justify-between pt-14 pb-5 mx-10">
+                    <PressableIcon
+                        onPress={() => {
+                            navigation.goBack();
+                        } }
+                        icon="arrow-left"
+                        size={40}
+                        color="black" />
+                    <Text className="font-bold ml-auto mr-auto text-3xl">
+                        {name}
+                    </Text>
+                </View>
+                <View className="items-center flex-1">
+                <View className="justify-center items-center w-full pt-14 h-96">
+                        <Clock
+                            locations={locations}
+                            face={clockface}
+                            membs={membersKeys}
+                        />
+                </View>
+                                    
+                <View className="flex-row pt-10">
+                    <PillButton
+                        title="Show Members"
+                        onPress={()=>{
+                            setShowMembers(true)
+                        }}
+                        icon="users"
                     />
-                    <GroupMemberBar
-                        title="James Daring"
+
+                    <PillButton
+                        title="Update Status"
                         onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="yellow"
-                    />
-                    <GroupMemberBar
-                        title="Thomas Spink"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="pink"
-                    />
-                    <GroupMemberBar
-                        title="Greg Star"
-                        onPress={() => {
-                            alert("View Profile")
-                        }}
-                        avatar={require('../assets/ben-avatar.png')}
-                        color="orange"
+                            setUpdateStatus(true)
+                        } }
+                        icon="upload" 
                     />
                 </View>
-            </ScrollView>
-            <View className="items-center py-3">
-                <TwoButtonsSide
-                    title1="Settings"
-                    onPress1={() => {
-                        navigation.navigate("GroupSettingsScreen")
-                    }}
-                    icon1="settings"
-                    title2="Customise"
-                    onPress2={() => {
-                        navigation.navigate("ClockCustomiseScreen")
-                    }}
-                    icon2="clock"
-                />
+                    
+                    
+                    <View className="items-center py-3 mt-auto">
+                        <TwoButtonsSide
+                            title1="Settings"
+                            onPress1={() => {
+                                navigation.navigate("GroupSettingsScreen",{
+                                    item: item,
+                                    dataMemb: membersKeys
+                                });
+                                setShowMembers(false)
+                            } }
+                            icon1="settings"
+                            color1="#E7E7FF"
+                            title2="Customise"
+                            onPress2={() => {
+                                navigation.navigate("ClockCustomiseScreen",{
+                                    locations: locations,
+                                    membersRef: membersRef,
+                                });
+                                setShowMembers(false)
+                            } }
+                            icon2="clock" 
+                            color2="#6B4EFF"/>
+                    </View>
+                    </View></>
+        }</>
+        }</>
+        :
+            <View className="justify-center items-center flex-1">
+                <ActivityIndicator size="large" color="#6B4EFF"  />
+                <Text className="text-center">Loading Group</Text>
             </View>
+        }
+
         </SafeAreaView>
 
     );
