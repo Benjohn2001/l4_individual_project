@@ -1,7 +1,7 @@
 <!-- App Icon -->
 <div align="center">
 <p align="center">
-    <img alt="Weasley Clock Icon" src="../l4_individual_project/src/app/assets/icon-clock-v2.png" height="200px">
+    <img alt="Weasley Clock Icon" src="src/app/assets/icon-clock-v2.png" height="200px">
     <h2>Weasley Clock</h2>
 </p>
 <p align="center">
@@ -22,9 +22,12 @@
         <a href="https://www.javascript.com/"><img alt="JavaScript" src="https://img.shields.io/badge/-JavaScript-yellow?&logo=javascript&style=for-the-badge"></a>
         <a href="https://www.npmjs.com/"><img alt="npm" src="https://img.shields.io/badge/-npm-red?&logo=npm&style=for-the-badge"></a>
         <a href="https://tailwindcss.com/"><img alt="tailwind" src="https://img.shields.io/badge/-tailwind%20css-white?&logo=tailwind-css&style=for-the-badge"></a>
-
-
-        
-
 </tbody>
 </table>
+
+## :compass: Project Layout
+
+- [`.`](#) Root of the repository
+
+
+## :scroll: License
