@@ -202,3 +202,7 @@
 
 *3 hour* Issues with only showing friends not in group when adding group members ccouldnt be resolved, now showing all friends but with different icon and onpress depending on if already a member, betteeer as shows system status
 *1 hour* Sorted bugs with new users with no profile picture uploaded breaking new components
+
+### 11 Jan 2023
+
+*2 hour* Update readme

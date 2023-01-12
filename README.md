@@ -28,6 +28,19 @@
 ## :compass: Project Layout
 
 - [`.`](#) Root of the repository
-
+- [`.github/workflows`](/.github/workflows/) Workflow files for github actions
+- [`src`](/src/) Contains source code, config files and package files for the app
+- [`src/app`](/src/app/) Contains the code for the app
+- [`src/app/assets`](/src/app/assets/) Contains the assets used in the app
+- [`src/app/components`](/src/app/components/) Contains the code for components used in the app
+- [`src/app/screens`](/src/app/screens/) Contains the code for the screens of the app
+- [`src/firebase.js`](/src/firebase.js) The firebase configuration file
+- [`src/tailwind.config.js`](/src/tailwind.config.js) The tailwind css configuration file
+- [`src/package.json`](/src/package.json) File containing the dependencies for the app
+- [`.gitignore`](/.gitignore) The git ignore file used
+- [`Ind-proj-init-design.fig`](/Ind-proj-init-design.fig) THe figma prototype for the app
+- [`Ind-proj-init-design.pdf`](/Ind-proj-init-design.pdf) The initial design
+- [`init-app-pages-flowchart.pdf`](/init-app-pages-flowchart.pdf) Initial flowchart for the app
+- [`timelog.md`](/timelog.md) Timelog detailing the work done on certain days
 
 ## :scroll: License
