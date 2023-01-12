@@ -6,9 +6,15 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "npx eslint app",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier app --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^0.17.0",
     "@freakycoder/react-native-bounceable": "^1.0.3",
     "@react-native-async-storage/async-storage": "~1.17.3",
@@ -26,6 +32,7 @@
     "firebase": "^9.13.0",
     "nativewind": "^2.0.11",
     "paths": "^0.1.1",
+    "prop-types": "^15.8.1",
     "randomcolor": "^0.6.2",
     "react": "18.0.0",
     "react-dom": "18.0.0",
@@ -48,7 +55,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
-    "metro-config": "^0.73.3"
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "metro-config": "^0.73.3",
+    "prettier": "2.8.2"
   },
   "private": true
 }

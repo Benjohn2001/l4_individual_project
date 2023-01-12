@@ -1,7 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-import { COLOURS } from './app/assets/colours';
 import { Feather } from '@expo/vector-icons';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import COLOURS from './app/assets/colours';
 import SignInScreen from './app/screens/SignInScreen';
 import RegisterScreen from './app/screens/RegisterScreen';
 import HomeScreen from './app/screens/HomeScreen';
@@ -12,10 +14,6 @@ import GroupScreen from './app/screens/GroupScreen';
 import GroupSettingsScreen from './app/screens/GroupSettingsScreen';
 import ClockCustomiseScreen from './app/screens/ClockCustomiseScreen';
 import CreateNewGroupScreen from './app/screens/CreateNewGroupScreen';
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import UserProfileScreen from './app/screens/UserProfileScreen';
 
 

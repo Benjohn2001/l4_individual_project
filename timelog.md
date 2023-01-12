@@ -206,3 +206,4 @@
 ### 11 Jan 2023
 
 *2 hour* Update readme
+*2 hour* Formatting, style and bugs with eslint and prettier

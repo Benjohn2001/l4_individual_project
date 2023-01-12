@@ -14,7 +14,7 @@
 <table>
 <tbody>
     <tr>
-        <td><b>Technologies Used</b></td>
+        <td><b>Technology Used</b></td>
         <td>
         <a href="https://reactnative.dev/"><img alt="ReactNative" src="https://img.shields.io/badge/-React%20Native-20232A?&logo=react&style=for-the-badge"></a>
         <a href="https://firebase.google.com/"><img alt="Firebase" src="https://img.shields.io/badge/-Firebase-ffffff?&logo=firebase&style=for-the-badge"></a>
@@ -22,6 +22,9 @@
         <a href="https://www.javascript.com/"><img alt="JavaScript" src="https://img.shields.io/badge/-JavaScript-yellow?&logo=javascript&style=for-the-badge"></a>
         <a href="https://www.npmjs.com/"><img alt="npm" src="https://img.shields.io/badge/-npm-red?&logo=npm&style=for-the-badge"></a>
         <a href="https://tailwindcss.com/"><img alt="tailwind" src="https://img.shields.io/badge/-tailwind%20css-white?&logo=tailwind-css&style=for-the-badge"></a>
+        <a href="https://prettier.io/"><img alt="prettier" src="https://img.shields.io/badge/-prettier-20232A?&logo=prettier&style=for-the-badge"></a>
+        <a href="https://eslint.org/"><img alt="eslint" src="https://img.shields.io/badge/-eslint-white?&logo=eslint&style=for-the-badge&logoColor=4339D6"></a>
+        <a href="https://airbnb.io/javascript/react/"><img alt="airbnb" src="https://img.shields.io/badge/-airbnb-red?&logo=airbnb&style=for-the-badge&logoColor=white"></a>
 </tbody>
 </table>
 
