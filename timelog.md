@@ -207,3 +207,7 @@
 
 *2 hour* Update readme
 *2 hour* Formatting, style and bugs with eslint and prettier
+
+### 13 Jan 2023
+
+*3 hour* fixing bugs and making hands have different lengths if multiple users at same status

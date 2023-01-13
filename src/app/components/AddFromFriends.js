@@ -6,21 +6,23 @@ import { getStorage, getDownloadURL, ref as stref } from "firebase/storage";
 
 function AddFromFriends(props) {
   const [pic, setPic] = useState(
-    Image.resolveAssetSource(require("../assets/defaultProfilePic.png")).uri
+    ""
   );
-  const { title, onPress, avatar, icon } = props;
+  const { title, onPress, data, icon } = props;
 
-  if (avatar !== "") {
-    getDownloadURL(stref(getStorage(), avatar)).then((url) => {
-      setPic(url);
-    });
-  } else {
-    setPic(
-      Image.resolveAssetSource(require("../assets/defaultProfilePic.png")).uri
-    );
+  React.useEffect(()=>{
+    if(data.val().profilePic !== undefined){
+      getDownloadURL(stref(getStorage(), data.val().profilePic )).then((url)=>{
+          setPic(url)
+      })
+  }else{
+      setPic(Image.resolveAssetSource(require('../assets/defaultProfilePic.png')).uri)
   }
+  },[])
+
   return (
     <View className="pt-3 w-full items-center">
+      {pic ?
       <TouchableOpacity
         onPress={onPress}
         className="bg-secondaryPurple h-16 pt-1 w-11/12  rounded-2xl mx-1.5"
@@ -35,6 +37,9 @@ function AddFromFriends(props) {
           </View>
         </View>
       </TouchableOpacity>
+      :
+      <></>
+    }
     </View>
   );
 }
@@ -42,7 +47,7 @@ function AddFromFriends(props) {
 AddFromFriends.propTypes = {
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  avatar: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
 };
 

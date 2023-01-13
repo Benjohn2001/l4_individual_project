@@ -32,6 +32,7 @@ module.exports = {
     'no-alert' : 'off',
     'react/no-unstable-nested-components' : 'off',
     'react/no-unescaped-entities' : 'off',
-    'no-console' : 'off'
+    'no-console' : 'off',
+    'no-shadow' : 'off'
   },
 };

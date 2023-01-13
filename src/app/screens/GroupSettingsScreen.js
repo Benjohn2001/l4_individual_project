@@ -154,14 +154,14 @@ function GroupSettingsScreen({ route, navigation }) {
                 <FlatList
                   data={filtered}
                   showsVerticalScrollIndicator={false}
-                  renderItem={({ itemFr }) => (
+                  renderItem={({ item }) => (
                     <AddFromFriends
-                      title={itemFr.val().userName}
+                      title={item.val().userName}
                       onPress={async () => {
-                        if (!membersKeys.includes(itemFr.key)) {
+                        if (!membersKeys.includes(item.key)) {
                           const groupsRef = ref(
                             getDatabase(),
-                            `/groups/${itemFr.key}/${key}`
+                            `/groups/${item.key}/${key}`
                           );
                           const groupMembersRef = push(
                             ref(getDatabase(), `/groupMembers/${membRef}`)
@@ -172,7 +172,7 @@ function GroupSettingsScreen({ route, navigation }) {
                             membersRef: membRef,
                           });
                           await set(groupMembersRef, {
-                            member: itemFr.key,
+                            member: item.key,
                             colour: randomColor(),
                           });
 
@@ -184,8 +184,8 @@ function GroupSettingsScreen({ route, navigation }) {
                           );
                         }
                       }}
-                      avatar={itemFr.val().profilePic}
-                      icon={membersKeys.includes(itemFr.key) ? "check" : "plus"}
+                      data={item}
+                      icon={membersKeys.includes(item.key) ? "check" : "plus"}
                     />
                   )}
                 />

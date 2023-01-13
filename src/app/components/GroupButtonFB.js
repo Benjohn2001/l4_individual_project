@@ -18,8 +18,6 @@ function GroupButtonFB(props) {
   const [pics, setPics] = useState([]);
   const [fetched, setFetched] = useState(false);
 
-  const { uid } = auth.currentUser;
-
   const fetchData = async () => {
     setFetched(false);
     setPics([]);
@@ -28,7 +26,7 @@ function GroupButtonFB(props) {
     );
     const data = await get(groupMembersRef);
     for (const c in data.val()) {
-      if (data.val()[c].member !== uid) {
+      if (data.val()[c].member !== auth.currentUser.uid) {
         const refV = query(
           ref(getDatabase(), `/users/${data.val()[c].member}`)
         );

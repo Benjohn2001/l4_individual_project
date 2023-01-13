@@ -63,7 +63,7 @@ function RegisterScreen({ navigation }) {
               lastName,
               userName,
               email,
-              bio: "Add a bio!",
+              bio: "Add a bio!"
             });
             setFirstName("");
             setLastName("");
