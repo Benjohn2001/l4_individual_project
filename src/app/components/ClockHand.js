@@ -31,22 +31,25 @@ function ClockHand(props) {
     }
   }
 
-  const a =[]
+  const a = [];
 
   const clockHands = members.map((member, index) => {
     if (member[2] === undefined) {
       <></>;
     } else {
       const angle = getAngle(member[2]);
-      const radHand = radius-30;
-      const len = a.includes(member[2]) ? (radHand) - ((radius/(members.length+1))*(a.filter(stat => stat === member[2]).length)) : radHand-10
-      const point = polar2cart(center, center, len , angle);
+      const radHand = radius - 30;
+      const len = a.includes(member[2])
+        ? radHand -
+          (radius / (members.length + 1)) *
+            a.filter((stat) => stat === member[2]).length
+        : radHand - 10;
+      const point = polar2cart(center, center, len, angle);
       // const point = polar2cart(center, center, radius-40, angle);
       a.push(member[2]);
       return (
         <Hand index={index} center={center} point={point} member={member} />
       );
-      
     }
 
     return true;
