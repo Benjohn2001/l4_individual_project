@@ -211,3 +211,7 @@
 ### 13 Jan 2023
 
 *3 hour* fixing bugs and making hands have different lengths if multiple users at same status
+
+### 16 Jan 2023
+
+*2 hour* Implement friend request system, now shows users requests they have received, can reject or accept, then shows as friend for both when accepted, few refresh bugs to work on

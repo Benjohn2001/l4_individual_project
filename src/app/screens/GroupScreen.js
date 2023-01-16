@@ -263,6 +263,7 @@ function GroupScreen({ route, navigation }) {
                         }}
                         icon1="settings"
                         color1="#E7E7FF"
+                        fontColor1="#6B4EFF"
                         title2="Customise"
                         onPress2={() => {
                           navigation.navigate("ClockCustomiseScreen", {
@@ -273,6 +274,7 @@ function GroupScreen({ route, navigation }) {
                         }}
                         icon2="clock"
                         color2="#6B4EFF"
+                        fontColor2='white'
                       />
                     </View>
                   </View>

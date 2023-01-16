@@ -18,7 +18,9 @@ function FriendsScreen({ navigation }) {
   const [spinVis, setSpinVis] = useState(false);
   const [unames, setUnames] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [friendsReq, setFriendsReq] = useState([]);
   const [friendsKeys, setFriendsKeys] = useState([]);
+  const [friendsReqKeys, setFriendsReqKeys] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [fetched, setFetched] = useState(false);
   const { uid } = auth.currentUser;
@@ -42,16 +44,24 @@ function FriendsScreen({ navigation }) {
   const getFriends = async () => {
     setFetched(false);
     setFriendsKeys([]);
+    setFriendsReqKeys([]);
     setFriends([]);
+    setFriendsReq([])
     const friendsRef = ref(getDatabase(), `/friends/${uid}`);
     const dataFr = await get(friendsRef);
     dataFr.forEach((c) => {
-      setFriendsKeys((a) => [...a, c.val().user]);
+      if(c.val().state==="requested"){
+        setFriendsReqKeys((a) => [...a, c.val().user])
+      }else if (c.val().state==="friend"){
+        setFriendsKeys((a) => [...a, c.val().user]);
+      }
     });
 
     for (const i in unames) {
       if (friendsKeys.includes(unames[i].key)) {
         setFriends((a) => [...a, unames[i]]);
+      }else if (friendsReqKeys.includes(unames[i].key)) {
+        setFriendsReq((a) => [...a, unames[i]]);
       }
     }
     setFetched(true);
@@ -139,6 +149,27 @@ function FriendsScreen({ navigation }) {
         <View className="flex-1">
           {fetched ? (
             <>
+            {friendsReq.length>0 ?
+            <View className="pb-5">
+              <Text className="">Friend Requests</Text>
+              <FlatList
+                    showsVerticalScrollIndicator={false}
+                    extraData={friendsReq}
+                    data={friendsReq}
+                    renderItem={({ item }) => (
+                      <FriendsRowSearch
+                        title={item.val().userName}
+                        onPress={() => {
+                          navigation.push("UserProfileScreen", {
+                            user: item,
+                          });
+                        } }
+                        data={item} />
+                    )} />
+                    </View>
+              : <></>
+                  }
+               <Text className="">Friends</Text>
               <FlatList
                 showsVerticalScrollIndicator={false}
                 extraData={friends}

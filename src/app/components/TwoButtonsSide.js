@@ -4,7 +4,7 @@ import { TouchableOpacity, Text, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 function TwoButtonsSide(props) {
-  const { title1, onPress1, icon1, color1, title2, onPress2, icon2, color2 } =
+  const { title1, onPress1, icon1, color1, fontColor1, title2, onPress2, icon2, color2, fontColor2 } =
     props;
   return (
     <View className="flex-row">
@@ -14,8 +14,8 @@ function TwoButtonsSide(props) {
         className=" h-12 w-40 pt-3 rounded-full mx-1.5"
       >
         <View className="flex-row justify-center">
-          <Feather name={icon1} size={20} color="#6B4EFF" />
-          <Text className="text-darkerPurple text-sm text-center ml-5">
+          <Feather name={icon1} size={20} color={fontColor1} />
+          <Text className=" text-sm text-center ml-5" style={{color:fontColor1}}>
             {title1}
           </Text>
         </View>
@@ -26,8 +26,8 @@ function TwoButtonsSide(props) {
         className=" h-12 w-40 pt-3 rounded-full mx-1.5"
       >
         <View className="flex-row justify-center">
-          <Feather name={icon2} size={20} color="white" />
-          <Text className="text-white text-sm text-center ml-5">{title2}</Text>
+          <Feather name={icon2} size={20} color={fontColor2} />
+          <Text className=" text-sm text-center ml-5" style={{color:fontColor2}}>{title2}</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -39,10 +39,12 @@ TwoButtonsSide.propTypes = {
   onPress1: PropTypes.func.isRequired,
   icon1: PropTypes.string.isRequired,
   color1: PropTypes.string,
+  fontColor1: PropTypes.string,
   title2: PropTypes.string.isRequired,
   onPress2: PropTypes.func.isRequired,
   icon2: PropTypes.string.isRequired,
   color2: PropTypes.string,
+  fontColor2: PropTypes.string,
 };
 
 export default TwoButtonsSide;

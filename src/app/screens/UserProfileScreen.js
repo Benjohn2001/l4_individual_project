@@ -15,6 +15,7 @@ import {
   get,
   push,
   remove,
+  update,
 } from "firebase/database";
 import { getStorage, getDownloadURL, ref as stref } from "firebase/storage";
 import AppButtonPurple from "../components/AppButtonPurple";
@@ -22,6 +23,7 @@ import ProfileBox from "../components/ProfileBox";
 import { auth } from "../../firebase";
 import PressableIcon from "../components/PressableIcon";
 import AppButtonRed from "../components/AppButtonRed";
+import TwoButtonsSide from "../components/TwoButtonsSide";
 
 function UserProfileScreen({ route, navigation }) {
   const [nameFull, setNameFull] = useState("");
@@ -29,6 +31,8 @@ function UserProfileScreen({ route, navigation }) {
   const [bio, setBio] = useState("");
   const [pic, setPic] = useState("");
   const [friend, setFriend] = useState(false);
+  const [requested, setRequested] = useState(false);
+  const [userKey, setUserKey] = useState("");
   const db = getDatabase();
   const { uid } = auth.currentUser;
 
@@ -53,7 +57,12 @@ function UserProfileScreen({ route, navigation }) {
       if (dataFr.val() !== null) {
         dataFr.forEach((c) => {
           if (c.val().user === user.key) {
-            setFriend(true);
+            if(c.val().state === "friend"){
+              setFriend(true);
+            }else if (c.val().state === "requested"){
+              setRequested(true)
+              setUserKey(c.key)
+            }
           }
         });
       }
@@ -81,7 +90,60 @@ function UserProfileScreen({ route, navigation }) {
           <View className="py-12">
             <ProfileBox name={nameFull} username={userName} bio={bio} />
           </View>
+          {requested ? (
+            <>
+            <TwoButtonsSide
+              title1="Reject"
+              icon1="trash"
+              color1="red"
+              onPress1={async ()=>{
+                const dref = query(ref(db, `/friends/${uid}`));
+                const data = await get(dref);
+                if (data.val() !== null) {
+                  data.forEach((c) => {
+                    if (c.val().user === user.key) {
+                      remove(ref(db, `/friends/${uid}/${c.key}`));
+                    }
+                  });
+                }
+                const dataF = await get(ref(db, `/friends/${user.key}`))
+                if(dataF.val() !== null){
+                  dataF.forEach((c) => {
+                    if (c.val().user === uid) {
+                      remove(ref(db, `/friends/${user.key}/${c.key}`))
+                    }
+                })}
+                Alert.alert("Success", "Friend removed succesfully");
+                setFriend(false);
+              }}
+              fontColor1="white"
+              title2="Accept"
+              icon2="users"
+              onPress2={async ()=>{
+                await update(ref(db, `/friends/${uid}/${userKey}`),{
+                  state:"friend"
+                })
+                const dataF = await get(ref(db, `/friends/${user.key}`))
+                if(dataF.val() !== null){
+                  dataF.forEach((c) => {
+                    if (c.val().user === uid) {
+                      update(ref(db, `/friends/${user.key}/${c.key}`),{
+                        state:"friend"
+                      })
+                    }
+                })}
+                Alert.alert("Success", "Friend accepted succesfully");
+                setFriend(true);
+              }}
+              color2="green"
+            />
+            </>
+          )
+
+          : ( 
+            <>
           {friend ? (
+
             <AppButtonRed
               title="Remove friend"
               onPress={async () => {
@@ -94,30 +156,50 @@ function UserProfileScreen({ route, navigation }) {
                     }
                   });
                 }
+                const dataF = await get(ref(db, `/friends/${user.key}`))
+                if(dataF.val() !== null){
+                  dataF.forEach((c) => {
+                    if (c.val().user === uid) {
+                      remove(ref(db, `/friends/${user.key}/${c.key}`))
+                    }
+                })}
                 Alert.alert("Success", "Friend removed succesfully");
                 setFriend(false);
               }}
             />
           ) : (
             <AppButtonPurple
-              title="Add friend"
+              title="Request friend"
               onPress={async () => {
                 const pref = push(ref(db, `/friends/${uid}`));
                 await set(pref, {
                   user: user.key,
+                  state: "pending"
                 });
-                Alert.alert("Success", "Friend added succesfully");
+                const prefReq = push(ref(db, `/friends/${user.key}`));
+                await set(prefReq, {
+                  user: uid,
+                  state: "requested"
+                });
+                Alert.alert("Success", "Friend requested succesfully");
                 setFriend(true);
               }}
             />
           )}
-        </View>
-      ) : (
+          </>)}
+          </View>
+        )
+        
+       : (
         <View className="justify-center items-center flex-1">
           <ActivityIndicator size="large" color="#6B4EFF" />
           <Text className="text-center">Loading Profile</Text>
         </View>
       )}
+
+     
+      
+      
     </SafeAreaView>
   );
 }
