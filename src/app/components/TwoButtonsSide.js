@@ -4,8 +4,18 @@ import { TouchableOpacity, Text, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 function TwoButtonsSide(props) {
-  const { title1, onPress1, icon1, color1, fontColor1, title2, onPress2, icon2, color2, fontColor2 } =
-    props;
+  const {
+    title1,
+    onPress1,
+    icon1,
+    color1,
+    fontColor1,
+    title2,
+    onPress2,
+    icon2,
+    color2,
+    fontColor2,
+  } = props;
   return (
     <View className="flex-row">
       <TouchableOpacity
@@ -15,7 +25,10 @@ function TwoButtonsSide(props) {
       >
         <View className="flex-row justify-center">
           <Feather name={icon1} size={20} color={fontColor1} />
-          <Text className=" text-sm text-center ml-5" style={{color:fontColor1}}>
+          <Text
+            className=" text-sm text-center ml-5"
+            style={{ color: fontColor1 }}
+          >
             {title1}
           </Text>
         </View>
@@ -27,7 +40,12 @@ function TwoButtonsSide(props) {
       >
         <View className="flex-row justify-center">
           <Feather name={icon2} size={20} color={fontColor2} />
-          <Text className=" text-sm text-center ml-5" style={{color:fontColor2}}>{title2}</Text>
+          <Text
+            className=" text-sm text-center ml-5"
+            style={{ color: fontColor2 }}
+          >
+            {title2}
+          </Text>
         </View>
       </TouchableOpacity>
     </View>

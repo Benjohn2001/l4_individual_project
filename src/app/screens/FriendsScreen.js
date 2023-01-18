@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import SearchBar from "react-native-dynamic-search-bar";
 import { getDatabase, ref, orderByChild, query, get } from "firebase/database";
+import { useIsFocused } from "@react-navigation/native";
 import PressableIcon from "../components/PressableIcon";
 import PillButton from "../components/PillButton";
 import FriendsRowSearch from "../components/FriendsRowSearch";
@@ -19,11 +20,14 @@ function FriendsScreen({ navigation }) {
   const [unames, setUnames] = useState([]);
   const [friends, setFriends] = useState([]);
   const [friendsReq, setFriendsReq] = useState([]);
+  const [friendsPend, setFriendsPend] = useState([]);
   const [friendsKeys, setFriendsKeys] = useState([]);
   const [friendsReqKeys, setFriendsReqKeys] = useState([]);
+  const [friendsPendKeys, setFriendsPendKeys] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [fetched, setFetched] = useState(false);
   const { uid } = auth.currentUser;
+  const focused = useIsFocused();
 
   const fetchData = async () => {
     setUnames([]);
@@ -45,23 +49,29 @@ function FriendsScreen({ navigation }) {
     setFetched(false);
     setFriendsKeys([]);
     setFriendsReqKeys([]);
+    setFriendsPendKeys([]);
     setFriends([]);
-    setFriendsReq([])
+    setFriendsReq([]);
+    setFriendsPend([]);
     const friendsRef = ref(getDatabase(), `/friends/${uid}`);
     const dataFr = await get(friendsRef);
     dataFr.forEach((c) => {
-      if(c.val().state==="requested"){
-        setFriendsReqKeys((a) => [...a, c.val().user])
-      }else if (c.val().state==="friend"){
+      if (c.val().state === "requested") {
+        setFriendsReqKeys((a) => [...a, c.val().user]);
+      } else if (c.val().state === "friend") {
         setFriendsKeys((a) => [...a, c.val().user]);
+      } else if (c.val().state === "pending") {
+        setFriendsPendKeys((a) => [...a, c.val().user]);
       }
     });
 
     for (const i in unames) {
       if (friendsKeys.includes(unames[i].key)) {
         setFriends((a) => [...a, unames[i]]);
-      }else if (friendsReqKeys.includes(unames[i].key)) {
+      } else if (friendsReqKeys.includes(unames[i].key)) {
         setFriendsReq((a) => [...a, unames[i]]);
+      } else if (friendsPendKeys.includes(unames[i].key)) {
+        setFriendsPend((a) => [...a, unames[i]]);
       }
     }
     setFetched(true);
@@ -70,7 +80,7 @@ function FriendsScreen({ navigation }) {
   useEffect(() => {
     fetchData();
     getFriends();
-  }, [searchVis]);
+  }, [searchVis, focused]);
 
   const filterUname = (uname) => {
     setFiltered([]);
@@ -149,10 +159,33 @@ function FriendsScreen({ navigation }) {
         <View className="flex-1">
           {fetched ? (
             <>
-            {friendsReq.length>0 ?
-            <View className="pb-5">
-              <Text className="">Friend Requests</Text>
-              <FlatList
+              {friendsPend.length > 0 ? (
+                <View className="pb-5">
+                  <Text className="ml-2">Friend Requests Sent</Text>
+                  <FlatList
+                    showsVerticalScrollIndicator={false}
+                    extraData={friendsPend}
+                    data={friendsPend}
+                    renderItem={({ item }) => (
+                      <FriendsRowSearch
+                        title={item.val().userName}
+                        onPress={() => {
+                          navigation.push("UserProfileScreen", {
+                            user: item,
+                          });
+                        }}
+                        data={item}
+                      />
+                    )}
+                  />
+                </View>
+              ) : (
+                <></>
+              )}
+              {friendsReq.length > 0 ? (
+                <View className="pb-5">
+                  <Text className="ml-2">Friend Requests Received</Text>
+                  <FlatList
                     showsVerticalScrollIndicator={false}
                     extraData={friendsReq}
                     data={friendsReq}
@@ -163,13 +196,16 @@ function FriendsScreen({ navigation }) {
                           navigation.push("UserProfileScreen", {
                             user: item,
                           });
-                        } }
-                        data={item} />
-                    )} />
-                    </View>
-              : <></>
-                  }
-               <Text className="">Friends</Text>
+                        }}
+                        data={item}
+                      />
+                    )}
+                  />
+                </View>
+              ) : (
+                <></>
+              )}
+              <Text className="ml-2">Friends</Text>
               <FlatList
                 showsVerticalScrollIndicator={false}
                 extraData={friends}

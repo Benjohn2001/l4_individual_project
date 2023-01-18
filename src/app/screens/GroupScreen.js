@@ -274,7 +274,7 @@ function GroupScreen({ route, navigation }) {
                         }}
                         icon2="clock"
                         color2="#6B4EFF"
-                        fontColor2='white'
+                        fontColor2="white"
                       />
                     </View>
                   </View>

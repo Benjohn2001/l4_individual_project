@@ -84,7 +84,7 @@ function GroupSettingsScreen({ route, navigation }) {
     const friendsRef = ref(getDatabase(), `/friends/${uid}`);
     const dataFr = await get(friendsRef);
     for (const c in dataFr.val()) {
-      if(dataFr.val()[c].state === "friend"){
+      if (dataFr.val()[c].state === "friend") {
         setFriendsKeys((a) => [...a, dataFr.val()[c].user]);
       }
     }
@@ -275,7 +275,7 @@ function GroupSettingsScreen({ route, navigation }) {
                   }}
                   icon1="x-circle"
                   color1="#C6C4FF"
-                  fontColor1='#6B4EFF'
+                  fontColor1="#6B4EFF"
                   title2="Leave"
                   onPress2={async () => {
                     const groupsRef = query(

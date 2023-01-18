@@ -215,3 +215,7 @@
 ### 16 Jan 2023
 
 *2 hour* Implement friend request system, now shows users requests they have received, can reject or accept, then shows as friend for both when accepted, few refresh bugs to work on
+
+### 18 Jan 2023
+
+*1 hour* Now can see friend requests sent and cancel them, also fixed buttons not chnaging on user profile when requesting

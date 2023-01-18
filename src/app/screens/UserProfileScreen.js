@@ -32,6 +32,7 @@ function UserProfileScreen({ route, navigation }) {
   const [pic, setPic] = useState("");
   const [friend, setFriend] = useState(false);
   const [requested, setRequested] = useState(false);
+  const [pending, setPending] = useState(false);
   const [userKey, setUserKey] = useState("");
   const db = getDatabase();
   const { uid } = auth.currentUser;
@@ -57,11 +58,15 @@ function UserProfileScreen({ route, navigation }) {
       if (dataFr.val() !== null) {
         dataFr.forEach((c) => {
           if (c.val().user === user.key) {
-            if(c.val().state === "friend"){
+            if (c.val().state === "friend") {
               setFriend(true);
-            }else if (c.val().state === "requested"){
-              setRequested(true)
-              setUserKey(c.key)
+            } else if (c.val().state === "requested") {
+              setRequested(true);
+              setUserKey(c.key);
+            } else if (c.val().state === "pending") {
+              setFriend(true);
+              setPending(true);
+              setUserKey(c.key);
             }
           }
         });
@@ -92,114 +97,156 @@ function UserProfileScreen({ route, navigation }) {
           </View>
           {requested ? (
             <>
-            <TwoButtonsSide
-              title1="Reject"
-              icon1="trash"
-              color1="red"
-              onPress1={async ()=>{
-                const dref = query(ref(db, `/friends/${uid}`));
-                const data = await get(dref);
-                if (data.val() !== null) {
-                  data.forEach((c) => {
-                    if (c.val().user === user.key) {
-                      remove(ref(db, `/friends/${uid}/${c.key}`));
-                    }
+              <TwoButtonsSide
+                title1="Reject"
+                icon1="trash"
+                color1="red"
+                onPress1={async () => {
+                  const dref = query(ref(db, `/friends/${uid}`));
+                  const data = await get(dref);
+                  if (data.val() !== null) {
+                    data.forEach((c) => {
+                      if (c.val().user === user.key) {
+                        remove(ref(db, `/friends/${uid}/${c.key}`));
+                      }
+                    });
+                  }
+                  const dataF = await get(ref(db, `/friends/${user.key}`));
+                  if (dataF.val() !== null) {
+                    dataF.forEach((c) => {
+                      if (c.val().user === uid) {
+                        remove(ref(db, `/friends/${user.key}/${c.key}`));
+                      }
+                    });
+                  }
+                  Alert.alert("Success", "Friend removed succesfully");
+                  setRequested(false);
+                  setFriend(false);
+                }}
+                fontColor1="white"
+                title2="Accept"
+                icon2="users"
+                onPress2={async () => {
+                  await update(ref(db, `/friends/${uid}/${userKey}`), {
+                    state: "friend",
                   });
-                }
-                const dataF = await get(ref(db, `/friends/${user.key}`))
-                if(dataF.val() !== null){
-                  dataF.forEach((c) => {
-                    if (c.val().user === uid) {
-                      remove(ref(db, `/friends/${user.key}/${c.key}`))
-                    }
-                })}
-                Alert.alert("Success", "Friend removed succesfully");
-                setFriend(false);
-              }}
-              fontColor1="white"
-              title2="Accept"
-              icon2="users"
-              onPress2={async ()=>{
-                await update(ref(db, `/friends/${uid}/${userKey}`),{
-                  state:"friend"
-                })
-                const dataF = await get(ref(db, `/friends/${user.key}`))
-                if(dataF.val() !== null){
-                  dataF.forEach((c) => {
-                    if (c.val().user === uid) {
-                      update(ref(db, `/friends/${user.key}/${c.key}`),{
-                        state:"friend"
-                      })
-                    }
-                })}
-                Alert.alert("Success", "Friend accepted succesfully");
-                setFriend(true);
-              }}
-              color2="green"
-            />
+                  const dataF = await get(ref(db, `/friends/${user.key}`));
+                  if (dataF.val() !== null) {
+                    dataF.forEach((c) => {
+                      if (c.val().user === uid) {
+                        update(ref(db, `/friends/${user.key}/${c.key}`), {
+                          state: "friend",
+                        });
+                      }
+                    });
+                  }
+                  Alert.alert("Success", "Friend accepted succesfully");
+                  setRequested(false);
+                  setFriend(true);
+                }}
+                color2="green"
+              />
             </>
-          )
-
-          : ( 
-            <>
-          {friend ? (
-
-            <AppButtonRed
-              title="Remove friend"
-              onPress={async () => {
-                const dref = query(ref(db, `/friends/${uid}`));
-                const data = await get(dref);
-                if (data.val() !== null) {
-                  data.forEach((c) => {
-                    if (c.val().user === user.key) {
-                      remove(ref(db, `/friends/${uid}/${c.key}`));
-                    }
-                  });
-                }
-                const dataF = await get(ref(db, `/friends/${user.key}`))
-                if(dataF.val() !== null){
-                  dataF.forEach((c) => {
-                    if (c.val().user === uid) {
-                      remove(ref(db, `/friends/${user.key}/${c.key}`))
-                    }
-                })}
-                Alert.alert("Success", "Friend removed succesfully");
-                setFriend(false);
-              }}
-            />
           ) : (
-            <AppButtonPurple
-              title="Request friend"
-              onPress={async () => {
-                const pref = push(ref(db, `/friends/${uid}`));
-                await set(pref, {
-                  user: user.key,
-                  state: "pending"
-                });
-                const prefReq = push(ref(db, `/friends/${user.key}`));
-                await set(prefReq, {
-                  user: uid,
-                  state: "requested"
-                });
-                Alert.alert("Success", "Friend requested succesfully");
-                setFriend(true);
-              }}
-            />
+            <>
+              {friend ? (
+                <>
+                  {pending ? (
+                    <>
+                      <AppButtonRed
+                        title="Cancel Request"
+                        onPress={async () => {
+                          const dref = query(ref(db, `/friends/${uid}`));
+                          const data = await get(dref);
+                          if (data.val() !== null) {
+                            data.forEach((c) => {
+                              if (c.val().user === user.key) {
+                                remove(ref(db, `/friends/${uid}/${c.key}`));
+                              }
+                            });
+                          }
+                          const dataF = await get(
+                            ref(db, `/friends/${user.key}`)
+                          );
+                          if (dataF.val() !== null) {
+                            dataF.forEach((c) => {
+                              if (c.val().user === uid) {
+                                remove(
+                                  ref(db, `/friends/${user.key}/${c.key}`)
+                                );
+                              }
+                            });
+                          }
+                          Alert.alert(
+                            "Success",
+                            "Request cancelled succesfully"
+                          );
+                          setFriend(false);
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <AppButtonRed
+                        title="Remove friend"
+                        onPress={async () => {
+                          const dref = query(ref(db, `/friends/${uid}`));
+                          const data = await get(dref);
+                          if (data.val() !== null) {
+                            data.forEach((c) => {
+                              if (c.val().user === user.key) {
+                                remove(ref(db, `/friends/${uid}/${c.key}`));
+                              }
+                            });
+                          }
+                          const dataF = await get(
+                            ref(db, `/friends/${user.key}`)
+                          );
+                          if (dataF.val() !== null) {
+                            dataF.forEach((c) => {
+                              if (c.val().user === uid) {
+                                remove(
+                                  ref(db, `/friends/${user.key}/${c.key}`)
+                                );
+                              }
+                            });
+                          }
+                          Alert.alert("Success", "Friend removed succesfully");
+                          setFriend(false);
+                        }}
+                      />
+                    </>
+                  )}
+                </>
+              ) : (
+                <AppButtonPurple
+                  title="Request friend"
+                  onPress={async () => {
+                    const pref = push(ref(db, `/friends/${uid}`));
+                    await set(pref, {
+                      user: user.key,
+                      state: "pending",
+                    });
+                    const prefReq = push(ref(db, `/friends/${user.key}`));
+                    await set(prefReq, {
+                      user: uid,
+                      state: "requested",
+                    });
+                    Alert.alert("Success", "Friend requested succesfully");
+                    setFriend(true);
+                    setPending(true);
+                  }}
+                />
+              )}
+            </>
           )}
-          </>)}
-          </View>
-        )
-        
-       : (
+        </View>
+      ) : (
         <View className="justify-center items-center flex-1">
           <ActivityIndicator size="large" color="#6B4EFF" />
           <Text className="text-center">Loading Profile</Text>
         </View>
       )}
-
-     
-      
-      
     </SafeAreaView>
   );
 }
