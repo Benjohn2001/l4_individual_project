@@ -97,12 +97,14 @@ function SignInScreen({ navigation }) {
         }}
         color1="#E7E7FF"
         icon1="edit"
+        fontColor1="#6B4EFF"
         title2="Sign In"
         onPress2={() => {
           signinUser();
         }}
         icon2="arrow-right-circle"
         color2="#6B4EFF"
+        fontColor2="white"
       />
 
       <Modal

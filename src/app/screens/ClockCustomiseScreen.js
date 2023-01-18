@@ -316,6 +316,7 @@ function ClockCustomiseScreen({ route, navigation }) {
                   setNewColourEntry(true);
                 }}
                 color1="#C6C4FF"
+                fontColor1="#6B4EFF"
                 icon1="droplet"
                 title2="Image"
                 onPress2={() => {
@@ -323,6 +324,7 @@ function ClockCustomiseScreen({ route, navigation }) {
                 }}
                 icon2="image"
                 color2="#6B4EFF"
+                fontColor2="white"
               />
             </>
           )}
