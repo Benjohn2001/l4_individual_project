@@ -219,3 +219,15 @@
 ### 18 Jan 2023
 
 *1 hour* Now can see friend requests sent and cancel them, also fixed buttons not chnaging on user profile when requesting
+
+### 21 Jan 2023
+
+*1 hour* Plan Evaluation
+
+### 23 Jan 2023
+
+*2 hour* Create first experiment
+
+### 25 Jan 2023
+
+*2 hour* Create additional experiment

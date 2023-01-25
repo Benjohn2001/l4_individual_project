@@ -7,6 +7,9 @@
 <p align="center">
     Weasley clock is a social media application created for groups of friends to easilly, and graphically see each others status' on a clock face. This application was created for my <a href="https://www.gla.ac.uk/coursecatalogue/course/?code=COMPSCI4025P">Level 4 individual project</a> at the University of Glasgow as part of my BSc (Hons) Computer Science degree.
 </p>
+<p align="center">
+    <img alt="App Screens" src="surveyPic.png" height="343px" width="400px">
+</p>
 </div>
 
 ## :page_facing_up: Documentation

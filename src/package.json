@@ -23,6 +23,7 @@
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
     "dotenv": "^16.0.3",
+    "eas-cli": "^3.4.1",
     "expo": "~46.0.16",
     "expo-constants": "~13.2.4",
     "expo-image-picker": "~13.3.1",
