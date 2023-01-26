@@ -50,19 +50,19 @@
 		-	Ability to customize locations on clock
 		-	Ability to customize clock hands
 		-	Customizable clock faces
-		-	Integration with dark mode
 		-	Authentication for users
 		-	Login/Sign up for user
 		-   Ability to change username
       	-   Ability to customise a profile (Image, bio)
       	-   Have a friends list
-      	-   Be able to share your profile for friends to add
+      	-   User can have multiple groups 
 
 	Could Haves:
-		-	User can have multiple groups 
-		-	Push notification integration
-		-	Ability to hide location
-		-	Animation design
+		-	Be able to share your profile for friends to add
+		-	Integration with dark mode
 
 	Will Not Have Initially (Extras)
 		-	Integration for real world location (e.g. Google Maps)
+		-	Push notification integration
+		-	Ability to hide location
+		-	Animation design
