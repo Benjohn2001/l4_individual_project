@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check AppButtonPurple renders correctly and onpress works 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#6B4EFF",
+      "borderBottomLeftRadius": 9999,
+      "borderBottomRightRadius": 9999,
+      "borderTopLeftRadius": 9999,
+      "borderTopRightRadius": 9999,
+      "height": 48,
+      "marginLeft": 6,
+      "marginRight": 6,
+      "opacity": 1,
+      "paddingTop": 12,
+      "width": "83.333333%",
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#fff",
+        },
+        Object {
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    press
+  </Text>
+</View>
+`;

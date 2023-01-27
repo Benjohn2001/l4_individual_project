@@ -7,7 +7,7 @@ function PressableIcon(props) {
   const { onPress, icon, size, color } = props;
   return (
     <View className="flex-row">
-      <Pressable onPress={onPress}>
+      <Pressable testID="pressableIcon" onPress={onPress}>
         <Feather name={icon} size={size} color={color} />
       </Pressable>
     </View>

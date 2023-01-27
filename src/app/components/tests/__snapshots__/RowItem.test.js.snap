@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check RowItem renders correctly and onpress works 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "paddingTop": 12,
+      },
+      Object {
+        "width": "100%",
+      },
+      Object {
+        "alignItems": "center",
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#E7E7FF",
+        "borderBottomLeftRadius": 16,
+        "borderBottomRightRadius": 16,
+        "borderTopLeftRadius": 16,
+        "borderTopRightRadius": 16,
+        "height": 56,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+        "paddingTop": 16,
+        "width": "91.666667%",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "marginLeft": 20,
+            },
+          ]
+        }
+      >
+        <Text />
+      </View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000",
+            },
+            Object {
+              "fontSize": 14,
+              "lineHeight": 20,
+            },
+            Object {
+              "textAlign": "center",
+            },
+            Object {
+              "marginLeft": 40,
+            },
+          ]
+        }
+      >
+        press
+      </Text>
+      <View
+        style={
+          Array [
+            Object {
+              "marginLeft": "auto",
+            },
+            Object {
+              "marginRight": 20,
+            },
+          ]
+        }
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+</View>
+`;

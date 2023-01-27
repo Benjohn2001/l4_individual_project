@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check TwoButtonStack renders correctly and onpress works 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexDirection": "column",
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#C6C4FF",
+        "borderBottomLeftRadius": 9999,
+        "borderBottomRightRadius": 9999,
+        "borderTopLeftRadius": 9999,
+        "borderTopRightRadius": 9999,
+        "height": 48,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+        "paddingTop": 12,
+        "width": 208,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#6B4EFF",
+          },
+          Object {
+            "fontSize": 14,
+            "lineHeight": 20,
+          },
+          Object {
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      press1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#6B4EFF",
+        "borderBottomLeftRadius": 9999,
+        "borderBottomRightRadius": 9999,
+        "borderTopLeftRadius": 9999,
+        "borderTopRightRadius": 9999,
+        "height": 48,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "marginTop": 8,
+        "opacity": 1,
+        "paddingTop": 12,
+        "width": 208,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+          },
+          Object {
+            "fontSize": 14,
+            "lineHeight": 20,
+          },
+          Object {
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      press2
+    </Text>
+  </View>
+</View>
+`;

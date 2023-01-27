@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check PillButton renders correctly and onpress works 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+      },
+      Object {
+        "paddingBottom": 12,
+        "paddingTop": 12,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#6B4EFF",
+        "borderBottomLeftRadius": 9999,
+        "borderBottomRightRadius": 9999,
+        "borderTopLeftRadius": 9999,
+        "borderTopRightRadius": 9999,
+        "height": 32,
+        "justifyContent": "space-between",
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+        "width": 176,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 8,
+            },
+          ]
+        }
+      >
+        <Text />
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 4,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#fff",
+              },
+              Object {
+                "fontSize": 14,
+                "lineHeight": 20,
+              },
+              Object {
+                "textAlign": "center",
+              },
+              Object {
+                "marginLeft": 20,
+              },
+            ]
+          }
+        >
+          press
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
