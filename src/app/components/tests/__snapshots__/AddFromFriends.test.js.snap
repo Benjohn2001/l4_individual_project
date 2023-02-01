@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check AddFromFriends renders correctly and onpress works 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "paddingTop": 12,
+      },
+      Object {
+        "width": "100%",
+      },
+      Object {
+        "alignItems": "center",
+      },
+    ]
+  }
+/>
+`;

@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check GroupMemberBar renders correctly and onpress works 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+      },
+      Object {
+        "paddingBottom": 4,
+        "paddingTop": 4,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#E7E7FF",
+        "borderBottomLeftRadius": 16,
+        "borderBottomRightRadius": 16,
+        "borderTopLeftRadius": 16,
+        "borderTopRightRadius": 16,
+        "height": 56,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+        "width": 320,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "justifyContent": "space-between",
+          },
+          Object {
+            "alignItems": "center",
+          },
+          Object {
+            "marginLeft": 12,
+            "marginRight": 12,
+          },
+          Object {
+            "paddingTop": 4,
+          },
+        ]
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "uri",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "width": 48,
+            },
+            Object {
+              "height": 48,
+            },
+            Object {
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+            },
+          ]
+        }
+      />
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000",
+            },
+            Object {
+              "fontSize": 18,
+              "lineHeight": 28,
+            },
+            Object {
+              "textAlign": "center",
+            },
+            Object {
+              "paddingTop": 4,
+            },
+          ]
+        }
+      >
+        press
+      </Text>
+      <View
+        style={
+          Array [
+            Object {
+              "height": 32,
+            },
+            Object {
+              "width": 32,
+            },
+            Object {
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+            },
+            Object {
+              "backgroundColor": "red",
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
