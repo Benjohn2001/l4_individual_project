@@ -24,10 +24,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: ./src
-    - run: npm ci --legacy-peer-deps
-      working-directory: ./src
-    - run: npm run prettier:fix && npm run lint:fix
-      working-directory: ./src
-    - run: npm test
-      working-directory: ./src
+        cache-dependency-path: "./src/package-lock.json"
+    - working-directory: ./src
+      run: npm ci --legacy-peer-deps
+    - working-directory: ./src
+      run: npm run prettier:fix && npm run lint:fix
+    - working-directory: ./src
+      run: npm test
