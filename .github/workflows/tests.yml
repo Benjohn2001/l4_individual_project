@@ -26,6 +26,8 @@ jobs:
         cache: 'npm'
         cache-dependency-path: "./src/package-lock.json"
     - run: npm ci
+      working-directory: ./src
     - run: npm run prettier:fix && npm run lint:fix
+      working-directory: ./src
     - run: npm test
       working-directory: ./src
