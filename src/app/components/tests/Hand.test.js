@@ -1,5 +1,5 @@
-import Hand from '../Hand'
 import { render } from '@testing-library/react-native'
+import Hand from '../Hand'
 
 test('Check Hand working correctly',()=>{
     const data = {
@@ -16,5 +16,5 @@ test('Check Hand working correctly',()=>{
         center={0}
         member={[snap,"blue"]}
     />).toJSON()
-    expect(hand["children"].length).toBe(3)
+    expect(hand.children.length).toBe(3)
 })

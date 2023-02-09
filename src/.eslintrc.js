@@ -34,6 +34,7 @@ module.exports = {
     'react/no-unstable-nested-components' : 'off',
     'react/no-unescaped-entities' : 'off',
     'no-console' : 'off',
-    'no-shadow' : 'off'
+    'no-shadow' : 'off',
+    'react/react-in-jsx-scope' : 'off'
   },
 };

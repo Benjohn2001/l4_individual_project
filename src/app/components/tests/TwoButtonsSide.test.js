@@ -1,6 +1,6 @@
-import TwoButtonsSide from '../TwoButtonsSide';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import TwoButtonsSide from '../TwoButtonsSide';
 
 
 test('Check TwoButtonsSide renders correctly and onpress works',()=>{
@@ -17,7 +17,7 @@ test('Check TwoButtonsSide renders correctly and onpress works',()=>{
             fontColor1="black"
             title2="press2"
             onPress2={()=>{
-                onPressMock2
+                onPressMock2()
             }}
             icon2="activity"
             color2="white"
@@ -39,7 +39,7 @@ test('Check TwoButtonsSide renders correctly and onpress works',()=>{
             fontColor1="black"
             title2="press2"
             onPress2={()=>{
-                onPressMock2
+                onPressMock2()
             }}
             icon2="activity"
             color2="white"
