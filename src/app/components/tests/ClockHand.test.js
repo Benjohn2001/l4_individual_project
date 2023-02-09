@@ -10,13 +10,11 @@ test('Check ClockHand working correctly',()=>{
         "userName": "tdawg123"
       }
     const snap1 = { val: () => data1 };
-    const snap2 = { val: () => data1 };
-    const snap3 = { val: () => data1 };
-    const snaps=[snap1,snap2,snap3]
+    const snaps=[[snap1,'red',0],[snap1,'red',1],[snap1,'red',2],[snap1,'red',3],[snap1,'red',4],[snap1,'red',5],[snap1,'red',5],[snap1,'red',7],[snap1]]
     const clockhand = render(<ClockHand 
         radius={5}
         center={0}
         members={snaps}
     />).toJSON()
-    console.log(clockhand,"not sure how to test renders 3 hands")
+    expect(clockhand['children'].length).toBe(8)
 })

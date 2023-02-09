@@ -1,0 +1,432 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check Clock working correctly 1`] = `
+<RNSVGSvgView
+  bbHeight={750}
+  bbWidth={750}
+  focusable={false}
+  height={750}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "borderWidth": 0,
+      },
+      Object {
+        "flex": 0,
+        "height": 750,
+        "width": 750,
+      },
+    ]
+  }
+  width={750}
+>
+  <RNSVGGroup>
+    <RNSVGCircle
+      cx={375}
+      cy={375}
+      fill={4285222655}
+      propList={
+        Array [
+          "fill",
+          "stroke",
+          "strokeWidth",
+        ]
+      }
+      r={370}
+      stroke={4278190080}
+      strokeWidth={2}
+    />
+    <RNSVGCircle
+      cx={375}
+      cy={375}
+      fill={4278235119}
+      propList={
+        Array [
+          "fill",
+          "stroke",
+          "strokeWidth",
+        ]
+      }
+      r={340}
+      stroke={4278190080}
+      strokeWidth={2}
+    />
+    <RNSVGCircle
+      cx={375}
+      cy={375}
+      propList={
+        Array [
+          "stroke",
+          "strokeWidth",
+        ]
+      }
+      r={340}
+      stroke={4278190080}
+      strokeWidth={2}
+    />
+    <RNSVGGroup>
+      <RNSVGGroup>
+        <RNSVGLine
+          propList={
+            Array [
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+            ]
+          }
+          stroke={4278190080}
+          strokeLinecap={1}
+          strokeWidth={2}
+          x1={375}
+          x2={375}
+          y1={375}
+          y2={5}
+        />
+        <RNSVGText
+          alignmentBaseline="central"
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "textAnchor": "middle",
+            }
+          }
+          matrix={
+            Array [
+              0.8660254037844387,
+              0.49999999999999994,
+              -0.49999999999999994,
+              0.8660254037844387,
+              552.5,
+              67.56098165652429,
+            ]
+          }
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          rotate={Array []}
+          x={Array []}
+          y={Array []}
+        >
+          <RNSVGTSpan
+            content="a"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+      <RNSVGGroup>
+        <RNSVGLine
+          propList={
+            Array [
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+            ]
+          }
+          stroke={4278190080}
+          strokeLinecap={1}
+          strokeWidth={2}
+          x1={375}
+          x2={695.4293994002423}
+          y1={375}
+          y2={190.00000000000003}
+        />
+        <RNSVGText
+          alignmentBaseline="central"
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "textAnchor": "middle",
+            }
+          }
+          matrix={
+            Array [
+              6.123233995736766e-17,
+              1,
+              -1,
+              6.123233995736766e-17,
+              730,
+              375,
+            ]
+          }
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          rotate={Array []}
+          x={Array []}
+          y={Array []}
+        >
+          <RNSVGTSpan
+            content="a"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+      <RNSVGGroup>
+        <RNSVGLine
+          propList={
+            Array [
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+            ]
+          }
+          stroke={4278190080}
+          strokeLinecap={1}
+          strokeWidth={2}
+          x1={375}
+          x2={695.4293994002423}
+          y1={375}
+          y2={560}
+        />
+        <RNSVGText
+          alignmentBaseline="central"
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "textAnchor": "middle",
+            }
+          }
+          matrix={
+            Array [
+              0.8660254037844387,
+              -0.49999999999999994,
+              0.49999999999999994,
+              0.8660254037844387,
+              552.5,
+              682.4390183434757,
+            ]
+          }
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          rotate={Array []}
+          x={Array []}
+          y={Array []}
+        >
+          <RNSVGTSpan
+            content="a"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+      <RNSVGGroup>
+        <RNSVGLine
+          propList={
+            Array [
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+            ]
+          }
+          stroke={4278190080}
+          strokeLinecap={1}
+          strokeWidth={2}
+          x1={375}
+          x2={375}
+          y1={375}
+          y2={745}
+        />
+        <RNSVGText
+          alignmentBaseline="central"
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "textAnchor": "middle",
+            }
+          }
+          matrix={
+            Array [
+              0.8660254037844387,
+              0.49999999999999994,
+              -0.49999999999999994,
+              0.8660254037844387,
+              197.50000000000009,
+              682.4390183434757,
+            ]
+          }
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          rotate={Array []}
+          x={Array []}
+          y={Array []}
+        >
+          <RNSVGTSpan
+            content="a"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+      <RNSVGGroup>
+        <RNSVGLine
+          propList={
+            Array [
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+            ]
+          }
+          stroke={4278190080}
+          strokeLinecap={1}
+          strokeWidth={2}
+          x1={375}
+          x2={54.570600599757654}
+          y1={375}
+          y2={560}
+        />
+        <RNSVGText
+          alignmentBaseline="central"
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "textAnchor": "middle",
+            }
+          }
+          matrix={
+            Array [
+              6.123233995736766e-17,
+              -1,
+              1,
+              6.123233995736766e-17,
+              20,
+              375.00000000000006,
+            ]
+          }
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          rotate={Array []}
+          x={Array []}
+          y={Array []}
+        >
+          <RNSVGTSpan
+            content="a"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+      <RNSVGGroup>
+        <RNSVGLine
+          propList={
+            Array [
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+            ]
+          }
+          stroke={4278190080}
+          strokeLinecap={1}
+          strokeWidth={2}
+          x1={375}
+          x2={54.57060059975771}
+          y1={375}
+          y2={189.99999999999997}
+        />
+        <RNSVGText
+          alignmentBaseline="central"
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 15,
+              "fontWeight": "bold",
+              "textAnchor": "middle",
+            }
+          }
+          matrix={
+            Array [
+              0.8660254037844387,
+              -0.49999999999999994,
+              0.49999999999999994,
+              0.8660254037844387,
+              197.49999999999983,
+              67.56098165652435,
+            ]
+          }
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          rotate={Array []}
+          x={Array []}
+          y={Array []}
+        >
+          <RNSVGTSpan
+            content="a"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+    </RNSVGGroup>
+  </RNSVGGroup>
+</RNSVGSvgView>
+`;
