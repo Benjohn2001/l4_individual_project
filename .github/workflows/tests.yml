@@ -21,8 +21,10 @@ jobs:
         cache: npm
         cache-dependency-path: "./src/package-lock.json"
     - name: Install with npm
+      working-directory: ./src
       run: npm install
     - name: Prettier and Eslint
+      working-directory: ./src
       run: npm run prettier:fix && npm run lint:fix
   
   jest:
@@ -37,6 +39,7 @@ jobs:
         cache: npm
         cache-dependency-path: "./src/package-lock.json"
     - name: Install with npm
+      working-directory: ./src
       run: npm install
     - name: run tests
       working-directory: ./src
