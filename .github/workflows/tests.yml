@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install with npm
-      run: npm
+      run: npm install
     - name: Prettier and Eslint
       run: npm run prettier:fix && npm run lint:fix
   
@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install with npm
-      run: npm
+      run: npm install
     - name: run tests
       working-directory: ./src
       run: npm test
