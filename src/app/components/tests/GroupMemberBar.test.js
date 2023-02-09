@@ -1,6 +1,6 @@
-import GroupMemberBar from '../GroupMemberBar';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import GroupMemberBar from '../GroupMemberBar';
 
 test('Check GroupMemberBar renders correctly and onpress works',()=>{
     const onPressMock = jest.fn();

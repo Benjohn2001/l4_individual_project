@@ -1,5 +1,5 @@
-import ClockHand from '../ClockHand';
 import { render } from '@testing-library/react-native'
+import ClockHand from '../ClockHand';
 
 test('Check ClockHand working correctly',()=>{
     const data1 = {
@@ -16,5 +16,5 @@ test('Check ClockHand working correctly',()=>{
         center={0}
         members={snaps}
     />).toJSON()
-    expect(clockhand['children'].length).toBe(8)
+    expect(clockhand.children.length).toBe(8)
 })

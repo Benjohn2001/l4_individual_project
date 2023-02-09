@@ -1,6 +1,6 @@
-import AppButtonLight from "../AppButtonLight"
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import AppButtonLight from "../AppButtonLight"
 
 test('Check AppButtonLight renders correctly and onpress works',()=>{
     const onPressMock = jest.fn();

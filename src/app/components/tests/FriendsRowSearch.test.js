@@ -1,6 +1,6 @@
-import FriendsRowSearch from '../FriendsRowSearch';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import FriendsRowSearch from '../FriendsRowSearch';
 
 test('Check FriendsRowSearch renders correctly and onpress works',()=>{
     const data1 = {

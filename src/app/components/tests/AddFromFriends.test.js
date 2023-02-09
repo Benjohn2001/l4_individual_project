@@ -1,6 +1,6 @@
-import AddFromFriends from '../AddFromFriends';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import AddFromFriends from '../AddFromFriends';
 
 test('Check AddFromFriends renders correctly and onpress works',()=>{
     const data1 = {

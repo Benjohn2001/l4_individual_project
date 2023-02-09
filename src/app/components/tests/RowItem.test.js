@@ -1,6 +1,6 @@
-import RowItem from '../RowItem';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import RowItem from '../RowItem';
 
 test('Check RowItem renders correctly and onpress works',()=>{
     const onPressMock = jest.fn();

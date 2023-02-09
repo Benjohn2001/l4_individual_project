@@ -1,6 +1,24 @@
-import GroupButtonFB from '../GroupButtonFB';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import GroupButtonFB from '../GroupButtonFB';
+
+jest.mock('firebase/database', () => ({
+    getDatabase: jest.fn().mockReturnThis(),
+  }));
+
+jest.mock('firebase/storage', () => ({
+      getStorage: jest.fn().mockReturnThis(),
+    }));
+  
+
+jest.mock('firebase/app', () => ({
+      auth: jest.fn().mockReturnThis(),
+      initializeApp: jest.fn().mockReturnThis(),
+    }));
+
+jest.mock('firebase/auth', () => ({
+      getAuth: jest.fn().mockReturnThis(),
+    }));
 
 test('Check GroupButtonFB renders correctly and onpress works',()=>{
     const onPressMock = jest.fn();
@@ -10,7 +28,7 @@ test('Check GroupButtonFB renders correctly and onpress works',()=>{
             onPress={()=>{
                 onPressMock()
             }}
-            membRef={"aaaaa"}
+            membRef="aaaaa"
         />,
       );
       fireEvent.press(screen.getByText('press'));
@@ -21,7 +39,7 @@ test('Check GroupButtonFB renders correctly and onpress works',()=>{
             onPress={()=>{
                 onPressMock()
             }}
-            membRef={"aaaaa"}
+            membRef="aaaaa"
         />
         ).toJSON();
       expect(domTree).toMatchSnapshot();

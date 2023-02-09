@@ -239,3 +239,15 @@
 ### 1 Feb 2023
 
 *2 hour* Testing
+
+### 3 Feb 2023
+
+*5 hour* Hard to say but I started online evaluation
+
+### 8 Feb 2023
+
+*1 hour* Started in person evaluation
+
+### 9 Feb 2023
+
+*4 hour* CI/CD setup and more testing

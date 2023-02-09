@@ -1,6 +1,6 @@
-import PillButton from '../PillButton';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import PillButton from '../PillButton';
 
 
 test('Check PillButton renders correctly and onpress works',()=>{

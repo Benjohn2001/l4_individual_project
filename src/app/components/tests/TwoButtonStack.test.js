@@ -1,6 +1,6 @@
-import TwoButtonStack from '../TwoButtonStack';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import TwoButtonStack from '../TwoButtonStack';
 
 test('Check TwoButtonStack renders correctly and onpress works',()=>{
     const onPressMock1 = jest.fn();

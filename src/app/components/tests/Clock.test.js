@@ -1,6 +1,6 @@
-import Clock from '../Clock';
 import { render } from '@testing-library/react-native'
 import renderer from "react-test-renderer";
+import Clock from '../Clock';
 
 test('Check Clock working correctly',()=>{
       
@@ -13,14 +13,14 @@ test('Check Clock working correctly',()=>{
     const snaps=[snap1]
     const clock = render(<Clock 
         locations={['a','a','a','a','a','a']}
-        face={"#00afef"}
+        face="#00afef"
         membs={snaps}
     />)
 
     const domTree = renderer.create(
         <Clock 
             locations={['a','a','a','a','a','a']}
-            face={"#00afef"}
+            face="#00afef"
             membs={snaps}
         />
         ).toJSON();

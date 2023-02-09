@@ -1,5 +1,5 @@
-import Labels from "../Labels";
 import { render } from '@testing-library/react-native'
+import Labels from "../Labels";
 
 test('Check Labels working correctly',()=>{
     const noLabels = render(<Labels 
@@ -7,5 +7,5 @@ test('Check Labels working correctly',()=>{
         center={0}
         locations={['a','a','a','a','a','a']}
     />).toJSON()
-    expect(noLabels["children"].length).toBe(6)
+    expect(noLabels.children.length).toBe(6)
 })

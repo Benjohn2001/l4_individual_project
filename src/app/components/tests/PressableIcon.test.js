@@ -1,6 +1,6 @@
-import PressableIcon from '../PressableIcon';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import PressableIcon from '../PressableIcon';
 
 
 test('Check PressableIcon renders correctly and onpress works',()=>{

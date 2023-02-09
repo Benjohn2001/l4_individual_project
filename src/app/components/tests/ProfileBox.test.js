@@ -1,5 +1,5 @@
-import ProfileBox from '../ProfileBox';
 import renderer from "react-test-renderer";
+import ProfileBox from '../ProfileBox';
 
 test('Check ProfileBox renders correctly',()=>{
       const domTree = renderer.create(

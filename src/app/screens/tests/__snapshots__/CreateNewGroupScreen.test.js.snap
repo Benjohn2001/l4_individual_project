@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check CreateNewGroupScreen working correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Array [
+      Object {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      Object {
+        "backgroundColor": "#C6C4FF",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+        },
+        Object {
+          "justifyContent": "space-between",
+        },
+        Object {
+          "paddingTop": 56,
+        },
+        Object {
+          "marginLeft": 40,
+          "marginRight": 40,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID="pressableIcon"
+      >
+        <Text />
+      </View>
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "fontWeight": "700",
+          },
+          Object {
+            "marginRight": "auto",
+          },
+          Object {
+            "marginLeft": "auto",
+          },
+          Object {
+            "fontSize": 30,
+            "lineHeight": 36,
+          },
+        ]
+      }
+    >
+      New Group
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "justifyContent": "center",
+        },
+        Object {
+          "alignItems": "center",
+        },
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "uri",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "width": 176,
+          },
+          Object {
+            "height": 176,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+        },
+      ]
+    }
+  >
+    <TextInput
+      cursorColor="#6B4EFF"
+      onChangeText={[Function]}
+      placeholder="Group Name"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#E7E7FF",
+          },
+          Object {
+            "marginBottom": 16,
+            "marginTop": 16,
+          },
+          Object {
+            "width": 320,
+          },
+          Object {
+            "height": 48,
+          },
+          Object {
+            "borderBottomLeftRadius": 6,
+            "borderBottomRightRadius": 6,
+            "borderTopLeftRadius": 6,
+            "borderTopRightRadius": 6,
+          },
+        ]
+      }
+      testID="groupname"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#6B4EFF",
+          "borderBottomLeftRadius": 9999,
+          "borderBottomRightRadius": 9999,
+          "borderTopLeftRadius": 9999,
+          "borderTopRightRadius": 9999,
+          "height": 48,
+          "marginLeft": 6,
+          "marginRight": 6,
+          "opacity": 1,
+          "paddingTop": 12,
+          "width": "83.333333%",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#fff",
+            },
+            Object {
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Create
+      </Text>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

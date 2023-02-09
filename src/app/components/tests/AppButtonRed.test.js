@@ -1,6 +1,6 @@
-import AppButtonRed from '../AppButtonRed';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import renderer from "react-test-renderer";
+import AppButtonRed from '../AppButtonRed';
 
 
 test('Check AppButtonRed renders correctly and onpress works',()=>{

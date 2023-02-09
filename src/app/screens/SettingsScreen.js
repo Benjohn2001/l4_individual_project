@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
+import { getAuth } from "firebase/auth";
 import RowItem from "../components/RowItem";
-import { auth } from "../../firebase";
 
 function SettingsScreen({ navigation }) {
   return (
@@ -33,7 +33,7 @@ function SettingsScreen({ navigation }) {
           title="Log Out"
           icon="log-out"
           onPress={() => {
-            auth
+            getAuth()
               .signOut()
               .then(() => {
                 navigation.push("SignInScreen");

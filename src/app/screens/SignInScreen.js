@@ -53,7 +53,7 @@ function SignInScreen({ navigation }) {
 
   return (
     <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple">
-      <Image className="w-64 h-64" source={require("../assets/clock.png")} />
+      <Image className="w-64 h-64" source={{uri: require("../assets/clock.png").uri}} />
       <View className="pt-10">
         <TextInput
           className="bg-secondaryPurple my-5 w-80 h-12 rounded-md"
@@ -68,6 +68,7 @@ function SignInScreen({ navigation }) {
           }}
           blurOnSubmit={false}
           autoCapitalize="none"
+          testID="unameT"
         />
         <TextInput
           className="bg-secondaryPurple mt-5 w-80 h-12 rounded-md"
@@ -79,6 +80,7 @@ function SignInScreen({ navigation }) {
           onChangeText={(val) => setPassword(val)}
           ref={passwordRef}
           autoCapitalize="none"
+          testID="passT"
         />
         <TouchableOpacity
           onPress={() => {
@@ -124,6 +126,7 @@ function SignInScreen({ navigation }) {
             cursorColor={COLOURS.darkerPurple}
             value={emailReset}
             onChangeText={(val) => setEmailReset(val)}
+            testID="forgotP"
           />
           <AppButtonPurple
             title="Send Email"
