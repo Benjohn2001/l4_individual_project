@@ -62,7 +62,10 @@ function CreateNewGroupScreen({ navigation }) {
         <Text className="font-bold mr-auto ml-auto text-3xl">New Group</Text>
       </View>
       <View className="justify-center items-center">
-        <Image className="w-44 h-44" source={{uri: require("../assets/clock.png").uri}} />
+        <Image
+          className="w-44 h-44"
+          source={{ uri: Image.resolveAssetSource(require("../assets/clock.png")).uri }}
+        />
       </View>
       <View className="items-center">
         <TextInput

@@ -1,0 +1,379 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check RegisterScreen  working correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Array [
+      Object {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      Object {
+        "backgroundColor": "#C6C4FF",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "paddingTop": 40,
+        },
+        Object {
+          "paddingLeft": 20,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID="pressableIcon"
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+        },
+        Object {
+          "justifyContent": "center",
+        },
+        Object {
+          "alignItems": "center",
+        },
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "uri",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "width": 176,
+          },
+          Object {
+            "height": 176,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontWeight": "700",
+            },
+            Object {
+              "fontSize": 24,
+              "lineHeight": 32,
+            },
+          ]
+        }
+      >
+        Weasley Clock
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 16,
+              "lineHeight": 24,
+            },
+          ]
+        }
+      >
+        Join today. It's free!
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+        },
+      ]
+    }
+  >
+    <TextInput
+      blurOnSubmit={false}
+      cursorColor="#6B4EFF"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="First Name"
+      returnKeyType="next"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#E7E7FF",
+          },
+          Object {
+            "marginBottom": 16,
+            "marginTop": 16,
+          },
+          Object {
+            "width": 320,
+          },
+          Object {
+            "height": 48,
+          },
+          Object {
+            "borderBottomLeftRadius": 6,
+            "borderBottomRightRadius": 6,
+            "borderTopLeftRadius": 6,
+            "borderTopRightRadius": 6,
+          },
+        ]
+      }
+      testID="fnameT"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      blurOnSubmit={false}
+      cursorColor="#6B4EFF"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="Last Name"
+      returnKeyType="next"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#E7E7FF",
+          },
+          Object {
+            "marginBottom": 16,
+            "marginTop": 16,
+          },
+          Object {
+            "width": 320,
+          },
+          Object {
+            "height": 48,
+          },
+          Object {
+            "borderBottomLeftRadius": 6,
+            "borderBottomRightRadius": 6,
+            "borderTopLeftRadius": 6,
+            "borderTopRightRadius": 6,
+          },
+        ]
+      }
+      testID="snameT"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      autoCapitalize="none"
+      blurOnSubmit={false}
+      cursorColor="#6B4EFF"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="Username"
+      returnKeyType="next"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#E7E7FF",
+          },
+          Object {
+            "marginBottom": 16,
+            "marginTop": 16,
+          },
+          Object {
+            "width": 320,
+          },
+          Object {
+            "height": 48,
+          },
+          Object {
+            "borderBottomLeftRadius": 6,
+            "borderBottomRightRadius": 6,
+            "borderTopLeftRadius": 6,
+            "borderTopRightRadius": 6,
+          },
+        ]
+      }
+      testID="unameT"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      autoCapitalize="none"
+      blurOnSubmit={false}
+      cursorColor="#6B4EFF"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="Email"
+      returnKeyType="next"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#E7E7FF",
+          },
+          Object {
+            "marginBottom": 16,
+            "marginTop": 16,
+          },
+          Object {
+            "width": 320,
+          },
+          Object {
+            "height": 48,
+          },
+          Object {
+            "borderBottomLeftRadius": 6,
+            "borderBottomRightRadius": 6,
+            "borderTopLeftRadius": 6,
+            "borderTopRightRadius": 6,
+          },
+        ]
+      }
+      testID="emailT"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      autoCapitalize="none"
+      cursorColor="#6B4EFF"
+      onChangeText={[Function]}
+      placeholder="Password"
+      secureTextEntry={true}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#E7E7FF",
+          },
+          Object {
+            "marginTop": 16,
+          },
+          Object {
+            "width": 320,
+          },
+          Object {
+            "height": 48,
+          },
+          Object {
+            "borderBottomLeftRadius": 6,
+            "borderBottomRightRadius": 6,
+            "borderTopLeftRadius": 6,
+            "borderTopRightRadius": 6,
+          },
+        ]
+      }
+      testID="passT"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 14,
+            "lineHeight": 20,
+          },
+          Object {
+            "textAlign": "left",
+          },
+          Object {
+            "paddingTop": 8,
+          },
+          Object {
+            "paddingBottom": 8,
+          },
+          Object {
+            "color": "#6b7280",
+          },
+        ]
+      }
+    >
+      Password must be at least 8 characters and 
+      
+
+      contain at least 1 upper-case character
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#6B4EFF",
+          "borderBottomLeftRadius": 9999,
+          "borderBottomRightRadius": 9999,
+          "borderTopLeftRadius": 9999,
+          "borderTopRightRadius": 9999,
+          "height": 48,
+          "marginLeft": 6,
+          "marginRight": 6,
+          "opacity": 1,
+          "paddingTop": 12,
+          "width": "83.333333%",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#fff",
+            },
+            Object {
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Submit
+      </Text>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

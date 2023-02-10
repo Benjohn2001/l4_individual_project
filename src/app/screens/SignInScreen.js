@@ -53,7 +53,10 @@ function SignInScreen({ navigation }) {
 
   return (
     <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple">
-      <Image className="w-64 h-64" source={{uri: require("../assets/clock.png").uri}} />
+      <Image
+        className="w-64 h-64"
+        source={{ uri: Image.resolveAssetSource(require("../assets/clock.png")).uri }}
+      />
       <View className="pt-10">
         <TextInput
           className="bg-secondaryPurple my-5 w-80 h-12 rounded-md"
