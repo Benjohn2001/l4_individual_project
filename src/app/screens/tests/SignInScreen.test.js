@@ -47,7 +47,7 @@ test("Check SignInScreen login working correctly", () => {
   const { getByTestId } = render(<SignInScreen navigation={navigation} />);
 
   fireEvent.changeText(getByTestId("unameT"), "abc");
-  fireEvent(getByTestId("unameT"), 'submitEditing')
+  fireEvent(getByTestId("unameT"), "submitEditing");
   fireEvent.changeText(getByTestId("passT"), "12345678B");
   fireEvent.press(screen.getByText("Sign In"));
 

@@ -55,7 +55,9 @@ function SignInScreen({ navigation }) {
     <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple">
       <Image
         className="w-64 h-64"
-        source={{ uri: Image.resolveAssetSource(require("../assets/clock.png")).uri }}
+        source={{
+          uri: Image.resolveAssetSource(require("../assets/clock.png")).uri,
+        }}
       />
       <View className="pt-10">
         <TextInput

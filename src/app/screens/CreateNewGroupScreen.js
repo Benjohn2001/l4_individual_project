@@ -64,7 +64,9 @@ function CreateNewGroupScreen({ navigation }) {
       <View className="justify-center items-center">
         <Image
           className="w-44 h-44"
-          source={{ uri: Image.resolveAssetSource(require("../assets/clock.png")).uri }}
+          source={{
+            uri: Image.resolveAssetSource(require("../assets/clock.png")).uri,
+          }}
         />
       </View>
       <View className="items-center">

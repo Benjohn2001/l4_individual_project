@@ -28,6 +28,7 @@
         <a href="https://prettier.io/"><img alt="prettier" src="https://img.shields.io/badge/-prettier-20232A?&logo=prettier&style=for-the-badge"></a>
         <a href="https://eslint.org/"><img alt="eslint" src="https://img.shields.io/badge/-eslint-white?&logo=eslint&style=for-the-badge&logoColor=4339D6"></a>
         <a href="https://airbnb.io/javascript/react/"><img alt="airbnb" src="https://img.shields.io/badge/-airbnb-red?&logo=airbnb&style=for-the-badge&logoColor=white"></a>
+        <a href="https://airbnb.io/javascript/react/"><img alt="airbnb" src="https://img.shields.io/badge/-jest-white?&logo=jest&style=for-the-badge&logoColor=red"></a>
 </tbody>
 </table>
 

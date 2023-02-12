@@ -8,7 +8,9 @@ jest.mock("firebase/database", () => ({
   push: jest.fn().mockReturnThis(),
   ref: jest.fn().mockReturnThis(),
   set: jest.fn().mockReturnThis(),
-  query: jest.fn(()=>{Promise.resolve()})
+  query: jest.fn(() => {
+    Promise.resolve();
+  }),
 }));
 
 jest.mock("firebase/storage", () => ({
@@ -55,31 +57,29 @@ test("Check RegisterScreen  working correctly", () => {
   expect(domTree).toMatchSnapshot();
 });
 
-
 test("Check invalidpass  working correctly", () => {
-    const { getByTestId } = render(<RegisterScreen navigation={navigation} />);
-    jest.spyOn(Alert, "alert");
-  
-    fireEvent.changeText(getByTestId("fnameT"), "abc");
-    fireEvent(getByTestId("fnameT"), 'submitEditing')
-    fireEvent.changeText(getByTestId("snameT"), "abc");
-    fireEvent(getByTestId("snameT"), 'submitEditing')
-    fireEvent.changeText(getByTestId("unameT"), "abc");
-    fireEvent(getByTestId("unameT"), 'submitEditing')
-    fireEvent.changeText(getByTestId("emailT"), "abc");
-    fireEvent(getByTestId("emailT"), 'submitEditing')
-    fireEvent.changeText(getByTestId("passT"), "1238B");
-    fireEvent.press(screen.getByText("Submit"));
-    // expect(Alert.alert).toHaveBeenCalledTimes(1);
-    
-  });
+  const { getByTestId } = render(<RegisterScreen navigation={navigation} />);
+  jest.spyOn(Alert, "alert");
+
+  fireEvent.changeText(getByTestId("fnameT"), "abc");
+  fireEvent(getByTestId("fnameT"), "submitEditing");
+  fireEvent.changeText(getByTestId("snameT"), "abc");
+  fireEvent(getByTestId("snameT"), "submitEditing");
+  fireEvent.changeText(getByTestId("unameT"), "abc");
+  fireEvent(getByTestId("unameT"), "submitEditing");
+  fireEvent.changeText(getByTestId("emailT"), "abc");
+  fireEvent(getByTestId("emailT"), "submitEditing");
+  fireEvent.changeText(getByTestId("passT"), "1238B");
+  fireEvent.press(screen.getByText("Submit"));
+  // expect(Alert.alert).toHaveBeenCalledTimes(1);
+});
 
 test("Check RegisterScreen no login data working correctly", () => {
-  jest.spyOn(Alert, "alert");
+  // const spy = jest.spyOn(Alert, "alert");
   render(<RegisterScreen navigation={navigation} />);
 
   fireEvent.press(screen.getByText("Submit"));
-//   expect(Alert.alert).toHaveBeenCalledTimes(1);
+  // expect(spy).toHaveBeenCalled()
 });
 
 test("Check register nav to signin", () => {
