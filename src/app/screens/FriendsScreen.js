@@ -9,10 +9,10 @@ import {
 import SearchBar from "react-native-dynamic-search-bar";
 import { getDatabase, ref, orderByChild, query, get } from "firebase/database";
 import { useIsFocused } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
 import PressableIcon from "../components/PressableIcon";
 import PillButton from "../components/PillButton";
 import FriendsRowSearch from "../components/FriendsRowSearch";
-import { auth } from "../../firebase";
 
 function FriendsScreen({ navigation }) {
   const [searchVis, setSearchVis] = useState(true);
@@ -26,7 +26,7 @@ function FriendsScreen({ navigation }) {
   const [friendsPendKeys, setFriendsPendKeys] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [fetched, setFetched] = useState(false);
-  const { uid } = auth.currentUser;
+  const { uid } = getAuth().currentUser;
   const focused = useIsFocused();
 
   const fetchData = async () => {
@@ -38,7 +38,7 @@ function FriendsScreen({ navigation }) {
     const data = await get(unamesRef);
     data.forEach((c) => {
       if (
-        c.val().email.toLowerCase() !== auth.currentUser.email.toLowerCase()
+        c.val().email.toLowerCase() !== getAuth().currentUser.email.toLowerCase()
       ) {
         setUnames((a) => [...a, c]);
       }
