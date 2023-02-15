@@ -5,7 +5,7 @@ import {
   Image,
   TextInput,
   SafeAreaView,
-  Alert,
+  Alert, ScrollView
 } from "react-native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {
@@ -17,6 +17,7 @@ import {
   equalTo,
   get,
 } from "firebase/database";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PressableIcon from "../components/PressableIcon";
 import COLOURS from "../assets/colours";
 import AppButtonPurple from "../components/AppButtonPurple";
@@ -92,7 +93,8 @@ function RegisterScreen({ navigation }) {
   const passwordRef = useRef();
 
   return (
-    <SafeAreaView className="flex-1 bg-primaryPurple">
+    <ScrollView className="flex-1 bg-primaryPurple"><KeyboardAwareScrollView>
+    <SafeAreaView>
       <View className="pt-10 pl-5">
         <PressableIcon
           onPress={() => {
@@ -201,6 +203,7 @@ function RegisterScreen({ navigation }) {
         />
       </View>
     </SafeAreaView>
+    </KeyboardAwareScrollView></ScrollView>
   );
 }
 export default RegisterScreen;

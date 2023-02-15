@@ -7,11 +7,13 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  ScrollView
 } from "react-native";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Modal from "react-native-modal";
 import AppButtonPurple from "../components/AppButtonPurple";
 import TwoButtonsSide from "../components/TwoButtonsSide";
@@ -52,7 +54,8 @@ function SignInScreen({ navigation }) {
   const passwordRef = useRef();
 
   return (
-    <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple">
+    <ScrollView className="flex-1 pt-20 bg-primaryPurple"><KeyboardAwareScrollView>
+    <SafeAreaView className="items-center">
       <Image
         className="w-64 h-64"
         source={{
@@ -149,6 +152,7 @@ function SignInScreen({ navigation }) {
         </View>
       </Modal>
     </SafeAreaView>
+    </KeyboardAwareScrollView></ScrollView>
   );
 }
 
