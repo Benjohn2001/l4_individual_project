@@ -13,6 +13,10 @@ jest.mock("firebase/database", () => ({
   }),
 }));
 
+jest.mock("react-native-keyboard-aware-scroll-view",()=>({
+  KeyboardAwareScrollView: jest.fn().mockImplementation(({children}) => children),
+}))
+
 jest.mock("firebase/storage", () => ({
   getStorage: jest.fn().mockReturnThis(),
 }));

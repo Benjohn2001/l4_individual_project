@@ -1,17 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Check SignInScreen login working correctly 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<RCTScrollView
   style={
     Array [
       Object {
         "flexBasis": "0%",
         "flexGrow": 1,
         "flexShrink": 1,
-      },
-      Object {
-        "alignItems": "center",
       },
       Object {
         "paddingTop": 80,
@@ -22,300 +18,313 @@ exports[`Check SignInScreen login working correctly 1`] = `
     ]
   }
 >
-  <Image
-    source={
-      Object {
-        "uri": "uri",
-      }
-    }
-    style={
-      Array [
-        Object {
-          "width": 256,
-        },
-        Object {
-          "height": 256,
-        },
-      ]
-    }
-  />
-  <View
-    style={
-      Array [
-        Object {
-          "paddingTop": 40,
-        },
-      ]
-    }
-  >
-    <TextInput
-      autoCapitalize="none"
-      blurOnSubmit={false}
-      cursorColor="#6B4EFF"
-      onChangeText={[Function]}
-      onSubmitEditing={[Function]}
-      placeholder="Email"
-      returnKeyType="next"
+  <View>
+    <RCTSafeAreaView
+      emulateUnlessSupported={true}
       style={
         Array [
           Object {
-            "backgroundColor": "#E7E7FF",
-          },
-          Object {
-            "marginBottom": 20,
-            "marginTop": 20,
-          },
-          Object {
-            "width": 320,
-          },
-          Object {
-            "height": 48,
-          },
-          Object {
-            "borderBottomLeftRadius": 6,
-            "borderBottomRightRadius": 6,
-            "borderTopLeftRadius": 6,
-            "borderTopRightRadius": 6,
+            "alignItems": "center",
           },
         ]
-      }
-      testID="unameT"
-      underlineColorAndroid="transparent"
-      value=""
-    />
-    <TextInput
-      autoCapitalize="none"
-      cursorColor="#6B4EFF"
-      onChangeText={[Function]}
-      placeholder="Password"
-      secureTextEntry={true}
-      style={
-        Array [
-          Object {
-            "backgroundColor": "#E7E7FF",
-          },
-          Object {
-            "marginTop": 20,
-          },
-          Object {
-            "width": 320,
-          },
-          Object {
-            "height": 48,
-          },
-          Object {
-            "borderBottomLeftRadius": 6,
-            "borderBottomRightRadius": 6,
-            "borderTopLeftRadius": 6,
-            "borderTopRightRadius": 6,
-          },
-        ]
-      }
-      testID="passT"
-      underlineColorAndroid="transparent"
-      value=""
-    />
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
       }
     >
-      <Text
+      <Image
+        source={
+          Object {
+            "uri": "uri",
+          }
+        }
         style={
           Array [
             Object {
-              "marginTop": 8,
+              "width": 256,
             },
             Object {
-              "marginBottom": 80,
+              "height": 256,
             },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
             Object {
-              "textDecorationLine": "underline",
-            },
-            Object {
-              "color": "#6B4EFF",
+              "paddingTop": 40,
             },
           ]
         }
       >
-        Forgotten Password
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "flexDirection": "row",
-        },
-      ]
-    }
-  >
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "backgroundColor": "#E7E7FF",
-          "borderBottomLeftRadius": 9999,
-          "borderBottomRightRadius": 9999,
-          "borderTopLeftRadius": 9999,
-          "borderTopRightRadius": 9999,
-          "height": 48,
-          "marginLeft": 6,
-          "marginRight": 6,
-          "opacity": 1,
-          "paddingTop": 12,
-          "width": 160,
-        }
-      }
-    >
+        <TextInput
+          autoCapitalize="none"
+          blurOnSubmit={false}
+          cursorColor="#6B4EFF"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          placeholder="Email"
+          returnKeyType="next"
+          style={
+            Array [
+              Object {
+                "backgroundColor": "#E7E7FF",
+              },
+              Object {
+                "marginBottom": 20,
+                "marginTop": 20,
+              },
+              Object {
+                "width": 320,
+              },
+              Object {
+                "height": 48,
+              },
+              Object {
+                "borderBottomLeftRadius": 6,
+                "borderBottomRightRadius": 6,
+                "borderTopLeftRadius": 6,
+                "borderTopRightRadius": 6,
+              },
+            ]
+          }
+          testID="unameT"
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <TextInput
+          autoCapitalize="none"
+          cursorColor="#6B4EFF"
+          onChangeText={[Function]}
+          placeholder="Password"
+          secureTextEntry={true}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "#E7E7FF",
+              },
+              Object {
+                "marginTop": 20,
+              },
+              Object {
+                "width": 320,
+              },
+              Object {
+                "height": 48,
+              },
+              Object {
+                "borderBottomLeftRadius": 6,
+                "borderBottomRightRadius": 6,
+                "borderTopLeftRadius": 6,
+                "borderTopRightRadius": 6,
+              },
+            ]
+          }
+          testID="passT"
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "marginTop": 8,
+                },
+                Object {
+                  "marginBottom": 80,
+                },
+                Object {
+                  "textDecorationLine": "underline",
+                },
+                Object {
+                  "color": "#6B4EFF",
+                },
+              ]
+            }
+          >
+            Forgotten Password
+          </Text>
+        </View>
+      </View>
       <View
         style={
           Array [
             Object {
               "flexDirection": "row",
             },
-            Object {
-              "justifyContent": "center",
-            },
           ]
         }
       >
-        <Text />
-        <Text
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
-                "fontSize": 14,
-                "lineHeight": 20,
-              },
-              Object {
-                "textAlign": "center",
-              },
-              Object {
-                "marginLeft": 20,
-              },
-              Object {
-                "color": "#6B4EFF",
-              },
-            ]
+            Object {
+              "backgroundColor": "#E7E7FF",
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+              "height": 48,
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+              "paddingTop": 12,
+              "width": 160,
+            }
           }
         >
-          Register
-        </Text>
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                Object {
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text />
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontSize": 14,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "marginLeft": 20,
+                  },
+                  Object {
+                    "color": "#6B4EFF",
+                  },
+                ]
+              }
+            >
+              Register
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#6B4EFF",
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+              "height": 48,
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+              "paddingTop": 12,
+              "width": 160,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                Object {
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text />
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontSize": 14,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "marginLeft": 20,
+                  },
+                  Object {
+                    "color": "white",
+                  },
+                ]
+              }
+            >
+              Sign In
+            </Text>
+          </View>
+        </View>
       </View>
-    </View>
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "backgroundColor": "#6B4EFF",
-          "borderBottomLeftRadius": 9999,
-          "borderBottomRightRadius": 9999,
-          "borderTopLeftRadius": 9999,
-          "borderTopRightRadius": 9999,
-          "height": 48,
-          "marginLeft": 6,
-          "marginRight": 6,
-          "opacity": 1,
-          "paddingTop": 12,
-          "width": 160,
-        }
-      }
-    >
-      <View
-        style={
+      <Modal
+        animationType="none"
+        deviceHeight={null}
+        deviceWidth={null}
+        hardwareAccelerated={false}
+        hideModalContentWhileAnimating={false}
+        onBackdropPress={[Function]}
+        onModalHide={[Function]}
+        onModalWillHide={[Function]}
+        onModalWillShow={[Function]}
+        onRequestClose={[Function]}
+        panResponderThreshold={4}
+        scrollHorizontal={false}
+        scrollOffset={0}
+        scrollOffsetMax={0}
+        scrollTo={null}
+        statusBarTranslucent={false}
+        supportedOrientations={
           Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "center",
-            },
+            "portrait",
+            "landscape",
           ]
         }
-      >
-        <Text />
-        <Text
-          style={
-            Array [
-              Object {
-                "fontSize": 14,
-                "lineHeight": 20,
-              },
-              Object {
-                "textAlign": "center",
-              },
-              Object {
-                "marginLeft": 20,
-              },
-              Object {
-                "color": "white",
-              },
-            ]
-          }
-        >
-          Sign In
-        </Text>
-      </View>
-    </View>
+        swipeThreshold={100}
+        transparent={true}
+        visible={false}
+      />
+    </RCTSafeAreaView>
   </View>
-  <Modal
-    animationType="none"
-    deviceHeight={null}
-    deviceWidth={null}
-    hardwareAccelerated={false}
-    hideModalContentWhileAnimating={false}
-    onBackdropPress={[Function]}
-    onModalHide={[Function]}
-    onModalWillHide={[Function]}
-    onModalWillShow={[Function]}
-    onRequestClose={[Function]}
-    panResponderThreshold={4}
-    scrollHorizontal={false}
-    scrollOffset={0}
-    scrollOffsetMax={0}
-    scrollTo={null}
-    statusBarTranslucent={false}
-    supportedOrientations={
-      Array [
-        "portrait",
-        "landscape",
-      ]
-    }
-    swipeThreshold={100}
-    transparent={true}
-    visible={false}
-  />
-</RCTSafeAreaView>
+</RCTScrollView>
 `;

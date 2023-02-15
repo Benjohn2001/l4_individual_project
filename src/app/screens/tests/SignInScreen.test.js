@@ -14,6 +14,10 @@ jest.mock("firebase/storage", () => ({
   getStorage: jest.fn().mockReturnThis(),
 }));
 
+jest.mock("react-native-keyboard-aware-scroll-view",()=>({
+    KeyboardAwareScrollView: jest.fn().mockImplementation(({children}) => children),
+  }))
+
 const navigation = {
   navigate: jest.fn(),
   push: jest.fn(),
