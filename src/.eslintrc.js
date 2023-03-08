@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    "jest/globals": true
   },
   extends: [
     'plugin:react/recommended',
@@ -15,7 +16,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react',
+    'react','jest'
   ],
   rules: {
     'global-require' : 'off',
@@ -33,6 +34,7 @@ module.exports = {
     'react/no-unstable-nested-components' : 'off',
     'react/no-unescaped-entities' : 'off',
     'no-console' : 'off',
-    'no-shadow' : 'off'
+    'no-shadow' : 'off',
+    'react/react-in-jsx-scope' : 'off'
   },
 };

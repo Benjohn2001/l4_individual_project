@@ -7,11 +7,13 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  ScrollView
 } from "react-native";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Modal from "react-native-modal";
 import AppButtonPurple from "../components/AppButtonPurple";
 import TwoButtonsSide from "../components/TwoButtonsSide";
@@ -52,8 +54,14 @@ function SignInScreen({ navigation }) {
   const passwordRef = useRef();
 
   return (
-    <SafeAreaView className="flex-1 items-center pt-20 bg-primaryPurple">
-      <Image className="w-64 h-64" source={require("../assets/clock.png")} />
+    <ScrollView className="flex-1 pt-20 bg-primaryPurple"><KeyboardAwareScrollView>
+    <SafeAreaView className="items-center">
+      <Image
+        className="w-64 h-64"
+        source={{
+          uri: Image.resolveAssetSource(require("../assets/clock.png")).uri,
+        }}
+      />
       <View className="pt-10">
         <TextInput
           className="bg-secondaryPurple my-5 w-80 h-12 rounded-md"
@@ -68,6 +76,7 @@ function SignInScreen({ navigation }) {
           }}
           blurOnSubmit={false}
           autoCapitalize="none"
+          testID="unameT"
         />
         <TextInput
           className="bg-secondaryPurple mt-5 w-80 h-12 rounded-md"
@@ -79,6 +88,7 @@ function SignInScreen({ navigation }) {
           onChangeText={(val) => setPassword(val)}
           ref={passwordRef}
           autoCapitalize="none"
+          testID="passT"
         />
         <TouchableOpacity
           onPress={() => {
@@ -124,6 +134,7 @@ function SignInScreen({ navigation }) {
             cursorColor={COLOURS.darkerPurple}
             value={emailReset}
             onChangeText={(val) => setEmailReset(val)}
+            testID="forgotP"
           />
           <AppButtonPurple
             title="Send Email"
@@ -141,6 +152,7 @@ function SignInScreen({ navigation }) {
         </View>
       </Modal>
     </SafeAreaView>
+    </KeyboardAwareScrollView></ScrollView>
   );
 }
 

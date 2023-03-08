@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check ProfileBox renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "paddingBottom": 12,
+        "paddingTop": 12,
+      },
+      Object {
+        "width": "100%",
+      },
+      Object {
+        "alignItems": "center",
+      },
+      Object {
+        "marginLeft": 6,
+        "marginRight": 6,
+      },
+      Object {
+        "backgroundColor": "#E7E7FF",
+      },
+      Object {
+        "borderBottomLeftRadius": 16,
+        "borderBottomRightRadius": 16,
+        "borderTopLeftRadius": 16,
+        "borderTopRightRadius": 16,
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000",
+        },
+        Object {
+          "fontSize": 24,
+          "lineHeight": 32,
+        },
+        Object {
+          "paddingBottom": 4,
+          "paddingTop": 4,
+        },
+        Object {
+          "textAlign": "center",
+        },
+        Object {
+          "marginLeft": 12,
+          "marginRight": 12,
+        },
+      ]
+    }
+  >
+    joe
+  </Text>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000",
+        },
+        Object {
+          "fontSize": 20,
+          "lineHeight": 28,
+        },
+        Object {
+          "paddingBottom": 4,
+          "paddingTop": 4,
+        },
+        Object {
+          "textAlign": "center",
+        },
+        Object {
+          "marginLeft": 12,
+          "marginRight": 12,
+        },
+      ]
+    }
+  >
+    @
+    jb
+  </Text>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000",
+        },
+        Object {
+          "fontSize": 20,
+          "lineHeight": 28,
+        },
+        Object {
+          "paddingBottom": 4,
+          "paddingTop": 4,
+        },
+        Object {
+          "textAlign": "center",
+        },
+        Object {
+          "marginLeft": 12,
+          "marginRight": 12,
+        },
+      ]
+    }
+  >
+    joeb
+  </Text>
+</View>
+`;

@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check TwoButtonsSide renders correctly and onpress works 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "red",
+        "borderBottomLeftRadius": 9999,
+        "borderBottomRightRadius": 9999,
+        "borderTopLeftRadius": 9999,
+        "borderTopRightRadius": 9999,
+        "height": 48,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+        "paddingTop": 12,
+        "width": 160,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text />
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 14,
+              "lineHeight": 20,
+            },
+            Object {
+              "textAlign": "center",
+            },
+            Object {
+              "marginLeft": 20,
+            },
+            Object {
+              "color": "black",
+            },
+          ]
+        }
+      >
+        press1
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "white",
+        "borderBottomLeftRadius": 9999,
+        "borderBottomRightRadius": 9999,
+        "borderTopLeftRadius": 9999,
+        "borderTopRightRadius": 9999,
+        "height": 48,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+        "paddingTop": 12,
+        "width": 160,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text />
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 14,
+              "lineHeight": 20,
+            },
+            Object {
+              "textAlign": "center",
+            },
+            Object {
+              "marginLeft": 20,
+            },
+            Object {
+              "color": "black",
+            },
+          ]
+        }
+      >
+        press2
+      </Text>
+    </View>
+  </View>
+</View>
+`;

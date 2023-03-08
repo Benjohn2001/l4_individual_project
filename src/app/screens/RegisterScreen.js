@@ -5,7 +5,7 @@ import {
   Image,
   TextInput,
   SafeAreaView,
-  Alert,
+  Alert, ScrollView
 } from "react-native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {
@@ -17,6 +17,7 @@ import {
   equalTo,
   get,
 } from "firebase/database";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PressableIcon from "../components/PressableIcon";
 import COLOURS from "../assets/colours";
 import AppButtonPurple from "../components/AppButtonPurple";
@@ -92,7 +93,8 @@ function RegisterScreen({ navigation }) {
   const passwordRef = useRef();
 
   return (
-    <SafeAreaView className="flex-1 bg-primaryPurple">
+    <ScrollView className="flex-1 bg-primaryPurple"><KeyboardAwareScrollView>
+    <SafeAreaView>
       <View className="pt-10 pl-5">
         <PressableIcon
           onPress={() => {
@@ -104,7 +106,12 @@ function RegisterScreen({ navigation }) {
         />
       </View>
       <View className="flex-row justify-center items-center">
-        <Image className="w-44 h-44" source={require("../assets/clock.png")} />
+        <Image
+          className="w-44 h-44"
+          source={{
+            uri: Image.resolveAssetSource(require("../assets/clock.png")).uri,
+          }}
+        />
         <View className="items-center">
           <Text className="font-bold text-2xl">Weasley Clock</Text>
           <Text className="text-base">Join today. It's free!</Text>
@@ -123,6 +130,7 @@ function RegisterScreen({ navigation }) {
             lastNameRef.current.focus();
           }}
           blurOnSubmit={false}
+          testID="fnameT"
         />
         <TextInput
           className="bg-secondaryPurple my-4 w-80 h-12 rounded-md"
@@ -137,6 +145,7 @@ function RegisterScreen({ navigation }) {
             usernameRef.current.focus();
           }}
           blurOnSubmit={false}
+          testID="snameT"
         />
         <TextInput
           className="bg-secondaryPurple my-4 w-80 h-12 rounded-md"
@@ -152,6 +161,7 @@ function RegisterScreen({ navigation }) {
           }}
           autoCapitalize="none"
           blurOnSubmit={false}
+          testID="unameT"
         />
         <TextInput
           className="bg-secondaryPurple my-4 w-80 h-12 rounded-md"
@@ -167,6 +177,7 @@ function RegisterScreen({ navigation }) {
           }}
           blurOnSubmit={false}
           autoCapitalize="none"
+          testID="emailT"
         />
         <TextInput
           className="bg-secondaryPurple mt-4 w-80 h-12 rounded-md"
@@ -178,6 +189,7 @@ function RegisterScreen({ navigation }) {
           onChangeText={(val) => setPassword(val)}
           ref={passwordRef}
           autoCapitalize="none"
+          testID="passT"
         />
         <Text className="text-sm text-left pt-2 pb-2 text-gray-500">
           Password must be at least 8 characters and {"\n"}
@@ -191,6 +203,7 @@ function RegisterScreen({ navigation }) {
         />
       </View>
     </SafeAreaView>
+    </KeyboardAwareScrollView></ScrollView>
   );
 }
 export default RegisterScreen;

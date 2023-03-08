@@ -24,17 +24,17 @@ import {
   uploadBytes,
   ref as stref,
 } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 import AppButtonPurple from "../components/AppButtonPurple";
 import COLOURS from "../assets/colours";
 import ProfileBox from "../components/ProfileBox";
 import RowItem from "../components/RowItem";
 import PillButton from "../components/PillButton";
-import { auth } from "../../firebase";
 import TwoButtonStack from "../components/TwoButtonStack";
 
 function MeScreen() {
   const db = getDatabase();
-  const user = auth.currentUser;
+  const user = getAuth().currentUser;
   const { uid } = user;
   const unamesRef = query(ref(db, `/users/${uid}`));
 

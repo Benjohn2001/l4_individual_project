@@ -231,3 +231,39 @@
 ### 25 Jan 2023
 
 *2 hour* Create additional experiment
+
+### 27 Jan 2023
+
+*2 hour* testing
+
+### 1 Feb 2023
+
+*2 hour* Testing
+
+### 3 Feb 2023
+
+*5 hour* Hard to say but I started online evaluation
+
+### 8 Feb 2023
+
+*1 hour* Started in person evaluation
+
+### 9 Feb 2023
+
+*4 hour* CI/CD setup and more testing
+
+### 10 Feb 2023
+
+*3 hour* More testing
+
+### 11 Feb 2023
+
+*3 hour* More testing
+
+### 13 Feb 2023
+
+*2 hour* More testing
+
+### 15 Feb 2023
+
+*1 hour* Fix keyboard covering forms & tests

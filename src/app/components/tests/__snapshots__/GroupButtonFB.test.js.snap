@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check GroupButtonFB renders correctly and onpress works 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+      },
+      Object {
+        "width": "100%",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "paddingBottom": 12,
+          "paddingTop": 12,
+        },
+        Object {
+          "width": "91.666667%",
+        },
+        Object {
+          "backgroundColor": "#9990FF",
+        },
+        Object {
+          "height": 144,
+        },
+        Object {
+          "borderBottomLeftRadius": 16,
+          "borderBottomRightRadius": 16,
+          "borderTopLeftRadius": 16,
+          "borderTopRightRadius": 16,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "width": "91.666667%",
+            },
+            Object {
+              "paddingBottom": 12,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000",
+              },
+              Object {
+                "fontSize": 24,
+                "lineHeight": 32,
+              },
+              Object {
+                "textAlign": "center",
+              },
+              Object {
+                "marginLeft": 20,
+              },
+              Object {
+                "marginRight": 12,
+              },
+            ]
+          }
+        >
+          press
+        </Text>
+        <View
+          style={
+            Array [
+              Object {
+                "marginLeft": "auto",
+              },
+              Object {
+                "marginRight": 20,
+              },
+            ]
+          }
+        >
+          <Text />
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+          },
+        ]
+      }
+    >
+      <ActivityIndicator
+        color="#6B4EFF"
+        size="large"
+      />
+    </View>
+  </View>
+</View>
+`;

@@ -1,0 +1,46 @@
+
+name: tests
+run-name: Running tests and formatting
+
+on:
+  push:
+    branches: [ "main", "tests"]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  code_style:
+    name: code style
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: node setup
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: npm
+        cache-dependency-path: "./src/package-lock.json"
+    - name: Install with npm
+      working-directory: ./src
+      run: npm install --legacy-peer-deps
+    - name: Prettier and Eslint
+      working-directory: ./src
+      run: npm run prettier:fix && npm run lint:fix
+  
+  jest:
+    name: jest
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: node setup
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: npm
+        cache-dependency-path: "./src/package-lock.json"
+    - name: Install with npm
+      working-directory: ./src
+      run: npm install --legacy-peer-deps
+    - name: run tests
+      working-directory: ./src
+      run: npm test

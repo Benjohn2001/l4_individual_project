@@ -25,7 +25,7 @@ function HomeTabs  (){
       <Tab.Navigator
           screenOptions={{
               tabBarActiveTintColor: COLOURS.darkerPurple,
-              tabBarInactiveTintColor: 'gray'
+              tabBarInactiveTintColor: 'gray',
           }}
       >
           <Tab.Screen
@@ -96,7 +96,8 @@ function App () {
         <Stack.Screen 
           name="HomeScreen"
           component={HomeTabs}
-          options={{ headerShown: false }}
+          options={{ headerShown: false,
+          }}
         />
         <Stack.Screen 
           name="GroupScreen"

@@ -45,7 +45,6 @@ function ClockHand(props) {
             a.filter((stat) => stat === member[2]).length
         : radHand - 10;
       const point = polar2cart(center, center, len, angle);
-      // const point = polar2cart(center, center, radius-40, angle);
       a.push(member[2]);
       return (
         <Hand index={index} center={center} point={point} member={member} />

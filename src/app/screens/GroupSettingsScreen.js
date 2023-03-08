@@ -28,6 +28,7 @@ import {
 } from "firebase/database";
 import SearchBar from "react-native-dynamic-search-bar";
 import randomColor from "randomcolor";
+import { getAuth } from "firebase/auth";
 import AppButtonPurple from "../components/AppButtonPurple";
 import TwoButtonsSide from "../components/TwoButtonsSide";
 import COLOURS from "../assets/colours";
@@ -55,7 +56,7 @@ function GroupSettingsScreen({ route, navigation }) {
   const [membersKeys, setMembersKeys] = React.useState([]);
   const [fetched, setFetched] = React.useState(false);
   const [nameNew, setNameNew] = React.useState("");
-  const { uid } = auth.currentUser;
+  const { uid } = getAuth().currentUser;
 
   const fetchData = async () => {
     setFetched(false);
