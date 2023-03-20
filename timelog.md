@@ -267,3 +267,75 @@
 ### 15 Feb 2023
 
 *1 hour* Fix keyboard covering forms & tests
+
+### 16 Feb 2023
+
+*5 hour* Dissertation - Implementation
+
+### 18  Feb 2023
+
+*3 hour* Dissertation - Implementation
+
+### 20 Feb 2023
+
+*4 hour* Dissertation - Implementation
+
+### 25 Feb 2023
+
+*2.5 hour* Dissertation - Implementation
+
+### 1 Mar 2023
+
+*5 hour* Dissertation - Backend Implementation
+
+### 3 Mar 2023
+
+*3 hour* Dissertation - Implementation Challenges
+
+### 5 Mar 2023
+
+*5 hour* Dissertation - Design
+
+### 6 Mar 2023
+
+*3.5 hour* Dissertation - Design
+
+### 7 Mar 2023
+
+*4 hour* Dissertation - Design
+
+### 9 Mar 2023
+
+*5 hour* Dissertation - Evaluation
+
+### 10 Mar 2023
+
+*4.5 hour* Dissertation - Evaluation
+
+### 13 Mar 2023
+
+*5 hour* Dissertation - Background
+
+### 14 Mar 2023
+
+*3 hour* Dissertation - Background
+
+### 15 Mar 2023
+
+*4 hour* Dissertation - Intro
+
+### 18 Mar 2023
+
+*6 hour* Dissertation - Add changes recommended from meeting
+
+### 19 Mar 2023
+
+*3 hour* Dissertation - Summaries and fixes
+
+### 20 Mar 2023
+
+*2 hour* Dissertation - Abstract & Intro
+
+
+
+
