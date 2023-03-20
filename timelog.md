@@ -37,14 +37,14 @@
   * Draw out requirements
   * Finish setting up git
   * Potentially design sketches
-* *1 hour* Create Git repository and make some intial issues
+* *1 hour* Create Git repository and make some initial issues
 
 ### 16 Oct 2022
 
 * *2.5 hour* Approx. trying to set-up basic app with react native cli (Xcode download, packages, sdk's etc.)
 * *1.5 hour* Research and use expo to create initial app and commit to repo
 * *0.5 hour* Start timelog & plan
-* *1 hour* Creation of dissertation repo and commiting template
+* *1 hour* Creation of dissertation repo and committing template
 
 ### 17 Oct 2022
 
@@ -73,7 +73,7 @@
 ### 26 Oct 2022
 
 * *0.5 hour* Alter figma design
-* *1 hour* Write agenda and have meetin
+* *1 hour* Write agenda and have meeting
 * *0.5 hour* Flowchart of apps flow between pages
 
 
@@ -97,7 +97,7 @@
 
 ### 2 Nov 2022
 
-* *0.5 hour* Meeting with jeremy
+* *0.5 hour* Meeting with Jeremy
 * *2.5 hour* Register and sign in pages completed,bottom navigation added
 * *1 hour* Create home page
 * *0.5 hour* Create settings page
@@ -188,19 +188,19 @@
 ### 6 Jan 2023
 
 *1 hour* Fix bug with group button on home screen so now button displays avatars
-*1.5 hour* Experimented with images on end of clockhands, wasnt working
+*1.5 hour* Experimented with images on end of clock hands, wasn't working
 
 ### 7 Jan 2023
 
-*3 hour* Managed to eventually get images on the end of clockhands, looks far better, going to keep
+*3 hour* Managed to eventually get images on the end of clock hands, looks far better, going to keep
 
 ### 9 Jan 2023
 
-*3 hour* Moving update status and show members to seperate pages fixed refresh bug
+*3 hour* Moving update status and show members to separate pages fixed refresh bug
 
 ### 10 Jan 2023
 
-*3 hour* Issues with only showing friends not in group when adding group members ccouldnt be resolved, now showing all friends but with different icon and onpress depending on if already a member, betteeer as shows system status
+*3 hour* Issues with only showing friends not in group when adding group members couldnt be resolved, now showing all friends but with different icon and onpress depending on if already a member, better as shows system status
 *1 hour* Sorted bugs with new users with no profile picture uploaded breaking new components
 
 ### 11 Jan 2023
@@ -218,7 +218,7 @@
 
 ### 18 Jan 2023
 
-*1 hour* Now can see friend requests sent and cancel them, also fixed buttons not chnaging on user profile when requesting
+*1 hour* Now can see friend requests sent and cancel them, also fixed buttons not changing on user profile when requesting
 
 ### 21 Jan 2023
 

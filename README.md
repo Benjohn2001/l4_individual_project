@@ -5,7 +5,7 @@
     <h2>Weasley Clock</h2>
 </p>
 <p align="center">
-    Weasley clock is a social media application created for groups of friends to easilly, and graphically see each others status' on a clock face. This application was created for my <a href="https://www.gla.ac.uk/coursecatalogue/course/?code=COMPSCI4025P">Level 4 individual project</a> at the University of Glasgow as part of my BSc (Hons) Computer Science degree. To run this application locally see <a href="https://github.com/Benjohn2001/l4_individual_project/blob/main/manual.md" target="_blank">manual</a>.
+    Weasley clock is a social media application created for groups of friends to easily, and graphically see each others statuses on a clock face. This application was created for my <a href="https://www.gla.ac.uk/coursecatalogue/course/?code=COMPSCI4025P">Level 4 individual project</a> at the University of Glasgow as part of my BSc (Hons) Computer Science degree. To run this application locally see <a href="https://github.com/Benjohn2001/l4_individual_project/blob/main/manual.md" target="_blank">manual</a>.
 </p>
 <p align="center">
     <img alt="App Screens" src="surveyPic.png" height="343px" width="400px">
@@ -45,7 +45,7 @@
 - [`src/tailwind.config.js`](/src/tailwind.config.js) The tailwind css configuration file
 - [`src/package.json`](/src/package.json) File containing the dependencies for the app
 - [`.gitignore`](/.gitignore) The git ignore file used
-- [`Ind-proj-init-design.fig`](/Ind-proj-init-design.fig) THe figma prototype for the app
+- [`Ind-proj-init-design.fig`](/Ind-proj-init-design.fig) The figma prototype for the app
 - [`Ind-proj-init-design.pdf`](/Ind-proj-init-design.pdf) The initial design
 - [`init-app-pages-flowchart.pdf`](/init-app-pages-flowchart.pdf) Initial flowchart for the app
 - [`timelog.md`](/timelog.md) Timelog detailing the work done on certain days
