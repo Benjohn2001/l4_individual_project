@@ -334,7 +334,7 @@
 
 ### 20 Mar 2023
 
-*2 hour* Dissertation - Abstract & Intro
+*3 hour* Dissertation - Abstract & Intro & Manual
 
 
 
