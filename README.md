@@ -50,5 +50,3 @@
 - [`init-app-pages-flowchart.pdf`](/init-app-pages-flowchart.pdf) Initial flowchart for the app
 - [`timelog.md`](/timelog.md) Timelog detailing the work done on certain days
 - [`manual.md`](/manual.md) Manual detailing how to run the application locally
-
-## :scroll: License

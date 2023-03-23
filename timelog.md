@@ -336,6 +336,16 @@
 
 *3 hour* Dissertation - Abstract & Intro & Manual
 
+### 22 Mar 2023
+
+*4 hour* Dissertation - Reading & Fixing grammar
+
+### 23 Mar 2023
+
+*3 hour* Dissertation - Reading & Fixing grammar
+*2 hour* Final changes to dissertation made
+
+
 
 
 
